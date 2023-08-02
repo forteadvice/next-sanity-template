@@ -1,25 +1,37 @@
-/**
- * This configuration is used to for the Sanity Studio that’s mounted on the `/app/studio/[[...index]]/page.jsx` route
- */
-
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
+import { apiVersion, dataset, projectId } from './env'
+import { schemaTypes } from '@/sanity/schemas'
+import { defaultDocumentNode } from '@/sanity/desk/defaultDocumentNode'
+import { deskStructure } from '@/sanity/desk/deskStructure'
 
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from './src/sanity/env'
-import { schema } from './src/sanity/schema'
+const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
+const singletonTypes = new Set(['frontpage'])
 
 export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  // Add and edit the content schema in the './sanity/schema' folder
-  schema,
+  schema: {
+    types: schemaTypes,
+    // Filter out singleton types from the global “New document” menu options
+    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+
+  document: {
+    // For singleton types, filter out actions that are not explicitly included in `singletonActions`
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
+  },
+
   plugins: [
-    deskTool(),
-    // Vision is a tool that lets you query your content with GROQ in the studio
-    // https://www.sanity.io/docs/the-vision-plugin
+    deskTool({
+      defaultDocumentNode,
+      structure: deskStructure,
+    }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
 })
