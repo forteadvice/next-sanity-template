@@ -21,3 +21,32 @@ body {
   background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
+
+/* TextBlock stylings */
+.text-block {
+  @apply mt-8;
+}
+.text-block > * {
+  @apply mb-2;
+}
+.text-block h2 {
+  @apply text-4xl font-bold;
+}
+.text-block h3 {
+  @apply text-3xl font-semibold;
+}
+.text-block h4 {
+  @apply text-2xl font-semibold;
+}
+.text-block blockquote {
+  @apply italic before:content-['"'] after:content-['"'];
+}
+.text-block a {
+  @apply underline;
+}
+.text-block ul li {
+  @apply list-disc list-inside;
+}
+.text-block ol li {
+  @apply list-decimal list-inside;
+}
