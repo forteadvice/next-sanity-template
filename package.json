@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.0.4",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@sanity/client": "^6.4.0",
     "@sanity/image-url": "1",
+    "@sanity/preview-kit": "^2.4.0",
     "@sanity/vision": "3",
     "autoprefixer": "10.4.14",
     "eslint": "8.46.0",
