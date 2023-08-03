@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <PreviewWrapper preview={preview} initialData={data} query={frontPageQuery}>
-      <FrontPageView />
+      <FrontPageView data={data} />
     </PreviewWrapper>
   )
 }
