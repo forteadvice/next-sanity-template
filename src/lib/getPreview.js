@@ -1,5 +1,3 @@
-// Server component only
-
 import { draftMode } from 'next/headers'
 
 export default function getPreview() {
