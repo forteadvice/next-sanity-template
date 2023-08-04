@@ -1,4 +1,4 @@
-import { DocumentIcon } from '@sanity/icons'
+import { DocumentsIcon, CogIcon } from '@sanity/icons'
 
 export const deskStructure = (S) =>
   S.list()
@@ -13,7 +13,15 @@ export const deskStructure = (S) =>
       // Pages
       S.listItem()
         .title('Pages')
-        .icon(DocumentIcon)
+        .icon(DocumentsIcon)
         .child(S.documentList().title(`Pages`).schemaType('page').filter('_type == "page"')),
+      S.divider(),
+
+      // Settings
+      S.documentListItem()
+        .title('Settings')
+        .icon(CogIcon)
+        .schemaType('settings')
+        .id('63a6d7d5-94d9-4488-83b0-1714b395b961'),
       S.divider(),
     ])
