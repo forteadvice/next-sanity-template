@@ -21,17 +21,23 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
+      name: 'hero',
+      title: 'Hero',
+      type: 'hero',
+    },
+    {
       name: 'contentBlocks',
       title: 'Content Blocks',
       type: 'array',
       of: [
         {
-          name: 'hero',
-          type: 'hero',
-        },
-        {
           name: 'textBlock',
           type: 'textBlock',
+        },
+        {
+          name: 'mainImage',
+          title: 'Image',
+          type: 'mainImage',
         },
       ],
     },
