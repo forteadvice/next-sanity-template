@@ -7,6 +7,7 @@ const secret = process.env.REVALIDATION_TOKEN
 export async function POST(req) {
   const signature = req.headers.get(SIGNATURE_HEADER_NAME)
   const body = await req.json()
+  console.log(body)
   const bodyString = JSON.stringify(body)
 
   if (isValidSignature(bodyString, signature, secret)) {
@@ -36,7 +37,8 @@ export async function POST(req) {
 }
 
 function resolvePath(body) {
-  return `/${body?.current?.slug}` || '/'
+  if (!body?.slug?.current) return '/'
+  return `/${body.slug.current}`
 }
 
 // Customized body parser
