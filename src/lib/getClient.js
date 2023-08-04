@@ -1,5 +1,5 @@
 import { createClient } from 'next-sanity'
-// import { cache } from 'react'
+import { cache } from 'react'
 
 import { apiVersion, dataset, projectId, useCdn } from '../../env'
 
@@ -26,7 +26,7 @@ export function getClient(preview) {
   return client
 }
 
-// export const getCachedClient = (preview) => {
-//   const client = getClient(preview)
-//   return cache(client.fetch.bind(client))
-// }
+export const getCachedClient = (preview) => {
+  const client = getClient(preview)
+  return cache(client.fetch.bind(client))
+}
