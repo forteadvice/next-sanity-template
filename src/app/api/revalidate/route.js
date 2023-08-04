@@ -1,39 +1,45 @@
-// import { NextResponse } from 'next/server'
-// import { revalidatePath } from 'next/cache'
-// import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
-// import { parseBody } from 'next-sanity/webhook'
+import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
+import { parseBody } from 'next-sanity/webhook'
 
-// const secret = process.env.REVALIDATION_TOKEN
+export { config } from 'next-sanity/webhook'
 
-// export async function POST(request) {
-//   const signature = request.headers[SIGNATURE_HEADER_NAME]
-//   const body = await readBody(request)
+const secret = process.env.REVALIDATION_TOKEN
 
-//   if (!isValidSignature(body, signature, secret)) {
-//     return NextResponse.json({ success: false, message: 'Invalid signature' }, { status: 401 })
-//   }
+export async function POST(request) {
+  const { isValidSignature, body } = await parseBody(request, secret)
 
-//   const jsonBody = JSON.parse(body)
-//   const path = jsonBody?.path
-//   if (!path) {
-//     console.log('No path provided')
-//     return NextResponse.json({ success: false, message: 'No path provided' }, { status: 400 })
-//   }
+  if (!isValidSignature) {
+    const message = 'Invalid signature'
+    console.log(message)
+    return NextResponse.json({ success: false, message }, { status: 401 })
+  }
 
-//   await sleep(1000) // Pause script for sanity to update DB
+  const path = resolvePath(body)
 
-//   try {
-//     const path = jsonBody.path
-//     revalidatePath(path)
-//     console.log(`Revalidated: '${path}'`)
-//     return NextResponse.json({ success: true }, { status: 200 })
-//   } catch (error) {
-//     console.log(error)
-//     return NextResponse.json({ success: false, message: 'Revalidation failed' }, { status: 500 })
-//   }
-// }
+  if (!path) {
+    const message = 'No path provided'
+    console.log(message)
+    return NextResponse.json({ success: false, message }, { status: 400 })
+  }
 
-// // Customized body parser
+  await sleep(1000) // Pause script for sanity to update DB
+
+  try {
+    revalidatePath(path)
+    console.log(`Revalidated: '${path}'`)
+    return NextResponse.json({ success: true }, { status: 200 })
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json({ success: false, message: 'Revalidation failed' }, { status: 500 })
+  }
+}
+
+function resolvePath(body) {
+  return `/${body?.current?.slug}` || '/'
+}
+
+// Customized body parser
 // async function readBody(readable) {
 //   const chunks = []
 //   for await (const chunk of readable) {
@@ -42,7 +48,7 @@
 //   return Buffer.concat(chunks).toString('utf8')
 // }
 
-// // Sleep API - May be needed to make sure DB is updated before revalidating
-// async function sleep(ms) {
-//   return new Promise((resolve) => setTimeout(resolve, ms))
-// }
+// Sleep API - May be needed to make sure DB is updated before revalidating
+async function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
