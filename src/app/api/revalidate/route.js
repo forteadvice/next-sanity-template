@@ -1,16 +1,21 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
+// import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
+
+import { parseBody } from 'next-sanity/webhook'
+export { config } from 'next-sanity/webhook'
 
 const secret = process.env.REVALIDATION_TOKEN
 
 export async function POST(req) {
-  const signature = req.headers.get(SIGNATURE_HEADER_NAME)
-  const body = await req.json()
-  console.log(body)
-  const bodyString = JSON.stringify(body)
+  // const signature = req.headers.get(SIGNATURE_HEADER_NAME)
+  // const body = await req.json()
+  // console.log(body)
+  // const bodyString = JSON.stringify(body)
 
-  if (isValidSignature(bodyString, signature, secret)) {
+  const { isValidSignature, body } = await parseBody(req, secret)
+
+  if (!isValidSignature) {
     const message = 'Invalid signature'
     console.log(message)
     return NextResponse.json({ success: false, message }, { status: 401 })
@@ -40,15 +45,6 @@ function resolvePath(body) {
   if (!body?.slug?.current) return '/'
   return `/${body.slug.current}`
 }
-
-// Customized body parser
-// async function readBody(readable) {
-//   const chunks = []
-//   for await (const chunk of readable) {
-//     chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk)
-//   }
-//   return Buffer.concat(chunks).toString('utf8')
-// }
 
 // Sleep API - May be needed to make sure DB is updated before revalidating
 async function sleep(ms) {
