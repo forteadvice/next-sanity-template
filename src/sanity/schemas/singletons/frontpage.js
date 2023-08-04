@@ -7,20 +7,24 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      initialValue: 'Frontpage',
+      readOnly: () => true,
+      hidden: () => true,
     },
+    { name: 'hero', type: 'hero' },
     {
       name: 'contentBlocks',
       title: 'Content Blocks',
       type: 'array',
       of: [
         {
-          name: 'hero',
-          type: 'hero',
-        },
-        {
           name: 'textBlock',
           type: 'textBlock',
+        },
+        {
+          name: 'mainImage',
+          title: 'image',
+          type: 'mainImage',
         },
       ],
     },
