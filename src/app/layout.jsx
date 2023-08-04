@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 import { headers } from 'next/headers'
 
 export default async function RootLayout({ children }) {
-  // Sanity studio layout
+  // Sanity studio layout TODO RM
   if (isStudio(headers())) {
     return (
       <html lang='en'>
