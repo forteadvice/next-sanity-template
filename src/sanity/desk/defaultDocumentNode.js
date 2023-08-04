@@ -22,6 +22,6 @@ export const defaultDocumentNode = (S, { schemaType }) => {
 function resolvePreviewUrl(doc) {
   const baseUrl = window.location.origin
   const urlPath = doc?.slug?.current ?? ''
-  const previewToken = process.env.NEXT_PUBLIC_SANITY_PREVIEW_TOKEN
+  const previewToken = process.env.NEXT_PUBLIC_PREVIEW_TOKEN
   return `${baseUrl}/api/preview?redirect=/${urlPath}&token=${previewToken}`
 }
