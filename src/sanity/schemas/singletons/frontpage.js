@@ -23,7 +23,7 @@ export default {
         },
         {
           name: 'mainImage',
-          title: 'image',
+          title: 'Image',
           type: 'mainImage',
         },
       ],
