@@ -5,6 +5,8 @@ import PreviewWrapper from '@/components/preview/PreviewWrapper'
 import FrontPageView from '@/components/views/FrontPageView'
 import getMetaObject from '@/lib/getMetaObject'
 
+export const dynamic = 'force-static'
+
 export async function generateMetadata() {
   const data = await getCachedClient()(frontPageQuery)
   return getMetaObject(data?.seo)

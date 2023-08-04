@@ -32,13 +32,6 @@ export async function POST(request) {
   }
 }
 
-// Disable next body parser
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
-
 // Customized body parser
 async function readBody(readable) {
   const chunks = []
