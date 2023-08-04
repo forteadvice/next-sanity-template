@@ -23,6 +23,9 @@ dependencies:
   '@sanity/vision':
     specifier: '3'
     version: 3.14.4(@babel/runtime@7.22.6)(@codemirror/lint@6.4.0)(@codemirror/state@6.2.1)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.0.3)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@5.2.3)
+  '@sanity/webhook':
+    specifier: ^2.0.0
+    version: 2.0.0
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.27)
