@@ -15,6 +15,10 @@ export async function POST(req) {
 
   const { isValidSignature, body } = await parseBody(req, secret)
 
+  console.log('######')
+  console.log(body)
+  console.log('######')
+
   if (!isValidSignature) {
     const message = 'Invalid signature'
     console.log(message)
