@@ -7,7 +7,7 @@ import { defaultDocumentNode } from '@/sanity/desk/defaultDocumentNode'
 import { deskStructure } from '@/sanity/desk/deskStructure'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
-const singletonTypes = new Set(['frontpage'])
+const singletonTypes = new Set(['frontpage', 'settings'])
 
 export default defineConfig({
   basePath: '/studio',
