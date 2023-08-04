@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { parseBody } from 'next-sanity/webhook'
-
-export { config } from 'next-sanity/webhook'
+import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
 
 const secret = process.env.REVALIDATION_TOKEN
 
-export async function POST(request) {
-  const { isValidSignature, body } = await parseBody(request, secret)
+export async function POST(req) {
+  const signature = req.headers.get(SIGNATURE_HEADER_NAME)
+  const body = await req.json()
+  const bodyString = JSON.stringify(body)
 
-  if (!isValidSignature) {
+  if (isValidSignature(bodyString, signature, secret)) {
     const message = 'Invalid signature'
     console.log(message)
     return NextResponse.json({ success: false, message }, { status: 401 })
