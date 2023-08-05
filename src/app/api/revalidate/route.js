@@ -17,12 +17,14 @@ export async function POST(req) {
   const path = resolvePath(body)
 
   if (!path) {
-    const message = 'Could not resolve path'
+    // const message = 'Could not resolve path'
+    const message = body?.slug
     console.log(message)
     return NextResponse.json({ success: false, message }, { status: 400 })
   }
 
-  await sleep(1000) // Pause script for sanity to update DB
+  // Pause script for sanity to update DB
+  await sleep(1000)
 
   try {
     revalidatePath(path)
@@ -36,7 +38,7 @@ export async function POST(req) {
 }
 
 function resolvePath(body) {
-  if (!body?._type == 'frontpage') return '/' // Frontpage
+  if (body?._type == 'frontpage') return '/' // Frontpage
   else if (body?.slug?.current) return `/${body.slug.current}` // Pages
   return undefined
 }
