@@ -8,17 +8,19 @@ export async function POST(req) {
   const signature = req.headers.get(SIGNATURE_HEADER_NAME)
   const body = await req.json()
 
+  // Validate Secret
   if (!isValidSignature(JSON.stringify(body), signature, secret)) {
     const message = 'Invalid signature'
     console.log(message)
     return NextResponse.json({ success: false, message }, { status: 401 })
   }
 
+  // Resolve path
   const path = resolvePath(body)
 
+  // Validate resolved path
   if (!path) {
-    // const message = 'Could not resolve path'
-    const message = body?.slug
+    const message = 'Could not resolve path'
     console.log(message)
     return NextResponse.json({ success: false, message }, { status: 400 })
   }
@@ -26,6 +28,7 @@ export async function POST(req) {
   // Pause script for sanity to update DB
   await sleep(1000)
 
+  // Try revalidate
   try {
     revalidatePath(path)
     const message = `Revalidated: '${path}'`
@@ -37,6 +40,8 @@ export async function POST(req) {
   }
 }
 
+// Function resolving path from body
+// Body-GROQ is set in the webhook pane at sanity.io
 function resolvePath(body) {
   if (body?._type == 'frontpage') return '/' // Frontpage
   else if (body?.slug?.current) return `/${body.slug.current}` // Pages
