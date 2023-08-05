@@ -121,7 +121,11 @@ Revaliation will
 
 ### Live preview
 
+TODO...
+
 ### Revalidate
+
+TODO...
 
 <br>
 
