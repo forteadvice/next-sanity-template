@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-// import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
+import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook'
 
-import { parseBody } from 'next-sanity/webhook'
+// import { parseBody } from 'next-sanity/webhook'
 export { config } from 'next-sanity/webhook'
 
 const secret = process.env.REVALIDATION_TOKEN
