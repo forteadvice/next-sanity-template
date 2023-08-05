@@ -8,14 +8,14 @@ export { config } from 'next-sanity/webhook'
 const secret = process.env.REVALIDATION_TOKEN
 
 export async function POST(req) {
-  // const signature = req.headers.get(SIGNATURE_HEADER_NAME)
-  // const body = await req.json()
+  const signature = req.headers.get(SIGNATURE_HEADER_NAME)
+  const body = await req.json()
   // console.log(body)
-  // const bodyString = JSON.stringify(body)
+  const bodyString = JSON.stringify(body)
 
-  const { isValidSignature, body } = await parseBody(req, secret)
+  // const { isValidSignature, body } = await parseBody(req, secret)
 
-  const message = isValidSignature
+  const message = bodyString
   console.log(message)
   return NextResponse.json({ success: false, message }, { status: 401 })
 
