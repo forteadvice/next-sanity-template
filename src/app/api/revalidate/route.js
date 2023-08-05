@@ -15,7 +15,9 @@ export async function POST(req) {
 
   // const { isValidSignature, body } = await parseBody(req, secret)
 
-  const message = signature
+  const isValid = isValidSignature(bodyString, signature, secret)
+
+  const message = isValid
   console.log(message)
   return NextResponse.json({ success: false, message }, { status: 401 })
 
