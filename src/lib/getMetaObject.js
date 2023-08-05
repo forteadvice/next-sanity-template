@@ -6,11 +6,11 @@ export default async function getMetaObject(meta) {
   let defaultMeta = null
   if (!meta?.title || meta?.description) {
     const settings = await getCachedClient()(settingsQuery)
-    defaultMeta = settings.defaultSeo
+    defaultMeta = settings?.defaultSeo
   }
 
   return {
-    title: meta?.title ?? defaultMeta?.title,
-    description: meta?.description ?? defaultMeta?.description,
+    title: meta?.title ?? defaultMeta?.title ?? '',
+    description: meta?.description ?? defaultMeta?.description ?? '',
   }
 }

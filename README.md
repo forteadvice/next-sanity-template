@@ -1,32 +1,96 @@
-## Preview
+# Next-Sanity Base Template
 
-First, run the development server:
+## Setup guide
+
+#### 1. Deploy NextJS template to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)][vercel-deploy]
+
+<!-- Variables -->
+
+[vercel-deploy]: https://vercel.com/new/clone?repository-url=https://github.com/mjthias/next-sanity-template&repository-name=next-sanity-template&project-name=next-sanity-template&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
+
+---
+
+#### 2. Install dependencies (App):
+
+```bash
+pnpm install
+```
+
+---
+
+#### 3. Create _.env_ file (App)
+
+Copy the .env.local.example file to .env.local and update the values.
+
+```yaml
+# .env.local.example
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET='production'
+NEXT_PUBLIC_SANITY_API_VERSION='2023-07-14'
+NEXT_PUBLIC_SANITY_PREVIEW_TOKEN='1ee7bc5c-32df-4873-b698-a89db92a9e66'
+```
+
+---
+
+#### 4. Run environment (App)
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+#### 5. Clone Sanity base template (Studio)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+git clone https://github.com/mjthias/sanity-base.git .
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+#### 6. Remove git connection, and connect to new repo (Studio)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Remove the git connection to the template repo by deleting the .git directory
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+sudo rm -r .git
+```
 
-## Deploy on Vercel
+Create and connect to a new repository
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### 7. Create .env file (Studio)
+
+Copy the .env.local.example file to .env.local and update the values.
+
+```yaml
+# .env.local.example
+SANITY_STUDIO_PROJECT_TITLE=
+SANITY_STUDIO_PROJECT_ID=
+SANITY_STUDIO_DATASET='production'
+SANITY_STUDIO_USE_CDN=true
+SANITY_STUDIO_LOCAL_PREVIEW_HOST='localhost:3000'
+SANITY_STUDIO_PRODUCTION_PREVIEW_HOST=
+SANITY_STUDIO_PREVIEW_TOKEN='1ee7bc5c-32df-4873-b698-a89db92a9e66'
+```
+
+---
+
+#### 8. Deploy studio (Studio)
+
+```bash
+pnpm run deploy
+```
+
+---
+
+## Environment settings
+
+The following settings are the standard of the next-sanity template.<br> Please make sure to not change these when patching the template.
+
+### Prettier linting
+
+The environment is linted using the settings within _.prettierrc_, which will owerwrite the Prettier config of your IDE.
