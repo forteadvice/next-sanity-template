@@ -1,96 +1,137 @@
 # Next-Sanity Base Template
 
+## Contents
+
+- [Setup Guide](#setup-guide)
+- [Configure Sanity Webhooks](#configure-sanity-webhooks)
+- [Important Files](#important-files)
+
+<br>
+
+---
+
+<br>
+
 ## Setup guide
 
-#### 1. Deploy NextJS template to Vercel
+### 1. Deploy Next-Sanity template to Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)][vercel-deploy]
 
-<!-- Variables -->
-
 [vercel-deploy]: https://vercel.com/new/clone?repository-url=https://github.com/mjthias/next-sanity-template&repository-name=next-sanity-template&project-name=next-sanity-template&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
 
----
+This will create a github repo, Sanity Project and a Vercel deploy with pre-configured Sanity envitonment variables
 
-#### 2. Install dependencies (App):
+<br>
 
-```bash
-pnpm install
+### 2. Configure missing environment variables (Vercel)
+
+```yaml
+# Add the following to Vercel
+NEXT_PUBLIC_SANITY_API_VERSION='YYYY-MM-DD' # Date of project start
+NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
+REVALIDATION_TOKEN='generated-token'
 ```
 
----
+[Generate tokens here 🚀](https://generate-random.org/api-token-generator?count=1&length=128&type=mixed-numbers&prefix=) <br>
 
-#### 3. Create _.env_ file (App)
+> See [Revalidation webhook](#revalidation-webhook) for configuring revalidation webhook calls at Sanity.io
 
-Copy the .env.local.example file to .env.local and update the values.
+<br>
+
+### 3. Clone repository and configure _.env.local_
+
+Copy the .env.local.example file to .env.local and insert the missing values
 
 ```yaml
 # .env.local.example
 NEXT_PUBLIC_SANITY_PROJECT_ID=
-NEXT_PUBLIC_SANITY_DATASET='production'
-NEXT_PUBLIC_SANITY_API_VERSION='2023-07-14'
-NEXT_PUBLIC_SANITY_PREVIEW_TOKEN='1ee7bc5c-32df-4873-b698-a89db92a9e66'
+NEXT_PUBLIC_SANITY_DATASET="production"
+SANITY_API_READ_TOKEN=
+NEXT_PUBLIC_SANITY_API_VERSION=
+REVALIDATION_TOKEN=
+NEXT_PUBLIC_PREVIEW_TOKEN=
 ```
 
----
+<br>
 
-#### 4. Run environment (App)
+### 4. Install and run local environment
+
+Install dependencies ⚙️
 
 ```bash
-npm run dev
+pnpm run install
 ```
 
----
+<br>
 
-#### 5. Clone Sanity base template (Studio)
+Run environment 🏃‍♀️
 
 ```bash
-git clone https://github.com/mjthias/sanity-base.git .
+pnpm run dev
 ```
+
+<br>
 
 ---
 
-#### 6. Remove git connection, and connect to new repo (Studio)
+<br>
 
-Remove the git connection to the template repo by deleting the .git directory
+## Configure Sanity Webhooks
 
-```bash
-sudo rm -r .git
-```
+### Revalidation webhook
 
-Create and connect to a new repository
+Revaliation will
+
+| Key         | Value                                         |
+| ----------- | --------------------------------------------- |
+| Name        | _Some name_                                   |
+| URL         | https:// DOMAIN.COM /api/revalidate           |
+| Dataset     | production                                    |
+| Trigger on  | Create, Update, Delete                        |
+| Filter      | _\_type == 'frontpage' \|\| \_type == 'page'_ |
+| Projection  | \_{\_type, slug}\_                            |
+| HTTP method | POST                                          |
+| API version | Newest                                        |
+| Secret      | _REVALIDATION_TOKEN_ from .env                |
+
+<br>
+
+### Vercel deploy-hook
+
+| Key         | Value                                         |
+| ----------- | --------------------------------------------- |
+| Name        | _Some name_                                   |
+| URL         | https:// DOMAIN.COM /api/revalidate           |
+| Dataset     | production                                    |
+| Trigger on  | Create, Update, Delete                        |
+| Filter      | _\_type == 'frontpage' \|\| \_type == 'page'_ |
+| Projection  | \_{\_type, slug}\_                            |
+| HTTP method | POST                                          |
+| API version | Newest                                        |
+| Secret      | _REVALIDATION_TOKEN_ from .env                |
+
+<br>
 
 ---
 
-#### 7. Create .env file (Studio)
+<br>
 
-Copy the .env.local.example file to .env.local and update the values.
+## Built in components & functionality
 
-```yaml
-# .env.local.example
-SANITY_STUDIO_PROJECT_TITLE=
-SANITY_STUDIO_PROJECT_ID=
-SANITY_STUDIO_DATASET='production'
-SANITY_STUDIO_USE_CDN=true
-SANITY_STUDIO_LOCAL_PREVIEW_HOST='localhost:3000'
-SANITY_STUDIO_PRODUCTION_PREVIEW_HOST=
-SANITY_STUDIO_PREVIEW_TOKEN='1ee7bc5c-32df-4873-b698-a89db92a9e66'
-```
+### Live preview
+
+### Revalidate
+
+<br>
 
 ---
 
-#### 8. Deploy studio (Studio)
+<br>
 
-```bash
-pnpm run deploy
-```
+## Important files
 
----
-
-## Environment settings
-
-The following settings are the standard of the next-sanity template.<br> Please make sure to not change these when patching the template.
-
-### Prettier linting
-
-The environment is linted using the settings within _.prettierrc_, which will owerwrite the Prettier config of your IDE.
+| File           | Description                                                                                                                 |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| .eslintrc.json | ESLint configuration. _"import/no-anonymous-default-export": "off"_ are set for _src/sanity/\*_, to follow Sanity standards |
+| .prettierrc    | Prettier linting configuration. Aligns Prettier config across dev-devices                                                   |
