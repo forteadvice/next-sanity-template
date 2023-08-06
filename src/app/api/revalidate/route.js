@@ -8,10 +8,6 @@ export async function POST(req) {
   const signature = req.headers.get(SIGNATURE_HEADER_NAME)
   const body = await req.json()
 
-  const message = JSON.stringify(body)
-  console.log(message)
-  return NextResponse.json({ success: false, message }, { status: 401 })
-
   // Validate Secret
   if (!isValidSignature(JSON.stringify(body), signature, secret)) {
     const message = 'Invalid signature'
@@ -20,7 +16,7 @@ export async function POST(req) {
   }
 
   // Resolve path
-  const path = resolvePath(body)
+  const { path, changedPath } = resolvePaths(body)
 
   // Validate resolved path
   if (!path) {
@@ -34,8 +30,9 @@ export async function POST(req) {
 
   // Try revalidate
   try {
+    if (changedPath) revalidatePath(changedPath)
     revalidatePath(path)
-    const message = `Revalidated: '${path}'`
+    const message = `Revalidated: '${path}' ${changedPath ? `& '${changedPath}'` : ''}`
     console.log(message)
     return NextResponse.json({ success: true, message }, { status: 200 })
   } catch (error) {
@@ -46,10 +43,20 @@ export async function POST(req) {
 
 // Function resolving path from body
 // Body-GROQ is set in the webhook pane at sanity.io
-function resolvePath(body) {
-  if (body?._type == 'frontpage') return '/' // Frontpage
-  else if (body?.slug?.current) return `/${body.slug.current}` // Pages
-  return undefined
+function resolvePaths(body) {
+  // Fontpage
+  if (body?._type == 'frontpage') {
+    return { path: '/', changedPath: false }
+  }
+
+  // Pages
+  else if (body?.slug) {
+    const changedPath = body.changedSlug ? `/${body.changedSlug}` : false
+    return { path: `/${body.slug}`, changedPath }
+  }
+
+  // Unhandled
+  return { path: undefined, changedPath: false }
 }
 
 // Sleep API - May be needed to make sure DB is updated before revalidating
