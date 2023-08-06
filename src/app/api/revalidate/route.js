@@ -39,7 +39,7 @@ export async function POST(req) {
     return NextResponse.json({ success: false, message: 'Revalidation failed' }, { status: 500 })
   }
 }
-ª
+
 // Function resolving path from body
 // Body-GROQ is set in the webhook pane at sanity.io
 function resolvePath(body) {
