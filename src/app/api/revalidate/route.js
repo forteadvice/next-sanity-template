@@ -44,7 +44,7 @@ export async function POST(req) {
 // Body-GROQ is set in the webhook pane at sanity.io
 function resolvePaths(body) {
   if (body?._type == 'frontpage') return '/(site)/(frontpage)' // Fontpage
-  else if (body?.slug) return `/(site)/(page)/[slug]` // Pages
+  else if (body?.slug) return `/(site)/(page)/[slug]/` + body?.slug // Pages
   // Unhandled
   return undefined
 }
