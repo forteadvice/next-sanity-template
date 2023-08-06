@@ -16,7 +16,7 @@ export async function POST(req) {
   }
 
   // Resolve path
-  const { path, changedPath } = resolvePaths(body)
+  const path = resolvePaths(body)
 
   // Validate resolved path
   if (!path) {
@@ -26,13 +26,12 @@ export async function POST(req) {
   }
 
   // Pause script for sanity to update DB
-  await sleep(5000)
+  await sleep(1000)
 
   // Try revalidate
   try {
-    if (changedPath) revalidatePath(changedPath)
     revalidatePath(path)
-    const message = `Revalidated: '${path}' ${changedPath ? `& '${changedPath}'` : ''}`
+    const message = `Revalidated: '${path}'}`
     console.log(message)
     return NextResponse.json({ success: true, message }, { status: 200 })
   } catch (error) {
@@ -44,19 +43,10 @@ export async function POST(req) {
 // Function resolving path from body
 // Body-GROQ is set in the webhook pane at sanity.io
 function resolvePaths(body) {
-  // Fontpage
-  if (body?._type == 'frontpage') {
-    return { path: '/', changedPath: false }
-  }
-
-  // Pages
-  else if (body?.slug) {
-    const changedPath = body.changedSlug ? `/${body.changedSlug}` : false
-    return { path: `/${body.slug}`, changedPath }
-  }
-
+  if (body?._type == 'frontpage') return '/(site)' // Fontpage
+  else if (body?.slug) return `/${body.slug}` // Pages
   // Unhandled
-  return { path: undefined, changedPath: false }
+  return undefined
 }
 
 // Sleep API - May be needed to make sure DB is updated before revalidating
