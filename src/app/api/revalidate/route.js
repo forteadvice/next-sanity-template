@@ -40,10 +40,20 @@ export async function POST(req) {
   }
 }
 
+export async function GET(request) {
+  const { searchParams } = new URL(request.url)
+
+  const path = searchParams.get('path')
+
+  revalidatePath(path)
+
+  return NextResponse.json({ success: true }, { status: 200 })
+}
+
 // Function resolving path from body
 // Body-GROQ is set in the webhook pane at sanity.io
 function resolvePaths(body) {
-  if (body?._type == 'frontpage') return '/(site)/(frontpage)/page.jsx' // Fontpage
+  if (body?._type == 'frontpage') return '/(site)/(frontpage)' // Fontpage
   else if (body?.slug) return '/(site)/(page)/[slug]' // Pages
   // Unhandled
   return undefined
