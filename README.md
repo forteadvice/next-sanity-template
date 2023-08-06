@@ -81,7 +81,7 @@ pnpm run dev
 
 ### Revalidation webhook
 
-Revaliation will
+Revalidatetion should only be triggered by state-changes on documents, generating a web-page.
 
 | Key         | Value                                         |
 | ----------- | --------------------------------------------- |
@@ -90,7 +90,7 @@ Revaliation will
 | Dataset     | production                                    |
 | Trigger on  | Create, Update, Delete                        |
 | Filter      | _\_type == 'frontpage' \|\| \_type == 'page'_ |
-| Projection  | \_{\_type, slug}\_                            |
+| Projection  | _{\_type, slug}_                              |
 | HTTP method | POST                                          |
 | API version | Newest                                        |
 | Secret      | _REVALIDATION_TOKEN_ from .env                |
@@ -99,17 +99,17 @@ Revaliation will
 
 ### Vercel deploy-hook
 
-| Key         | Value                                         |
-| ----------- | --------------------------------------------- |
-| Name        | _Some name_                                   |
-| URL         | https:// DOMAIN.COM /api/revalidate           |
-| Dataset     | production                                    |
-| Trigger on  | Create, Update, Delete                        |
-| Filter      | _\_type == 'frontpage' \|\| \_type == 'page'_ |
-| Projection  | \_{\_type, slug}\_                            |
-| HTTP method | POST                                          |
-| API version | Newest                                        |
-| Secret      | _REVALIDATION_TOKEN_ from .env                |
+Full rebuild should only be triggered be state-changes on documents that affect the majority of the website.
+
+| Key         | Value                  |
+| ----------- | ---------------------- |
+| Name        | _Some name_            |
+| URL         | _Vercel-deploy-hook_   |
+| Dataset     | production             |
+| Trigger on  | Create, Update, Delete |
+| Filter      | _\_type == 'settings'_ |
+| HTTP method | POST                   |
+| API version | Newest                 |
 
 <br>
 
@@ -121,7 +121,56 @@ Revaliation will
 
 ### Live preview
 
-TODO...
+Live previewing compenents can be achived by wrapping them inside the _PreivewWrapper-component_. <br>
+_PreviewWrapper_ takes the following props:
+
+```jsx
+<PreviewWrapper
+  preview={ preview } // getPreview()
+  query={ groqQuery }
+  params={ groqParams } // paramsObject || undefined
+  initialData={ fethedData }
+  // ...rest
+  >
+    // Child gets 'data' prop from PreviewWrapper
+    <ChildComponent />
+<PreviewWrapper>
+```
+
+> Since the previewed child component will be rerendered client side, this direct child must have _"use client"_ declared. <br> For that reason, the template includes the _components/views_ directory to keep intire page views.
+
+#### Full example
+
+```JSX
+// src/(site)/(page)/[slug]/page.jsx
+import PreviewWrapper from '@/components/preview/PreviewWrapper'
+import PageView from '@/components/views/PageView'
+import { getCachedClient } from '@/lib/getClient'
+import { pageQuery } from '@/lib/queries'
+import getPreview from '@/lib/getPreview'
+// Other imports
+
+export async function generateStaticParams() {...}
+export async function generateMetadata({ params }) {...}
+
+export default async function Page({ params }) {
+  const preview = getPreview()
+  const data = await getCachedClient(preview)(pageQuery, params)
+
+  return (
+    <PreviewWrapper
+      initialData={data}
+      preview={preview}
+      query={pageQuery}
+      params={params}
+      >
+      <PageView />
+    </PreviewWrapper>
+  )
+}
+```
+
+<br>
 
 ### Revalidate
 
