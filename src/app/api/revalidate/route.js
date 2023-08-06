@@ -26,11 +26,11 @@ export async function POST(req) {
   }
 
   // Pause script for sanity to update DB
-  await sleep(1000)
+  await sleep(5000)
 
   // Try revalidate
   try {
-    // if (changedPath) revalidatePath(changedPath)
+    if (changedPath) revalidatePath(changedPath)
     revalidatePath(path)
     const message = `Revalidated: '${path}' ${changedPath ? `& '${changedPath}'` : ''}`
     console.log(message)
