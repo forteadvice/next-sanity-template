@@ -3,8 +3,9 @@ import PageView from '@/components/views/PageView'
 import { getCachedClient } from '@/lib/getClient'
 import getMetaObject from '@/lib/getMetaObject'
 import getPreview from '@/lib/getPreview'
-
 import { pageQuery, pagesPathQuery } from '@/lib/queries'
+
+export const dynamic = 'force-static'
 
 export async function generateStaticParams() {
   const pages = await getCachedClient()(pagesPathQuery)
