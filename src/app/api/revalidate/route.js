@@ -8,6 +8,10 @@ export async function POST(req) {
   const signature = req.headers.get(SIGNATURE_HEADER_NAME)
   const body = await req.json()
 
+  const message = JSON.stringify(body)
+  console.log(message)
+  return NextResponse.json({ success: false, message }, { status: 401 })
+
   // Validate Secret
   if (!isValidSignature(JSON.stringify(body), signature, secret)) {
     const message = 'Invalid signature'
