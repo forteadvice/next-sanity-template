@@ -30,7 +30,7 @@ export async function POST(req) {
 
   // Try revalidate
   try {
-    if (changedPath) revalidatePath(changedPath)
+    // if (changedPath) revalidatePath(changedPath)
     revalidatePath(path)
     const message = `Revalidated: '${path}' ${changedPath ? `& '${changedPath}'` : ''}`
     console.log(message)
