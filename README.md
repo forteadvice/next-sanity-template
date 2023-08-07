@@ -25,8 +25,6 @@ This template preconfigures:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION,NEXT_PUBLIC_PREVIEW_TOKEN,REVALIDATION_TOKEN&envDescription=Read%20about%20the%20variable%20requirments%20here%3A&envLink=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template%232-configure-missing-environment-variables-vercel&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
 
-This will create a github repo, Sanity Project and a Vercel deploy with pre-configured Sanity envitonment variables
-
 <br>
 
 ### 2. Configure missing environment variables (Vercel)
@@ -38,8 +36,8 @@ NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
 REVALIDATION_TOKEN='generated-token'
 ```
 
-[Generate revalidation token 🚀](https://generate-random.org/api-token-generator?count=1&length=128&type=mixed-numbers&prefix=) <br>
-[Generate preview token 🚀](https://generate-random.org/api-token-generator?count=1&length=64&type=mixed-numbers&prefix=) <br>
+[Generate revalidation token 🔗](https://it-tools.tech/token-generator?length=128) <br>
+[Generate preview token 🔗](https://it-tools.tech/token-generator?length=32) <br>
 
 <br>
 
