@@ -5,6 +5,8 @@ import getMetaObject from '@/lib/getMetaObject'
 import getPreview from '@/lib/getPreview'
 import { pageQuery, pagesPathQuery } from '@/lib/queries'
 
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   const pages = await getCachedClient()(pagesPathQuery)
   return pages
