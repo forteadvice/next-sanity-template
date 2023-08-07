@@ -81,35 +81,33 @@ pnpm run dev
 
 ### Revalidation webhook
 
-Revalidatetion should only be triggered by state-changes on documents, generating a web-page.
-
 | Key         | Value                                         |
 | ----------- | --------------------------------------------- |
 | Name        | _Some name_                                   |
 | URL         | https:// DOMAIN.COM /api/revalidate           |
 | Dataset     | production                                    |
 | Trigger on  | Create, Update, Delete                        |
-| Filter      | _\_type == 'frontpage' \|\| \_type == 'page'_ |
-| Projection  | _{\_type, slug}_                              |
+| Filter      | _\_type == 'affectedType'_ - if not all types |
+| Projection  | _{\_type}_                                    |
 | HTTP method | POST                                          |
 | API version | Newest                                        |
 | Secret      | _REVALIDATION_TOKEN_ from .env                |
+
+> This template has Filter blank, and uses a resolvePath() function to determine path to revalidate - uncluding full website revalidation.
 
 <br>
 
 ### Vercel deploy-hook
 
-Full rebuild should only be triggered be state-changes on documents that affect the majority of the website.
-
-| Key         | Value                  |
-| ----------- | ---------------------- |
-| Name        | _Some name_            |
-| URL         | _Vercel-deploy-hook_   |
-| Dataset     | production             |
-| Trigger on  | Create, Update, Delete |
-| Filter      | _\_type == 'settings'_ |
-| HTTP method | POST                   |
-| API version | Newest                 |
+| Key         | Value                      |
+| ----------- | -------------------------- |
+| Name        | _Some name_                |
+| URL         | _Vercel-deploy-hook_       |
+| Dataset     | production                 |
+| Trigger on  | Create, Update, Delete     |
+| Filter      | _\_type == 'affectedType'_ |
+| HTTP method | POST                       |
+| API version | Newest                     |
 
 <br>
 
