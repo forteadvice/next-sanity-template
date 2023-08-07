@@ -1,9 +1,16 @@
 # Next-Sanity Base Template
 
+This template preconfigures:
+
+- An embedded Sanity Studio with basic documents and objects
+- A desk-strucure enabling for singletons and a preview-pane
+- A React-component for LivePreviews
+- An API for handling path revalidation based on document types
+
 ## Contents
 
 - [Setup Guide](#setup-guide)
-- [Configure Sanity Webhooks](#configure-sanity-webhooks)
+- [Configure Vercel deploy-hook](#configure-vercel-deploy-hook)
 - [Important Files](#important-files)
 
 <br>
@@ -33,18 +40,25 @@ NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
 REVALIDATION_TOKEN='generated-token'
 ```
 
-[Generate tokens here 🚀](https://generate-random.org/api-token-generator?count=2&length=128&type=mixed-numbers&prefix=) <br>
+[Generate revalidation token 🚀](https://generate-random.org/api-token-generator?count=1&length=128&type=mixed-numbers&prefix=) <br>
+[Generate preview token 🚀](https://generate-random.org/api-token-generator?count=1&length=64&type=mixed-numbers&prefix=) <br>
 
-> See [Revalidation webhook](#revalidation-webhook) for configuring revalidation webhook calls at Sanity.io
+> Remeber to rebuild the app to make the new variables available
 
 <br>
 
 ### 3. Clone repository and configure _.env.local_
 
-Copy the .env.local.example file to .env.local and insert the missing values
+Copy the .env.local.example file to .env.local
+
+```bash
+cp .env.local.example .env.local
+```
+
+Insert the missing values
 
 ```yaml
-# .env.local.example
+# .env.local
 NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET="production"
 SANITY_API_READ_TOKEN=
@@ -73,36 +87,33 @@ pnpm run dev
 
 <br>
 
+### 5. Configure revalidation webhook at Sanity.io
+
+| Key         | Value                               |
+| ----------- | ----------------------------------- |
+| Name        | _Some name_                         |
+| URL         | https:// DOMAIN.COM /api/revalidate |
+| Dataset     | production                          |
+| Trigger on  | Create, Update, Delete              |
+| Projection  | _{\_type}_                          |
+| HTTP method | POST                                |
+| API version | Select the newest                   |
+| Secret      | _REVALIDATION_TOKEN_ from .env      |
+
+<br>
+
 ---
 
 <br>
 
-## Configure Sanity Webhooks
+## Configure Vercel deploy-hook
 
-### Revalidation webhook
-
-| Key         | Value                                         |
-| ----------- | --------------------------------------------- |
-| Name        | _Some name_                                   |
-| URL         | https:// DOMAIN.COM /api/revalidate           |
-| Dataset     | production                                    |
-| Trigger on  | Create, Update, Delete                        |
-| Filter      | _\_type == 'affectedType'_ - if not all types |
-| Projection  | _{\_type}_                                    |
-| HTTP method | POST                                          |
-| API version | Newest                                        |
-| Secret      | _REVALIDATION_TOKEN_ from .env                |
-
-> This template has Filter blank, and uses a resolvePath() function to determine path to revalidate - uncluding full website revalidation.
-
-<br>
-
-### Vercel deploy-hook
+If needed, Vercel deploy-hook can be set up as following:
 
 | Key         | Value                      |
 | ----------- | -------------------------- |
 | Name        | _Some name_                |
-| URL         | _Vercel-deploy-hook_       |
+| URL         | _Deploy-hook URL_          |
 | Dataset     | production                 |
 | Trigger on  | Create, Update, Delete     |
 | Filter      | _\_type == 'affectedType'_ |
