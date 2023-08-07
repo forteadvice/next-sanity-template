@@ -8,7 +8,11 @@ export default function Menu({ data }) {
       </Link>
 
       {data?.links?.map((link) => {
-        return <Link href={`/${link?.slug}`}>{link?.title}</Link>
+        return (
+          <Link key={link?._key} href={`/${link?.slug}`}>
+            {link?.title}
+          </Link>
+        )
       })}
     </nav>
   )
