@@ -33,7 +33,7 @@ NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
 REVALIDATION_TOKEN='generated-token'
 ```
 
-[Generate tokens here 🚀](https://generate-random.org/api-token-generator?count=1&length=128&type=mixed-numbers&prefix=) <br>
+[Generate tokens here 🚀](https://generate-random.org/api-token-generator?count=2&length=128&type=mixed-numbers&prefix=) <br>
 
 > See [Revalidation webhook](#revalidation-webhook) for configuring revalidation webhook calls at Sanity.io
 
