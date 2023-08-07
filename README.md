@@ -23,9 +23,7 @@ This template preconfigures:
 
 ### 1. Deploy Next-Sanity template to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)][vercel-deploy]
-
-[vercel-deploy]: https://vercel.com/new/clone?repository-url=https://github.com/mjthias/next-sanity-template&repository-name=next-sanity-template&project-name=next-sanity-template&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION,NEXT_PUBLIC_PREVIEW_TOKEN,REVALIDATION_TOKEN&envDescription=Read%20about%20the%20variable%20requirments%20here%3A&envLink=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template%232-configure-missing-environment-variables-vercel&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
 
 This will create a github repo, Sanity Project and a Vercel deploy with pre-configured Sanity envitonment variables
 
@@ -43,11 +41,24 @@ REVALIDATION_TOKEN='generated-token'
 [Generate revalidation token 🚀](https://generate-random.org/api-token-generator?count=1&length=128&type=mixed-numbers&prefix=) <br>
 [Generate preview token 🚀](https://generate-random.org/api-token-generator?count=1&length=64&type=mixed-numbers&prefix=) <br>
 
-> Remeber to rebuild the app to make the new variables available
+<br>
+
+### 3. Configure revalidation webhook at Sanity.io
+
+| Key         | Value                               |
+| ----------- | ----------------------------------- |
+| Name        | _Some name_                         |
+| URL         | https:// DOMAIN.COM /api/revalidate |
+| Dataset     | production                          |
+| Trigger on  | Create, Update, Delete              |
+| Projection  | _{\_type}_                          |
+| HTTP method | POST                                |
+| API version | Select the newest                   |
+| Secret      | _REVALIDATION_TOKEN_ from .env      |
 
 <br>
 
-### 3. Clone repository and configure _.env.local_
+### 4. Clone repository and configure _.env.local_
 
 Copy the .env.local.example file to .env.local
 
@@ -67,9 +78,11 @@ REVALIDATION_TOKEN=
 NEXT_PUBLIC_PREVIEW_TOKEN=
 ```
 
+> Even though Vercel might have more variables, only these are needed.
+
 <br>
 
-### 4. Install and run local environment
+### 5. Install and run local environment
 
 Install dependencies ⚙️
 
@@ -84,21 +97,6 @@ Run environment 🏃‍♀️
 ```bash
 pnpm run dev
 ```
-
-<br>
-
-### 5. Configure revalidation webhook at Sanity.io
-
-| Key         | Value                               |
-| ----------- | ----------------------------------- |
-| Name        | _Some name_                         |
-| URL         | https:// DOMAIN.COM /api/revalidate |
-| Dataset     | production                          |
-| Trigger on  | Create, Update, Delete              |
-| Projection  | _{\_type}_                          |
-| HTTP method | POST                                |
-| API version | Select the newest                   |
-| Secret      | _REVALIDATION_TOKEN_ from .env      |
 
 <br>
 
