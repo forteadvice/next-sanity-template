@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import PreviewWrapper from '@/components/preview/PreviewWrapper'
 import PageView from '@/components/views/PageView'
 import { getCachedClient } from '@/lib/getClient'
@@ -18,6 +19,10 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const preview = getPreview()
   const data = await getCachedClient(preview)(pageQuery, params)
+
+  if (!data) {
+    return notFound()
+  }
 
   return (
     <PreviewWrapper initialData={data} preview={preview} query={pageQuery} params={params}>
