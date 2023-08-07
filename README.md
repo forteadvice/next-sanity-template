@@ -193,3 +193,13 @@ TODO...
 | -------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | .eslintrc.json | ESLint configuration. _"import/no-anonymous-default-export": "off"_ are set for _src/sanity/\*_, to follow Sanity standards |
 | .prettierrc    | Prettier linting configuration. Aligns Prettier config across dev-devices                                                   |
+
+<br>
+
+---
+
+<br>
+
+## TODOS
+
+- [Dynamic image heights - unstable_getImgProps()](https://github.com/vercel/next.js/discussions/19880) Next 13.4.8 needed
