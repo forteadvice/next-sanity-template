@@ -5,17 +5,17 @@ import Footer from '@/components/Footer'
 
 export default async function NotFound() {
   const settings = await getCachedClient()(settingsQuery)
-  const { menu, pageNotFound, footer } = settings
+  const { pageNotFound } = settings
 
   return (
     <div className='h-screen flex flex-col'>
-      <Menu data={menu} />
+      <Menu data={settings?.menu} />
       <main className='flex-1 flex justify-center items-center'>
         <h1 className='text-2xl mb-2'>
           {pageNotFound?.title} | {pageNotFound?.body}
         </h1>
       </main>
-      <Footer data={footer} />
+      <Footer data={settings?.footer} />
     </div>
   )
 }
