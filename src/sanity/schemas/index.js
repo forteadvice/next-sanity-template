@@ -8,8 +8,8 @@ import seo from './objects/seo'
 import portableText from './objects/portableText'
 import linkInternal from './objects/linkInternal'
 import linkExternal from './objects/linkExternal'
+import hero from './objects/hero'
 // Content-blocks
-import hero from './content-blocks/hero'
 import textBlock from './content-blocks/textBlock'
 
 export const schemaTypes = [
@@ -24,7 +24,7 @@ export const schemaTypes = [
   portableText,
   linkInternal,
   linkExternal,
-  // Content-blocks
   hero,
+  // Content-blocks
   textBlock,
 ]
