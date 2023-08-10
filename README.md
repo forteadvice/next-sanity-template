@@ -36,8 +36,8 @@ NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
 REVALIDATION_TOKEN='generated-token'
 ```
 
-[Generate revalidation token 🔗](https://it-tools.tech/token-generator?length=128) <br>
-[Generate preview token 🔗](https://it-tools.tech/token-generator?length=32) <br>
+[Generate PREVIEW token 🔗](https://it-tools.tech/token-generator?length=32) <br>
+[Generate REVALIDATION token 🔗](https://it-tools.tech/token-generator?length=128) <br>
 
 <br>
 
