@@ -104,6 +104,28 @@ pnpm run dev
 
 ## Configure Vercel deploy-hook
 
+Go to /studio, click dashboard and create a new connection.
+
+1. Vercel Account Token <br>
+   This can be created in Vercel under Account > Settings > Tokens.
+
+2. Vercel Project ID <br>
+   This can be retrieved via the web UI on -> Settings -> General -> Scroll down to Project ID.
+
+3. Vercel Team ID <br>
+   This can be retrieved via the web UI on -> Settings -> General -> Scroll down to Project ID.
+
+4. Deploy hook <br>
+   These can be created in Vercel by going to Project > Settings > Git > Deploy Hooks.
+
+<br>
+
+Read docs [here](https://www.sanity.io/plugins/vercel-dashboard-widget)
+
+<br>
+
+## Configure Vercel deploy-hook
+
 If needed, Vercel deploy-hook can be set up as following:
 
 | Key         | Value                      |

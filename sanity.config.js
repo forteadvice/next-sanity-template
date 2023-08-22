@@ -1,4 +1,6 @@
 import { visionTool } from '@sanity/vision'
+import { dashboardTool } from '@sanity/dashboard'
+import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { apiVersion, dataset, projectId } from './env'
@@ -31,6 +33,9 @@ export default defineConfig({
     deskTool({
       defaultDocumentNode,
       structure: deskStructure,
+    }),
+    dashboardTool({
+      widgets: [vercelWidget()],
     }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
