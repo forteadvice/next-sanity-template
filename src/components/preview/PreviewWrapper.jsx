@@ -12,11 +12,9 @@ export default function PreviewWrapper(props) {
   }
 
   return (
-    <PreviewProvider token={props.preview}>
+    <PreviewProvider preview={preview}>
       <ExitPreview />
-      <PreviewData initialData={props.initialData} query={query} params={params}>
-        {props.children}
-      </PreviewData>
+      <PreviewData {...{ initialData, query, params }}>{props.children}</PreviewData>
     </PreviewProvider>
   )
 }

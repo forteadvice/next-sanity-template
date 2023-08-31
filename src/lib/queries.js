@@ -38,7 +38,7 @@ contentBlocks[]{
 `
 
 // Queries
-export const pagesPathQuery = groq`
+export const pagesPathsQuery = groq`
 *[_type == 'page' && defined(slug.current)][] {
   'slug': slug.current,
 }
