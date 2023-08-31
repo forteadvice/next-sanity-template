@@ -7,7 +7,7 @@ import getPreview from '@/lib/getPreview'
 import { pageQuery, pagesPathsQuery } from '@/lib/queries'
 
 export async function generateStaticParams() {
-  const pages = await sanityFetch({ query: pagesPathsQuery, tags: ['pages-path'] })
+  const pages = await sanityFetch({ query: pagesPathsQuery, tags: ['page', 'page-paths'] })
   return pages
 }
 

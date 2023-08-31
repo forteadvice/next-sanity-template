@@ -20,7 +20,7 @@ export async function POST(req) {
 
     revalidateTag(body._type)
 
-    return NextResponse.json({ message: `Revalidated ${body._type}` })
+    return NextResponse.json({ body })
   } catch (err) {
     console.error(err)
     return new Response(err.message, { status: 500 })
