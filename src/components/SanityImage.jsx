@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useNextSanityImage } from 'next-sanity-image'
-import { getClient } from '@/lib/getClient'
+import { client } from '@/lib/sanity.client'
 
 export default function SanityImage({ imageObj, heightRatio, width, ...rest }) {
   const config = (imageUrlBuilder, options) => {
@@ -13,7 +13,7 @@ export default function SanityImage({ imageObj, heightRatio, width, ...rest }) {
       .quality(75)
   }
 
-  const imageProps = useNextSanityImage(getClient(), imageObj, { imageBuilder: config })
+  const imageProps = useNextSanityImage(client, imageObj, { imageBuilder: config })
 
   return (
     <Image

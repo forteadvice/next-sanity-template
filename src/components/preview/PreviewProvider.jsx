@@ -1,10 +1,19 @@
 'use client'
 
-import { getClient } from '@/lib/getClient'
-import { LiveQueryProvider } from 'next-sanity/preview'
-import { useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import { suspend } from 'suspend-react'
 
-export default function PreviewProvider({ children, token }) {
-  const client = useMemo(() => getClient(token), [token])
-  return <LiveQueryProvider client={client}>{children}</LiveQueryProvider>
+const LiveQueryProvider = dynamic(() => import('next-sanity/preview'))
+
+const UniqueKey = Symbol('@/lib/sanity.client')
+
+export default function PreviewProvider({ children, preview }) {
+  const { client } = suspend(() => import('@/lib/sanity.client'), [UniqueKey])
+  const token = preview?.token
+  if (!token) throw new TypeError('Missing token')
+  return (
+    <LiveQueryProvider client={client} token={token}>
+      {children}
+    </LiveQueryProvider>
+  )
 }

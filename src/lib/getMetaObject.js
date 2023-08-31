@@ -1,11 +1,11 @@
-import { getCachedClient } from './getClient'
 import { settingsQuery } from './queries'
+import { sanityFetch } from './sanity.fetch'
 
 export default async function getMetaObject(meta) {
   // Get default meta from settings if seo not complete
   let defaultMeta = null
   if (!meta?.title || meta?.description) {
-    const settings = await getCachedClient()(settingsQuery)
+    const settings = await sanityFetch({ query: settingsQuery, tags: ['default-meta'] })
     defaultMeta = settings?.defaultSeo
   }
 

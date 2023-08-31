@@ -1,10 +1,10 @@
-import { getCachedClient } from '@/lib/getClient'
 import { settingsQuery } from '@/lib/queries'
+import { sanityFetch } from '@/lib/sanity.fetch'
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
 
 export default async function BaseLayout({ children }) {
-  const settings = await getCachedClient()(settingsQuery)
+  const settings = await sanityFetch({ query: settingsQuery, tags: ['settings'] })
 
   return (
     <>

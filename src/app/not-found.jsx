@@ -1,10 +1,10 @@
-import { getCachedClient } from '@/lib/getClient'
+import { sanityFetch } from '@/lib/sanity.fetch'
 import { settingsQuery } from '@/lib/queries'
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
 
 export default async function NotFound() {
-  const settings = await getCachedClient()(settingsQuery)
+  const settings = await sanityFetch({ query: settingsQuery, tags: ['settings'] })
 
   return (
     <div className='h-screen flex flex-col'>
