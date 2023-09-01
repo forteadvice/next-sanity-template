@@ -23,7 +23,7 @@ This template preconfigures:
 
 ### 1. Deploy Next-Sanity template to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION,NEXT_PUBLIC_PREVIEW_TOKEN,REVALIDATION_TOKEN&envDescription=Read%20about%20the%20variable%20requirments%20here%3A&envLink=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template%232-configure-missing-environment-variables-vercel&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION,NEXT_PUBLIC_PREVIEW_TOKEN,SANITY_REVALIDATE_SECRET&envDescription=Read%20about%20the%20variable%20requirments%20here%3A&envLink=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template%232-configure-missing-environment-variables-vercel&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
 
 <br>
 
@@ -33,7 +33,7 @@ This template preconfigures:
 # Add the following to Vercel
 NEXT_PUBLIC_SANITY_API_VERSION='YYYY-MM-DD' # Date of project start
 NEXT_PUBLIC_PREVIEW_TOKEN='generated-token'
-REVALIDATION_TOKEN='generated-token'
+SANITY_REVALIDATE_SECRET='generated-token'
 ```
 
 [Generate PREVIEW token 🔗](https://it-tools.tech/token-generator?length=32) <br>
@@ -43,16 +43,16 @@ REVALIDATION_TOKEN='generated-token'
 
 ### 3. Configure revalidation webhook at Sanity.io
 
-| Key         | Value                               |
-| ----------- | ----------------------------------- |
-| Name        | _Some name_                         |
-| URL         | https:// DOMAIN.COM /api/revalidate |
-| Dataset     | production                          |
-| Trigger on  | Create, Update, Delete              |
-| Projection  | _{\_type}_                          |
-| HTTP method | POST                                |
-| API version | Select the newest                   |
-| Secret      | _REVALIDATION_TOKEN_ from .env      |
+| Key         | Value                                |
+| ----------- | ------------------------------------ |
+| Name        | _Some name_                          |
+| URL         | https:// DOMAIN.COM /api/revalidate  |
+| Dataset     | production                           |
+| Trigger on  | Create, Update, Delete               |
+| Projection  | _{\_type}_                           |
+| HTTP method | POST                                 |
+| API version | Select the newest                    |
+| Secret      | _SANITY_REVALIDATE_SECRET_ from .env |
 
 <br>
 
@@ -72,7 +72,7 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET="production"
 SANITY_API_READ_TOKEN=
 NEXT_PUBLIC_SANITY_API_VERSION=
-REVALIDATION_TOKEN=
+SANITY_REVALIDATE_SECRET=
 NEXT_PUBLIC_PREVIEW_TOKEN=
 ```
 
