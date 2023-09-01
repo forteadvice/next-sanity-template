@@ -1,4 +1,5 @@
 import { DocumentsIcon, CogIcon } from '@sanity/icons'
+import { apiVersion } from '../../../env'
 
 export const deskStructure = (S) =>
   S.list()
@@ -14,7 +15,13 @@ export const deskStructure = (S) =>
       S.listItem()
         .title('Pages')
         .icon(DocumentsIcon)
-        .child(S.documentList().title(`Pages`).schemaType('page').filter('_type == "page"')),
+        .child(
+          S.documentList()
+            .title(`Pages`)
+            .schemaType('page')
+            .apiVersion(`v${apiVersion}`)
+            .filter('_type == "page"'),
+        ),
       S.divider(),
 
       // Settings

@@ -2,7 +2,7 @@ import { ImageIcon } from '@sanity/icons'
 
 export default {
   name: 'textImage',
-  title: 'Text image',
+  title: 'Text Image',
   type: 'object',
   icon: ImageIcon,
   validation: (Rule) => Rule.required(),
@@ -21,12 +21,14 @@ export default {
       ],
       validation: (Rule) => Rule.required(),
     },
+
     {
       name: 'textBlock',
       title: 'Text block',
       type: 'textBlock',
       validation: (Rule) => Rule.required(),
     },
+
     {
       name: 'layout',
       title: 'Layout',
@@ -43,4 +45,21 @@ export default {
       validation: (Rule) => Rule.required(),
     },
   ],
+
+  preview: {
+    select: {
+      titleObj: 'textBlock',
+      image: 'image',
+    },
+
+    prepare({ titleObj, image }) {
+      const title = titleObj.text[0].children[0].text
+
+      return {
+        title: title,
+        subtitle: 'Text Image',
+        media: image.asset,
+      }
+    },
+  },
 }

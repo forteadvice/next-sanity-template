@@ -22,4 +22,19 @@ export default {
       description: 'Important for SEO and accessiblity.',
     },
   ],
+
+  preview: {
+    select: {
+      title: 'alt',
+      image: 'asset',
+    },
+
+    prepare({ title, image }) {
+      return {
+        title,
+        subtitle: 'Image',
+        media: image,
+      }
+    },
+  },
 }
