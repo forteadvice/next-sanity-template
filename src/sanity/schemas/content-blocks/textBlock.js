@@ -4,6 +4,7 @@ export default {
   name: 'textBlock',
   title: 'Text Block',
   type: 'object',
+  icon: BlockContentIcon,
   fields: [
     {
       name: 'text',

@@ -39,6 +39,10 @@ export default {
           title: 'Image',
           type: 'mainImage',
         },
+        {
+          name: 'Text image',
+          type: 'textImage',
+        },
       ],
     },
     {

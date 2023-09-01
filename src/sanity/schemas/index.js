@@ -11,6 +11,7 @@ import linkExternal from './objects/linkExternal'
 import hero from './objects/hero'
 // Content-blocks
 import textBlock from './content-blocks/textBlock'
+import textImage from './content-blocks/textImage'
 
 export const schemaTypes = [
   // Documents
@@ -27,4 +28,5 @@ export const schemaTypes = [
   hero,
   // Content-blocks
   textBlock,
+  textImage,
 ]

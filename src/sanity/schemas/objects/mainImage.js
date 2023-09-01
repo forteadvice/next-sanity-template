@@ -1,7 +1,10 @@
+import { ImageIcon } from '@sanity/icons'
+
 export default {
   name: 'mainImage',
   title: 'Main image',
   type: 'image',
+  icon: ImageIcon,
   options: {
     hotspot: true,
   },
