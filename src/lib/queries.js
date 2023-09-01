@@ -9,7 +9,6 @@ hero {
     asset->,
   }
 }
-
 `
 
 const contentBlocks = groq`
@@ -24,8 +23,31 @@ contentBlocks[]{
         ...,
         _type == 'internalLink' => {
           'slug': @->slug.current,
-        }
-      }
+        },
+      },
+    },
+  },
+
+  // TextImage
+  _type == 'textImage' => {
+    ...,
+    
+    textBlock {
+      ...,
+      text [] {
+        ...,
+        markDefs[] {
+          ...,
+            _type == 'internalLink' => {
+            'slug': @->slug.current,
+          },
+        },
+      },
+    },
+
+    image {
+      ...,
+      asset->,
     },
   },
 

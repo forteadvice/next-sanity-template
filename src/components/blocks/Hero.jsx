@@ -2,14 +2,14 @@ import SanityImage from '../SanityImage'
 
 export default function Hero({ data }) {
   return (
-    <section>
-      <h1 className='text-6xl font-bold'>{data?.title}</h1>
-      <p className='text-xl font-semibold'>{data?.tagline}</p>
+    <section className='hero'>
+      <h1 className='text-6xl lg:text-7xl font-bold'>{data?.title}</h1>
+      <p className='text-lg md:text-xl mt-2 font-semibold'>{data?.tagline}</p>
       <SanityImage
         imageObj={data?.image}
-        heightRatio={1 / 1}
-        width={500}
-        sizes={'(max-width: 500x) 100vw, 500px'}
+        heightRatio={1 / 2}
+        width={1400}
+        sizes={'(max-width: 1400x) 100vw, 1400px'}
       />
     </section>
   )

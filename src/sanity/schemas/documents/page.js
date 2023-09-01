@@ -40,7 +40,7 @@ export default {
           type: 'mainImage',
         },
         {
-          name: 'Text image',
+          name: 'textImage',
           type: 'textImage',
         },
       ],

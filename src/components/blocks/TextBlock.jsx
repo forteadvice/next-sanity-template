@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
-export default function TextBlock({ data }) {
+export default function TextBlock({ data, mt = true }) {
   return (
-    <div className='text-block'>
+    <div className={`text-block ${mt ? 'mt-8' : ''}`}>
       <PortableText value={data.text} components={components} />
     </div>
   )

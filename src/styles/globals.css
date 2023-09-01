@@ -2,31 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* TextBlock stylings */
-.text-block {
-  @apply mt-8;
-}
-.text-block > * {
+.text-block > *:not(:last-child) {
   @apply mb-2;
 }
 .text-block h2 {
@@ -49,4 +31,45 @@ body {
 }
 .text-block ol li {
   @apply list-decimal list-inside;
+}
+
+/* SAMPLE STYLING - rm when cloned */
+* {
+  @apply text-[#202020];
+}
+body {
+  @apply bg-[#fcfcfc];
+}
+main {
+  @apply p-4 max-w-[1400px] m-auto;
+}
+img {
+  @apply block rounded-3xl;
+}
+.hero p {
+  @apply md:ml-12 lg:ml-24;
+}
+.hero img {
+  @apply mt-4;
+}
+.text-block {
+  @apply max-w-[35rem] my-16;
+}
+.text-image {
+  @apply my-16 gap-16;
+}
+main > *:not(.hero):not(figure) {
+  @apply md:mx-16;
+}
+figure {
+  @apply max-w-[700px] m-auto my-32;
+}
+figcaption {
+  @apply italic text-center;
+}
+nav {
+  @apply py-2 px-4 border-b-black border-b;
+}
+footer {
+  @apply py-2 mt-16 border-t-black border-t lg:flex lg:gap-4 lg:pl-4;
 }
