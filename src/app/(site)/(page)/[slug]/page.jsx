@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
-import PreviewWrapper from '@/components/preview/PreviewWrapper'
-import PageView from '@/components/views/PageView'
 import { sanityFetch } from '@/lib/sanity.fetch'
 import getMetaObject from '@/lib/getMetaObject'
 import getPreview from '@/lib/getPreview'
 import { pageQuery, pagesPathsQuery } from '@/lib/queries'
+
+import { Hero } from '@/components/blocks'
+import ContentBlocks from '@/components/ContentBlocks'
 
 export async function generateStaticParams() {
   const pages = await sanityFetch({ query: pagesPathsQuery, tags: ['page', 'page-paths'] })
@@ -34,8 +35,9 @@ export default async function Page({ params }) {
   }
 
   return (
-    <PreviewWrapper initialData={data} preview={preview} query={pageQuery} params={params}>
-      <PageView />
-    </PreviewWrapper>
+    <main>
+      {data?.hero && <Hero data={data.hero} />}
+      {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
+    </main>
   )
 }

@@ -34,7 +34,7 @@
 }
 
 /* SAMPLE STYLING - rm when cloned */
-* {
+*:not([data-ui='NextStudioLayout'] *) {
   @apply text-[#202020];
 }
 body {

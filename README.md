@@ -146,53 +146,41 @@ If needed, Vercel deploy-hook can be set up as following:
 
 ## Built in components & functionality
 
-### Live preview
+### Preview - not live!
 
-Live previewing compenents can be achived by wrapping them inside the _PreivewWrapper-component_. <br>
-_PreviewWrapper_ takes the following props:
+Getting preview data is enabled by using the lib-functions getPreview and sanityFetch(). <br>
+This is not live-preview, so page reload is needed to update the page - however this is super simple to setup and maintain.
 
 ```jsx
-<PreviewWrapper
-  preview={ preview } // getPreview()
-  query={ groqQuery }
-  params={ groqParams } // paramsObject || undefined
-  initialData={ fethedData }
-  // ...rest
-  >
-    // Child gets 'data' prop from PreviewWrapper
-    <ChildComponent />
-<PreviewWrapper>
+const preview = getPreview()
+const data = await sanityFetch({ preview, query: frontPageQuery, tags: ['frontpage'] })
 ```
-
-> Since the previewed child component will be rerendered client side, this direct child must have _"use client"_ declared. <br> For that reason, the template includes the _components/views_ directory to keep intire page views.
 
 #### Full example
 
 ```JSX
-// src/(site)/(page)/[slug]/page.jsx
-import PreviewWrapper from '@/components/preview/PreviewWrapper'
-import PageView from '@/components/views/PageView'
-import { getCachedClient } from '@/lib/getClient'
-import { pageQuery } from '@/lib/queries'
+// src/app/(site)/(frontpage)/page.jsx
 import getPreview from '@/lib/getPreview'
-// Other imports
+import { frontPageQuery } from '@/lib/queries'
+import getMetaObject from '@/lib/getMetaObject'
+import { sanityFetch } from '@/lib/sanity.fetch'
+import { Hero } from '@/components/blocks'
+import ContentBlocks from '@/components/ContentBlocks'
 
-export async function generateStaticParams() {...}
-export async function generateMetadata({ params }) {...}
+export async function generateMetadata() {
+  const data = await sanityFetch({ query: frontPageQuery, tags: ['frontpage'] })
+  return getMetaObject(data?.seo)
+}
 
-export default async function Page({ params }) {
+export default async function Home() {
   const preview = getPreview()
-  const data = await getCachedClient(preview)(pageQuery, params)
+  const data = await sanityFetch({ preview, query: frontPageQuery, tags: ['frontpage'] })
 
   return (
-    <PreviewWrapper
-      initialData={data}
-      preview={preview}
-      query={pageQuery}
-      params={params}
-      >
-      <PageView />
-    </PreviewWrapper>
+    <main>
+      {data?.hero && <Hero data={data.hero} />}
+      {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
+    </main>
   )
 }
 ```

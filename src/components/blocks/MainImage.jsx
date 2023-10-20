@@ -1,7 +1,6 @@
 import SanityImage from '../SanityImage'
 
 export default function MainImage({ data }) {
-  console.log(data)
   return (
     <figure className='main-image'>
       <SanityImage

@@ -8,14 +8,14 @@ export async function sanityFetch({ preview = false, query, params = {}, tags = 
   }
 
   return client.fetch(query, params, {
-    cache: process.env.NODE_ENV === 'development' ? 'no-cache' : 'force-cache',
+    cache: process.env.NODE_ENV === 'development' ? 'no-cache' : 'force-cache', // No fetch-data cache in dev
     ...(preview && {
       cache: undefined,
       token: preview.token,
       perspective: 'previewDrafts',
     }),
     next: {
-      ...(preview && { revalidate: 30 }),
+      ...(preview && { revalidate: 0 }),
       tags,
     },
   })
