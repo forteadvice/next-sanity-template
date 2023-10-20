@@ -14,7 +14,6 @@ export default {
     {
       name: 'reference',
       type: 'reference',
-      weak: true,
       to: [{ type: 'page' }, { type: 'frontpage' }],
     },
   ],
