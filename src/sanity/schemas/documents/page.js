@@ -1,4 +1,5 @@
 import { toUrlSafe } from '@/lib/helpers'
+import { client } from '@/lib/sanity.client'
 
 export default {
   name: 'page',
@@ -28,11 +29,25 @@ export default {
       type: 'reference',
       to: [{ type: 'page' }],
       options: {
-        // Filter out unpublished pages + the page itself
+        // Filter out the page itself + unpublished pages + 3 level deep pages + pages that, added up, dont count 3 levels
         filter: ({ document }) => {
           return {
-            filter: '!(_id in $ids) && !(_id in path("drafts.**"))',
-            params: { ids: [document._id, document._id.replace('drafts.', '')] },
+            filter: `
+            !(_id in $ids) &&
+            !(_id in path("drafts.**")) &&
+            !defined(parent->.parent._ref) && 
+            !(parent._ref in $ids) &&
+            count(*[_type == "page" && parent->parent._ref == $id]) == 0 &&
+            (
+              count(*[_type == "page" && parent._ref == $id]) > 0 && 
+              !defined(parent._ref) || 
+              count(*[_type == "page" && parent._ref == $id]) == 0
+            )
+            `,
+            params: {
+              ids: [document._id, document._id.replace('drafts.', '')],
+              id: document._id.replace('drafts.', ''),
+            },
           }
         },
       },
@@ -69,4 +84,21 @@ export default {
       options: { collapsible: true, collapsed: true },
     },
   ],
+
+  preview: {
+    select: {
+      title: 'title',
+      slug: 'slug.current',
+      parent: 'parent.slug.current',
+      grandParent: 'parent.parent.slug.current',
+    },
+
+    prepare({ title, slug, parent, grandParent }) {
+      const path = `/${[grandParent, parent, slug].filter(Boolean).join('/')}`
+      return {
+        title,
+        subtitle: path,
+      }
+    },
+  },
 }

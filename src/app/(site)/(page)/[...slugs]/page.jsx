@@ -3,7 +3,6 @@ import { sanityFetch } from '@/lib/sanity.fetch'
 import getMetaObject from '@/lib/getMetaObject'
 import getPreview from '@/lib/getPreview'
 import { pageQuery, pagesPathsQuery } from '@/lib/queries'
-
 import { Hero } from '@/components/blocks'
 import ContentBlocks from '@/components/ContentBlocks'
 
@@ -13,9 +12,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
+  const slug = params.slugs[params.slugs.length - 1]
   const data = await sanityFetch({
     query: pageQuery,
-    params,
+    params: { slug },
     tags: ['page', `page-${params.slug}`],
   })
   return getMetaObject(data?.seo)
@@ -23,11 +23,12 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const preview = getPreview()
+  const slug = params.slugs[params.slugs.length - 1]
   const data = await sanityFetch({
     preview,
     query: pageQuery,
-    params,
-    tags: ['page', `page-${params.slug}`],
+    params: { slug },
+    tags: ['page', `page-${slug}`],
   })
 
   if (!data) {

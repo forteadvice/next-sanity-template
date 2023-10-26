@@ -62,7 +62,13 @@ contentBlocks[]{
 // Queries
 export const pagesPathsQuery = groq`
 *[_type == 'page' && defined(slug.current)][] {
-  'slug': slug.current,
+  'slug': [slug.current],
+  defined(parent->slug.current) => {
+    'slug': [parent->slug.current, slug.current]
+  },
+  defined(parent->parent->slug.current) => {
+    'slug': [parent->parent->slug.current, parent->slug.current, slug.current]
+  },
 }
 `
 
