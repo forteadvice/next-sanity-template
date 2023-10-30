@@ -73,7 +73,11 @@ export const pagesPathsQuery = groq`
 `
 
 export const pageQuery = groq`
-*[_type == 'page' && slug.current == $slug][0] {
+*[
+  _type == 'page' && slug.current == $slug && 
+  (!defined(parent._ref) || parent->slug.current == $parentSlug) &&
+  (!defined(parent->parent._ref) || parent->parent->slug.current == $grandParentSlug)
+  ][0] {
   ...,
   ${hero},
   ${contentBlocks},

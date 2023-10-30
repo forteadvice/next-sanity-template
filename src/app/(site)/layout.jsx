@@ -8,7 +8,6 @@ import ExitPreview from '@/components/preview/ExitPreview'
 export default async function BaseLayout({ children }) {
   const preview = getPreview()
   const settings = await sanityFetch({ query: settingsQuery, tags: ['settings'] })
-  // test
 
   return (
     <>

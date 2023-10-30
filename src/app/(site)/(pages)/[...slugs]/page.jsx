@@ -6,30 +6,35 @@ import { pageQuery, pagesPathsQuery } from '@/lib/queries'
 import { Hero } from '@/components/blocks'
 import ContentBlocks from '@/components/ContentBlocks'
 
+async function getPages(slugs, preview = false) {
+  // Assemble params to get specific page
+  const slug = slugs[slugs.length - 1]
+  const parentSlug = slugs[slugs.length - 2] ?? null
+  const grandParentSlug = slugs[slugs.length - 3] ?? null
+  const data = await sanityFetch({
+    preview,
+    query: pageQuery,
+    params: { slug, parentSlug, grandParentSlug },
+    tags: ['page', `page-${slug}`],
+  })
+  return data
+}
+
 export async function generateStaticParams() {
   const pages = await sanityFetch({ query: pagesPathsQuery, tags: ['page', 'page-paths'] })
   return pages
 }
 
 export async function generateMetadata({ params }) {
-  const slug = params.slugs[params.slugs.length - 1]
-  const data = await sanityFetch({
-    query: pageQuery,
-    params: { slug },
-    tags: ['page', `page-${params.slug}`],
-  })
+  const { slugs } = params
+  const data = await getPages(slugs, false)
   return getMetaObject(data?.seo)
 }
 
 export default async function Page({ params }) {
+  const { slugs } = params
   const preview = getPreview()
-  const slug = params.slugs[params.slugs.length - 1]
-  const data = await sanityFetch({
-    preview,
-    query: pageQuery,
-    params: { slug },
-    tags: ['page', `page-${slug}`],
-  })
+  const data = await getPages(slugs, preview)
 
   if (!data) {
     return notFound()

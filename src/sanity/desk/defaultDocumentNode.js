@@ -1,6 +1,9 @@
 import Iframe from 'sanity-plugin-iframe-pane'
+import { apiVersion } from '../../../env'
+import { groq } from 'next-sanity'
 
 export const defaultDocumentNode = (S, { schemaType }) => {
+  const client = S.context.getClient({ apiVersion })
   switch (schemaType) {
     case 'page':
     case 'frontpage':
@@ -10,7 +13,7 @@ export const defaultDocumentNode = (S, { schemaType }) => {
         S.view
           .component(Iframe)
           .options({
-            url: (doc) => resolvePreviewUrl(doc),
+            url: async (doc) => await resolvePreviewUrl(doc, client),
           })
           .title('Preview'),
       ])
@@ -19,9 +22,31 @@ export const defaultDocumentNode = (S, { schemaType }) => {
   }
 }
 
-function resolvePreviewUrl(doc) {
+async function resolvePreviewUrl(doc, client) {
   const baseUrl = window.location.origin
-  const urlPath = doc?.slug?.current ?? ''
+  let urlPath = null
+
+  switch (doc?._type) {
+    case 'page':
+      const query = groq`
+      *[_type == 'page' && _id == $id][0] {
+        'path': slug.current,
+        defined(parent->slug.current) => {
+          'path': parent->slug.current + "/" + slug.current
+        },
+        defined(parent->parent->slug.current) => {
+          'path': parent->parent->slug.current + "/" + parent->slug.current + "/" + slug.current
+        },
+      }
+      `
+      const res = await client.fetch(query, { id: doc._id })
+      urlPath = res?.path
+      break
+
+    default:
+      urlPath = ''
+  }
+
   const previewToken = process.env.NEXT_PUBLIC_PREVIEW_TOKEN
   return `${baseUrl}/api/preview?redirect=/${urlPath}&token=${previewToken}`
 }
