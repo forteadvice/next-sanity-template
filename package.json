@@ -15,7 +15,6 @@
     "@sanity/vision": "3.18.1",
     "next": "14.0.1",
     "next-sanity": "5.5.10",
-    "next-sanity-image": "^6.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sanity": "3.18.1",

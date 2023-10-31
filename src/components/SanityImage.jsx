@@ -30,6 +30,7 @@ export default function SanityImage({ imageObj, height, width, ...rest }) {
     />
   )
 }
+
 const builder = imageUrlBuilder(client)
 function urlFor(source) {
   return builder.image(source)
