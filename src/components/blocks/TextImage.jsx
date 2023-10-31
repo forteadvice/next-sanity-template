@@ -11,7 +11,7 @@ export default function TextImage({ data }) {
         <SanityImage
           imageObj={image}
           width={500}
-          heightRatio={1}
+          height={500}
           sizes={'(max-width: 500x) 100vw, 500px'}
         />
       </div>

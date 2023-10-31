@@ -6,7 +6,7 @@ export default function MainImage({ data }) {
       <SanityImage
         imageObj={data}
         width={700}
-        heightRatio={1 / 1.5}
+        height={500}
         sizes={'(max-width: 700x) 100vw, 700px'}
       />
       <figcaption className='mt-2'>{data.caption}</figcaption>

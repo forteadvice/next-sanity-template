@@ -7,7 +7,7 @@ export default function Hero({ data }) {
       <p className='text-lg md:text-xl mt-2 font-semibold'>{data?.tagline}</p>
       <SanityImage
         imageObj={data?.image}
-        heightRatio={1 / 2}
+        height={700}
         width={1400}
         sizes={'(max-width: 1400x) 100vw, 1400px'}
       />

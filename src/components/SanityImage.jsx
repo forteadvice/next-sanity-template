@@ -1,27 +1,36 @@
 import Image from 'next/image'
-import { useNextSanityImage } from 'next-sanity-image'
 import { client } from '@/lib/sanity.client'
+import imageUrlBuilder from '@sanity/image-url'
 
-export default function SanityImage({ imageObj, heightRatio, width, ...rest }) {
-  const config = (imageUrlBuilder, options) => {
-    return imageUrlBuilder
-      .width(options.width)
-      .height(Math.round(options.width * heightRatio))
+export default function SanityImage({ imageObj, height, width, ...rest }) {
+  const { hotspot } = imageObj
+
+  let src = undefined
+  if (hotspot) {
+    src = urlFor(imageObj)
+      .quality(100)
+      .width(width)
+      .height(height)
+      .focalPoint(hotspot.x, hotspot.y)
       .fit('crop')
-      .quality(75)
+      .url()
+  } else {
+    src = urlFor(imageObj).quality(100).width(width).height(height).url()
   }
-
-  const imageProps = useNextSanityImage(client, imageObj, { imageBuilder: config })
 
   return (
     <Image
-      {...imageProps}
-      {...rest}
+      src={src}
       width={width}
-      height={Math.round(width * heightRatio)}
+      height={height}
       alt={imageObj?.alt}
+      {...rest}
       placeholder={imageObj?.asset?.metadata?.lqip ? 'blur' : undefined}
       blurDataURL={imageObj?.asset?.metadata?.lqip ?? undefined}
     />
   )
+}
+const builder = imageUrlBuilder(client)
+function urlFor(source) {
+  return builder.image(source)
 }
