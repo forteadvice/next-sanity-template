@@ -13,18 +13,21 @@
     "@sanity/client": "^6.7.0",
     "@sanity/image-url": "1.0.2",
     "@sanity/vision": "3.18.1",
-    "autoprefixer": "10.4.16",
-    "eslint": "8.52.0",
-    "eslint-config-next": "14.0.0",
-    "next": "14.0.0",
+    "next": "14.0.1",
     "next-sanity": "5.5.10",
     "next-sanity-image": "^6.1.0",
-    "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sanity": "3.18.1",
     "sanity-plugin-dashboard-widget-vercel": "^2.0.1",
     "sanity-plugin-iframe-pane": "^2.6.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "10.4.16",
+    "eslint": "8.52.0",
+    "eslint-config-next": "14.0.1",
+    "postcss": "8.4.31",
     "tailwindcss": "3.3.5"
   }
 }

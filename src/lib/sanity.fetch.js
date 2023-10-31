@@ -1,5 +1,6 @@
 import 'server-only'
 
+import 'server-only'
 import { client } from './sanity.client'
 
 export async function sanityFetch({ preview = false, query, params = {}, tags = [] }) {
