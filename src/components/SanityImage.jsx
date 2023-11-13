@@ -1,23 +1,21 @@
 import Image from 'next/image'
 import { client } from '@/lib/sanity.client'
 import imageUrlBuilder from '@sanity/image-url'
-
 export default function SanityImage({ imageObj, height, width, ...rest }) {
   const { hotspot } = imageObj
-
   let src = undefined
   if (hotspot) {
     src = urlFor(imageObj)
       .quality(100)
+      .dpr(2)
       .width(width)
       .height(height)
       .focalPoint(hotspot.x, hotspot.y)
       .fit('crop')
       .url()
   } else {
-    src = urlFor(imageObj).quality(100).width(width).height(height).url()
+    src = urlFor(imageObj).quality(100).dpr(2).width(width).height(height).url()
   }
-
   return (
     <Image
       src={src}
@@ -30,7 +28,6 @@ export default function SanityImage({ imageObj, height, width, ...rest }) {
     />
   )
 }
-
 const builder = imageUrlBuilder(client)
 function urlFor(source) {
   return builder.image(source)
