@@ -20,6 +20,7 @@
     "sanity": "3.19.2",
     "sanity-plugin-dashboard-widget-vercel": "^2.0.1",
     "sanity-plugin-iframe-pane": "^2.6.0",
+    "sanity-plugin-media": "^2.2.4",
     "server-only": "^0.0.1"
   },
   "devDependencies": {

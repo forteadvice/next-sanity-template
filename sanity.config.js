@@ -8,6 +8,8 @@ import { schemaTypes } from '@/sanity/schemas'
 import { defaultDocumentNode } from '@/sanity/desk/defaultDocumentNode'
 import { deskStructure } from '@/sanity/desk/deskStructure'
 
+import { media } from 'sanity-plugin-media'
+
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['frontpage', 'settings'])
 
@@ -37,6 +39,7 @@ export default defineConfig({
     dashboardTool({
       widgets: [vercelWidget()],
     }),
+    media(),
     visionTool({ defaultApiVersion: apiVersion }),
   ],
 })
