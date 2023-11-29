@@ -146,46 +146,9 @@ If needed, Vercel deploy-hook can be set up as following:
 
 ## Built in components & functionality
 
-### Preview - not live!
+### Preview
 
-Getting preview data is enabled by using the lib-functions getPreview and sanityFetch(). <br>
-This is not live-preview, so page reload is needed to update the page - however this is super simple to setup and maintain.
-
-```jsx
-const preview = getPreview()
-const data = await sanityFetch({ preview, query: frontPageQuery, tags: ['frontpage'] })
-```
-
-#### Full example
-
-```JSX
-// src/app/(site)/(frontpage)/page.jsx
-import getPreview from '@/lib/getPreview'
-import { frontPageQuery } from '@/lib/queries'
-import getMetaObject from '@/lib/getMetaObject'
-import { sanityFetch } from '@/lib/sanity.fetch'
-import { Hero } from '@/components/blocks'
-import ContentBlocks from '@/components/ContentBlocks'
-
-export async function generateMetadata() {
-  const data = await sanityFetch({ query: frontPageQuery, tags: ['frontpage'] })
-  return getMetaObject(data?.seo)
-}
-
-export default async function Home() {
-  const preview = getPreview()
-  const data = await sanityFetch({ preview, query: frontPageQuery, tags: ['frontpage'] })
-
-  return (
-    <main>
-      {data?.hero && <Hero data={data.hero} />}
-      {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
-    </main>
-  )
-}
-```
-
-<br>
+TODO...
 
 ### Revalidate
 
@@ -212,4 +175,6 @@ TODO...
 
 ## TODOS
 
-- [Dynamic image heights - unstable_getImgProps()](https://github.com/vercel/next.js/discussions/19880) Next 13.4.8 needed
+- [Dynamic image heights - unstable_getImgProps()](https://github.com/vercel/next.js/discussions/19880)
+
+- Revalidate is currently not working - for anyone. 14.0.4 might fix the issue
