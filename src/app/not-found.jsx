@@ -1,10 +1,9 @@
-import { sanityFetch } from '@/lib/sanity.fetch'
-import { settingsQuery } from '@/lib/queries'
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
+import getSettingsData from '@/lib/fetch/getSettingsData'
 
 export default async function NotFound() {
-  const settings = await sanityFetch({ query: settingsQuery, tags: ['settings'] })
+  const settings = await getSettingsData()
 
   return (
     <div className='h-screen flex flex-col'>

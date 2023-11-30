@@ -1,15 +1,14 @@
-import { settingsQuery } from '@/lib/queries'
-import { sanityFetch } from '@/lib/sanity.fetch'
+import '../../styles/globals.css'
+
 import Menu from '@/components/Menu'
 import Footer from '@/components/Footer'
 import getPreview from '@/lib/getPreview'
 import ExitPreview from '@/components/preview/ExitPreview'
-
-import '../../styles/globals.css'
+import getSettingsData from '@/lib/fetch/getSettingsData'
 
 export default async function BaseLayout({ children }) {
   const preview = getPreview()
-  const settings = await sanityFetch({ query: settingsQuery, tags: ['settings'] })
+  const settings = await getSettingsData()
 
   return (
     <html lang='en'>

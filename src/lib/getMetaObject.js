@@ -1,4 +1,4 @@
-import { settingsQuery } from './queries'
+import { settingsQuery } from './fetch/queryPartials'
 import { sanityFetch } from './sanity.fetch'
 
 export default async function getMetaObject(meta) {

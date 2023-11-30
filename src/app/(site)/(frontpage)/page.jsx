@@ -1,18 +1,15 @@
-import getPreview from '@/lib/getPreview'
-import { frontPageQuery } from '@/lib/queries'
 import getMetaObject from '@/lib/getMetaObject'
-import { sanityFetch } from '@/lib/sanity.fetch'
+import getFrontpageData from '@/lib/fetch/getFrontpageData'
 import { Hero } from '@/components/blocks'
 import ContentBlocks from '@/components/ContentBlocks'
 
 export async function generateMetadata() {
-  const data = await sanityFetch({ query: frontPageQuery, tags: ['frontpage'] })
+  const data = await getFrontpageData()
   return getMetaObject(data?.seo)
 }
 
 export default async function Home() {
-  const preview = getPreview()
-  const data = await sanityFetch({ preview, query: frontPageQuery, tags: ['frontpage'] })
+  const data = await getFrontpageData()
 
   return (
     <main>
