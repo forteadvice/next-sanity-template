@@ -4,7 +4,6 @@ import MainContentLink from './globals/MainContentLink'
 export default function Menu({ data }) {
   return (
     <nav className='flex gap-4'>
-      <MainContentLink />
       <Link href={'/'} prefetch={false}>
         Home
       </Link>
