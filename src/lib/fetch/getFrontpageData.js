@@ -9,6 +9,10 @@ export default async function getFrontpageData() {
 const query = groq`
 *[_type == 'frontpage'][0] {
   ...,
+  seo{
+    ...,
+    'image': image.asset->url,
+  },
   ${heroQuery},
   ${contentBlocksQuery},
 }

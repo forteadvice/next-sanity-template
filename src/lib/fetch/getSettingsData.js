@@ -9,6 +9,10 @@ export default async function getSettingsData() {
 export const query = groq`
 *[_type == 'settings'][0] {
   ...,
+  defaultSeo{
+    ...,
+    "image": image.asset->url,
+  },
   menu {
     links[] {
       title,
