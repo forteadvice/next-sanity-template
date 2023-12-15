@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-
+export {query as settingsQuery} from './getSettingsData'
 export const docReferencePathQuery = groq`
   _type == "frontpage" => {
     'path': "/"
