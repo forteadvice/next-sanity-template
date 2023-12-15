@@ -20,7 +20,7 @@ export default async function Page({ params }) {
   if (!data) return notFound()
 
   return (
-    <main>
+    <main id="main">
       {data?.hero && <Hero data={data.hero} />}
       {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
     </main>

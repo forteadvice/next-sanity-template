@@ -12,7 +12,7 @@ export default async function Home() {
   const data = await getFrontpageData()
 
   return (
-    <main>
+    <main id="main">
       {data?.hero && <Hero data={data.hero} />}
       {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
     </main>
