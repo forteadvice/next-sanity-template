@@ -12,11 +12,11 @@ export default async function getMetaObject(meta) {
   }
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_PRODUCTION_URL || 'http://localhost:3000'),
     title: title ?? defaultMeta?.title ?? '',
     description: description ?? defaultMeta?.description ?? '',
     openGraph: {
       images: [(image ?? defaultMeta?.image) || undefined].filter(i => i),
     },
-
   }
 }

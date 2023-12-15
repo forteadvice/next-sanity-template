@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import MainContentLink from './globals/MainContentLink'
 
 export default function Menu({ data }) {
   return (
