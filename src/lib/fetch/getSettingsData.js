@@ -13,7 +13,9 @@ export const query = groq`
     links[] {
       title,
       _key,
-      ${docReferencePathQuery},
+      ...reference->{
+        ${docReferencePathQuery},
+      }
     }
   }
 }
