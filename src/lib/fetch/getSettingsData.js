@@ -5,7 +5,6 @@ import { docReferencePathQuery } from './queryPartials'
 export default async function getSettingsData() {
   return await sanityFetch({ query, tags: ['settings'] })
 }
-
 export const query = groq`
 *[_type == 'settings'][0] {
   ...,

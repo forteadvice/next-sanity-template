@@ -19,9 +19,8 @@ const components = {
 
 // Custom components design
 function InternalLink(props) {
-  // console.log(props)
   return (
-    <Link href={`/${props?.value?.slug}`} prefetch={false}>
+    <Link href={`/${props?.value?.path}`} prefetch={false}>
       {props.text}
     </Link>
   )

@@ -1,5 +1,4 @@
 import { groq } from 'next-sanity'
-export {query as settingsQuery} from './getSettingsData'
 export const docReferencePathQuery = groq`
   _type == "frontpage" => {
     'path': "/"
@@ -16,7 +15,20 @@ export const docReferencePathQuery = groq`
     }
   }
 `
-
+export const portableTextQuery = groq`
+text[] {
+  ...,
+  markDefs[] {
+    ...,
+    _type == 'internalLink' => {
+      ...,
+      ...reference->{
+        ${docReferencePathQuery}
+      }
+      // 'slug': @->slug.current,
+    },
+  },
+}`
 export const heroQuery = groq`
 hero {
   ...,
@@ -33,34 +45,15 @@ contentBlocks[]{
 
   // Text Block
   _type == 'textBlock' => {
-    text[] {
-      ...,
-      markDefs[] {
-        ...,
-        _type == 'internalLink' => {
-          'slug': @->slug.current,
-        },
-      },
-    },
+    ${portableTextQuery},
   },
 
   // TextImage
   _type == 'textImage' => {
     ...,
-    
     textBlock {
-      ...,
-      text [] {
-        ...,
-        markDefs[] {
-          ...,
-            _type == 'internalLink' => {
-            'slug': @->slug.current,
-          },
-        },
-      },
+      ${portableTextQuery},
     },
-
     image {
       ...,
       asset->,

@@ -16,7 +16,7 @@ export default function TextImage({ data }) {
         />
       </div>
       <div>
-        <TextBlock data={textBlock} mt={false} />
+        <TextBlock data={textBlock} mt={false} mb={false} />
       </div>
     </article>
   )
