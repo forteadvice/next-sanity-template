@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation'
 import getPagesParams from '@/lib/fetch/getPagesParams'
 import getPageData from '@/lib/fetch/getPageData'
 import getMetaObject from '@/lib/getMetaObject'
-import { Hero } from '@/components/blocks'
-import ContentBlocks from '@/components/ContentBlocks'
+import { Hero } from '@/components/sections'
+import ContentBlocks from '@/components/global/ContentBlocks'
 
 export async function generateStaticParams() {
   const pages = await getPagesParams()

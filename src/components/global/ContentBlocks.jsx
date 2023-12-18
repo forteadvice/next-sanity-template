@@ -1,4 +1,4 @@
-import * as Blocks from './blocks'
+import * as Blocks from '../sections'
 
 export default function ContentBlocks({ blocks }) {
   return (

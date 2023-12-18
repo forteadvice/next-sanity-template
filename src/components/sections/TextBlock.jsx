@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
-export default function TextBlock({ data, mt = true }) {
+export default function TextBlock({ data, mt = true, mb = true }) {
   return (
-    <div className={`text-block ${mt ? 'mt-8' : ''}`}>
+    <div className={`text-block ${mt ? typeof mt === 'string' ? mt : 'mt-8' : ''} ${mb ? typeof mb === 'string' ? mb : 'mt-8' : ''}`}>
       <PortableText value={data.text} components={components} />
     </div>
   )
@@ -19,6 +19,7 @@ const components = {
 
 // Custom components design
 function InternalLink(props) {
+  // console.log(props)
   return (
     <Link href={`/${props?.value?.slug}`} prefetch={false}>
       {props.text}

@@ -1,5 +1,5 @@
 import TextBlock from './TextBlock'
-import SanityImage from '../SanityImage'
+import SanityImage from '../utilities/SanityImage'
 
 export default function TextImage({ data }) {
   const { textBlock, image, layout } = data
