@@ -1,8 +1,8 @@
-import TextBlock from './TextBlock'
+import TextSection from './TextSection'
 import SanityImage from '../utilities/SanityImage'
 
 export default function TextImage({ data }) {
-  const { textBlock, image, layout } = data
+  const { textSection, image, layout } = data
   const flexDirection = layout == 'imageText' ? 'md:flex' : 'md:flex-row-reverse'
 
   return (
@@ -16,7 +16,7 @@ export default function TextImage({ data }) {
         />
       </div>
       <div>
-        <TextBlock data={textBlock} mt={false} mb={false} />
+        <TextSection data={textSection} mt={false} mb={false} />
       </div>
     </article>
   )

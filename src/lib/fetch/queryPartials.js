@@ -5,7 +5,7 @@ export const docReferencePathQuery = groq`
   },
 
   _type == "page" => {
-  'title': hero.title,
+  // 'title': hero.title,
     'path': slug.current,
     defined(parent->slug.current) => {
       'path': parent->slug.current + "/" + slug.current
@@ -39,19 +39,19 @@ hero {
 }
 `
 
-export const contentBlocksQuery = groq`
-contentBlocks[]{
+export const sectionsQuery = groq`
+sections[]{
   ...,
 
   // Text Block
-  _type == 'textBlock' => {
+  _type == 'textSection' => {
     ${portableTextQuery},
   },
 
   // TextImage
   _type == 'textImage' => {
     ...,
-    textBlock {
+    textSection {
       ${portableTextQuery},
     },
     image {

@@ -1,8 +1,8 @@
 import { BlockContentIcon } from '@sanity/icons'
 
 export default {
-  name: 'textBlock',
-  title: 'Text Block',
+  name: 'textSection',
+  title: 'Text Section',
   type: 'object',
   icon: BlockContentIcon,
   fields: [
@@ -19,7 +19,7 @@ export default {
     prepare({ title }) {
       return {
         title: title[0].children[0].text,
-        subtitle: 'Text Block',
+        subtitle: 'Text Section',
         media: BlockContentIcon,
       }
     },

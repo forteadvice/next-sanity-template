@@ -3,7 +3,7 @@ import getPagesParams from '@/lib/fetch/getPagesParams'
 import getPageData from '@/lib/fetch/getPageData'
 import getMetaObject from '@/lib/getMetaObject'
 import { Hero } from '@/components/sections'
-import ContentBlocks from '@/components/global/ContentBlocks'
+import SectionsResolver from '@/components/global/SectionsResolver'
 
 export async function generateStaticParams() {
   const pages = await getPagesParams()
@@ -22,7 +22,7 @@ export default async function Page({ params }) {
   return (
     <main id="main">
       {data?.hero && <Hero data={data.hero} />}
-      {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
+      {data?.sections && <SectionsResolver sections={data.sections} />}
     </main>
   )
 }

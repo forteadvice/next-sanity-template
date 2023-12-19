@@ -14,6 +14,7 @@ export const query = groq`
   },
   menu {
     links[] {
+      ...,
       title,
       _key,
       ...reference->{
