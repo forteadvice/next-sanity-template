@@ -17,11 +17,11 @@ export async function POST(req) {
       console.log(message)
       return new Response({ message, body }, { status: 400 })
     }
-    revalidatePath('/(site)')
+    revalidatePath('/', 'layout')
 
     if (body.changedSlug) {
       console.log('revalidate *')
-      revalidatePath('/(site)')
+      revalidatePath('/', 'layout')
     } else {
       const tag = resolveTags
       console.log(`revalidateTag: ${tag}`)
