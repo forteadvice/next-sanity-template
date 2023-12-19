@@ -17,6 +17,7 @@ export async function POST(req) {
       console.log(message)
       return new Response({ message, body }, { status: 400 })
     }
+    revalidatePath('/(site)')
 
     if (body.changedSlug) {
       console.log('revalidate *')
