@@ -13,13 +13,13 @@ export default {
     },
     { name: 'hero', type: 'hero' },
     {
-      name: 'contentBlocks',
-      title: 'Content Blocks',
+      name: 'sections',
+      title: 'Sections',
       type: 'array',
       of: [
         {
-          name: 'textBlock',
-          type: 'textBlock',
+          name: 'textSection',
+          type: 'textSection',
         },
         {
           name: 'mainImage',

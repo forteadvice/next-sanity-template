@@ -1,32 +1,19 @@
-import page from './documents/page'
+// Pages
+import Documents from './documents' 
 // Singletons
-import frontpage from './singletons/frontpage'
-import settings from './singletons/settings'
+import Singletons from './singletons'
 // Objects
-import mainImage from './objects/mainImage'
-import seo from './objects/seo'
-import portableText from './objects/portableText'
-import linkInternal from './objects/linkInternal'
-import linkExternal from './objects/linkExternal'
-import hero from './objects/hero'
-// Content-blocks
-import textBlock from './content-blocks/textBlock'
-import textImage from './content-blocks/textImage'
+import Objects from './objects' 
+// Sections
+import Sections from './sections'
 
 export const schemaTypes = [
   // Documents
-  page,
+  ...Documents,
   // Singletons
-  frontpage,
-  settings,
+  ...Singletons,
   // Objects
-  mainImage,
-  seo,
-  portableText,
-  linkInternal,
-  linkExternal,
-  hero,
-  // Content-blocks
-  textBlock,
-  textImage,
+  ...Objects,
+  // Sections
+  ...Sections,
 ]

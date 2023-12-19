@@ -1,7 +1,7 @@
 import getMetaObject from '@/lib/getMetaObject'
 import getFrontpageData from '@/lib/fetch/getFrontpageData'
 import { Hero } from '@/components/sections'
-import ContentBlocks from '@/components/global/ContentBlocks'
+import SectionsResolver from '@/components/global/SectionsResolver'
 
 export async function generateMetadata() {
   const data = await getFrontpageData()
@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main id="main">
       {data?.hero && <Hero data={data.hero} />}
-      {data?.contentBlocks && <ContentBlocks blocks={data.contentBlocks} />}
+      {data?.sections && <SectionsResolver blocks={data.sections} />}
     </main>
   )
 }

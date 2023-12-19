@@ -39,8 +39,8 @@ hero {
 }
 `
 
-export const contentBlocksQuery = groq`
-contentBlocks[]{
+export const sectionsQuery = groq`
+sections[]{
   ...,
 
   // Text Block

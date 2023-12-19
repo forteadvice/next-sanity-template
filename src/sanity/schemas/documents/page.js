@@ -1,5 +1,4 @@
 import { toUrlSafe } from '@/lib/helpers'
-import { client } from '@/lib/sanity.client'
 
 export default {
   name: 'page',
@@ -58,13 +57,13 @@ export default {
       type: 'hero',
     },
     {
-      name: 'contentBlocks',
-      title: 'Content Blocks',
+      name: 'sections',
+      title: 'Sections',
       type: 'array',
       of: [
         {
-          name: 'textBlock',
-          type: 'textBlock',
+          name: 'textSection',
+          type: 'textSection',
         },
         {
           name: 'mainImage',

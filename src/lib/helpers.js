@@ -8,3 +8,7 @@ export function toUrlSafe(str) {
     .replaceAll(/[^a-z0-9\-]/g, '')
   return urlSafe
 }
+
+export function upperFirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

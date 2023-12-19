@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { sanityFetch } from '../sanity.fetch'
-import { heroQuery, contentBlocksQuery } from './queryPartials'
+import { heroQuery, sectionsQuery } from './queryPartials'
 
 // Assemble params to get specific page
 // This makes sure that we only build each pages once, at the correct "slug"-position in the 3-level page-tree
@@ -28,6 +28,6 @@ const query = groq`
     'image': image.asset->url,
   },
   ${heroQuery},
-  ${contentBlocksQuery},
+  ${sectionsQuery},
 }
 `

@@ -23,9 +23,9 @@ export default {
     },
 
     {
-      name: 'textBlock',
-      title: 'Text block',
-      type: 'textBlock',
+      name: 'textSection',
+      title: 'Text section',
+      type: 'textSection',
       validation: (Rule) => Rule.required(),
     },
 
