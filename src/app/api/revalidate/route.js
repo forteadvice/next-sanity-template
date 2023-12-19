@@ -17,6 +17,7 @@ export async function POST(req) {
       console.log(message)
       return new Response({ message, body }, { status: 400 })
     }
+    revalidatePath('/(site)')
 
     if (body.changedSlug) {
       console.log('revalidate *')
@@ -27,10 +28,10 @@ export async function POST(req) {
       revalidateTag(tag)
     }
 
-    return NextResponse.json({ body })
+    return NextResponse.json({ message: 'Reavalidated' }, { status: 200 })
   } catch (err) {
     console.error(err)
-    return new Response(err.message, { status: 500 })
+    return NextResponse(err.message, { status: 500 })
   }
 }
 
