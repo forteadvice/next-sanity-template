@@ -9,7 +9,7 @@ export default function SectionsResolver({ sections }) {
         if (!Section) {
           return <div key={section._key}>Missing section: {upperFirst(section._type)}</div>
         }
-        return <Section data={section} sectionIdx={idx} key={v._key} />
+        return <Section data={section} sectionIdx={idx} key={section._key} />
       })}
     </>
   )

@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
-export default function TextBlock({ data, mt = true, mb = true }) {
+export default function TextSection({ data, mt = true, mb = true }) {
   return (
-    <div className={`text-block ${mt ? typeof mt === 'string' ? mt : 'mt-8' : ''} ${mb ? typeof mb === 'string' ? mb : 'mt-8' : ''}`}>
-      <PortableText value={data.text} components={components} />
+    <div className={`text-section ${mt ? typeof mt === 'string' ? mt : 'mt-8' : ''} ${mb ? typeof mb === 'string' ? mb : 'mt-8' : ''}`}>
+      <PortableText value={data?.text} components={components} />
     </div>
   )
 }

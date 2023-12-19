@@ -48,12 +48,12 @@ export default {
 
   preview: {
     select: {
-      titleObj: 'textBlock',
+      titleObj: 'textSection',
       image: 'image',
     },
 
     prepare({ titleObj, image }) {
-      const title = titleObj.text[0].children[0].text
+      const title = titleObj?.text[0]?.children[0]?.text || 'Text image'
 
       return {
         title: title,

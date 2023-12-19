@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main id="main">
       {data?.hero && <Hero data={data.hero} />}
-      {data?.sections && <SectionsResolver blocks={data.sections} />}
+      {data?.sections && <SectionsResolver sections={data.sections} />}
     </main>
   )
 }

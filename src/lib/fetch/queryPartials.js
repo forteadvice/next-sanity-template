@@ -44,14 +44,14 @@ sections[]{
   ...,
 
   // Text Block
-  _type == 'textBlock' => {
+  _type == 'textSection' => {
     ${portableTextQuery},
   },
 
   // TextImage
   _type == 'textImage' => {
     ...,
-    textBlock {
+    textSection {
       ${portableTextQuery},
     },
     image {
