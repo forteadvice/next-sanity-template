@@ -5,7 +5,7 @@ export const docReferencePathQuery = groq`
   },
 
   _type == "page" => {
-  'title': hero.title,
+  // 'title': hero.title,
     'path': slug.current,
     defined(parent->slug.current) => {
       'path': parent->slug.current + "/" + slug.current
