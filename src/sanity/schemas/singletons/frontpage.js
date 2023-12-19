@@ -1,3 +1,10 @@
+import {FrontPageSections} from '../sections' 
+
+const SectionSelection = FrontPageSections.map(section => ({
+  name: section.name,
+  type: section.name
+}))
+
 export default {
   name: 'frontpage',
   type: 'document',
@@ -16,21 +23,8 @@ export default {
       name: 'sections',
       title: 'Sections',
       type: 'array',
-      of: [
-        {
-          name: 'textSection',
-          type: 'textSection',
-        },
-        {
-          name: 'mainImage',
-          title: 'Image',
-          type: 'mainImage',
-        },
-        {
-          name: 'textImage',
-          type: 'textImage',
-        },
-      ],
+      // import section-elements from /sections/index => {name, type}[]
+      of: SectionSelection
     },
     {
       name: 'seo',
