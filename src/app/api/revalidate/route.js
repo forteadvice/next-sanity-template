@@ -18,9 +18,12 @@ export async function POST(req) {
       return new Response({ message, body }, { status: 400 })
     }
 
-    const tag = resolveTags
-
-    revalidateTag(tag)
+    if (body.changedSlug) {
+      revalidatePath('/(site)')
+    } else {
+      const tag = resolveTags
+      revalidateTag(tag)
+    }
 
     return NextResponse.json({ body })
   } catch (err) {
