@@ -23,6 +23,10 @@ const query = groq`
   (!defined(parent->parent._ref) || parent->parent->slug.current == $grandParentSlug)
   ][0] {
   ...,
+  seo{
+    ...,
+    'image': image.asset->url,
+  },
   ${heroQuery},
   ${contentBlocksQuery},
 }

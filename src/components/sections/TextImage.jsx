@@ -1,5 +1,5 @@
 import TextBlock from './TextBlock'
-import SanityImage from '../SanityImage'
+import SanityImage from '../utilities/SanityImage'
 
 export default function TextImage({ data }) {
   const { textBlock, image, layout } = data
@@ -16,7 +16,7 @@ export default function TextImage({ data }) {
         />
       </div>
       <div>
-        <TextBlock data={textBlock} mt={false} />
+        <TextBlock data={textBlock} mt={false} mb={false} />
       </div>
     </article>
   )

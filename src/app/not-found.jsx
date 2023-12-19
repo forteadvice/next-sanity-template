@@ -1,5 +1,5 @@
-import Menu from '@/components/Menu'
-import Footer from '@/components/Footer'
+import Menu from '@/components/global/Menu'
+import Footer from '@/components/global/Footer'
 import getSettingsData from '@/lib/fetch/getSettingsData'
 
 export default async function NotFound() {

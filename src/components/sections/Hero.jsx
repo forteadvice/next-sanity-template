@@ -1,4 +1,4 @@
-import SanityImage from '../SanityImage'
+import SanityImage from '../utilities/SanityImage'
 
 export default function Hero({ data }) {
   return (
