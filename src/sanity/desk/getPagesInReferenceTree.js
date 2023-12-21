@@ -1,4 +1,5 @@
 import { apiVersion } from '../../../env'
+import { groq } from 'next-sanity'
 
 // Get pages in "tree-structure"
 // Init get pages that are root / don't reference a parent page
@@ -6,8 +7,7 @@ import { apiVersion } from '../../../env'
 // Not showing drafts - as they then might appear several places
 export default async function getPagesInReferenceTree(S) {
   const client = S.context.getClient({ apiVersion })
-  const rootQuery =
-    '*[_type == "page" && !(_id in path("drafts.**")) && !defined(parent)][]{_id,title}'
+  const rootQuery = groq`*[_type == "page" && !(_id in path("drafts.**")) && !defined(parent)][]{_id,title}`
   const pages = await client.fetch(rootQuery)
   const structure = await getPagesWithChildren(S, pages)
   return structure
@@ -20,8 +20,7 @@ async function getPagesWithChildren(S, pages) {
 
   for (let i = 1; i <= pages.length; i++) {
     const page = pages[i - 1]
-    const childQuery =
-      '*[_type == "page" && !(_id in path("drafts.**")) && parent._ref == $id][]{_id,title}'
+    const childQuery = groq`*[_type == "page" && !(_id in path("drafts.**")) && parent._ref == $id][]{_id,title}`
     const params = { id: page._id.replace('drafts.') }
     const childPages = await client.fetch(childQuery, params)
 
