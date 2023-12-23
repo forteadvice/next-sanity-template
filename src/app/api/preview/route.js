@@ -3,14 +3,14 @@ import { redirect } from 'next/navigation'
 const token = process.env.NEXT_PUBLIC_PREVIEW_TOKEN
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url)
+  // const { searchParams } = new URL(request.url)
 
-  if (searchParams.get('token') != token) {
-    return redirect('/api/exit-preview')
-  }
+  // if (searchParams.get('token') != token) {
+  //   return redirect('/api/exit-preview')
+  // }
 
-  const redirPath = searchParams.get('redirect') ?? '/'
+  // const redirPath = searchParams.get('redirect') ?? '/'
 
-  draftMode().enable()
-  return redirect(redirPath)
+  // draftMode().enable()
+  // return redirect(redirPath)
 }
