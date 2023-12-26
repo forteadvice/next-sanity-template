@@ -46,6 +46,7 @@ export const loadQuery = ((query, params = {}, options = {}) => {
     perspective,
     // @TODO add support in `@sanity/client/stega` for the below
     // works any way when uncommented
+    // @ts-ignore: Unreachable code error
     stega: {enabled: draftMode().isEnabled}
   })
 }) satisfies typeof queryStore.loadQuery
