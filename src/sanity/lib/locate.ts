@@ -38,8 +38,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
         )
         switch (params.type) {
           case 'frontpage':
-            return isReferencedBySettings
-              ? ({
+            return ({
                   locations: [
                     {
                       title:
@@ -50,10 +49,6 @@ export const locate: DocumentLocationResolver = (params, context) => {
                   ],
                   tone: 'positive',
                   message: 'This document is used to render the front page',
-                } satisfies DocumentLocationsState)
-              : ({
-                  tone: 'critical',
-                  message: `The top menu isn't linking to the home page. This might make it difficult for visitors to navigate your site.`,
                 } satisfies DocumentLocationsState)
           case 'page':
             return {

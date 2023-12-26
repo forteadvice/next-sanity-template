@@ -1,28 +1,33 @@
 import { notFound } from 'next/navigation'
-import {type PageParams, loadPageParams} from '@/sanity/queries/getPagesParams'
-import { loadPage } from '@/sanity/queries/pageQuery'
+import {type TPageParams, loadPageParams} from '@/sanity/queries/getPagesParams'
+import { loadPage } from '@/sanity/queries'
 import { getMetaObject } from '@/sanity/queries/getMetaObject'
-import { Hero } from '@/components/sections'
-import SectionsResolver from '@/components/global/SectionsResolver'
+import Page from '@/components/views/page/Page'
+import { draftMode } from 'next/headers'
+import dynamic from 'next/dynamic'
+
+
+const PagePreview = dynamic(() => import('@/components/views/page/PagePreview'))
 
 export async function generateStaticParams() {
   const pages = await loadPageParams()
   return pages
 }
 
-export async function generateMetadata({ params }: {params: PageParams}) {
+export async function generateMetadata({ params }: {params: TPageParams}) {
   const {data} = await loadPage(params)
   return getMetaObject(data)
 }
 
-export default async function Page({ params }: {params: PageParams}) {
-  const {data} = await loadPage(params)
-  if (!data) return notFound()
+export default async function RenderPage({ params }: {params: TPageParams}) {
+  const initial = await loadPage(params)
+  if (draftMode().isEnabled) {
+    return <PagePreview params={params} initial={initial} />
+  }
 
-  return (
-    <main id="main">
-      {data?.hero && <Hero data={data.hero} />}
-      {data?.sections && <SectionsResolver sections={data.sections} />}
-    </main>
-  )
+  if (!initial) {
+    return notFound()
+  }
+
+  return <Page data={initial?.data} />
 }

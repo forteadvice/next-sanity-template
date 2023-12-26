@@ -1,7 +1,8 @@
 import { groq } from 'next-sanity'
 import { type TPartialHeroPayload, heroQuery, seoQuery, sectionsQuery, TPartialSeoPayload } from './queryPartials'
-import { loadQuery } from "@/sanity/loader/loadQuery";
-import { pageParams } from './getPagesParams';
+import { type TPageParams } from './getPagesParams';
+
+
 export type TPagePayload = TPartialHeroPayload & TPartialSeoPayload & {
   sections?: {
     _type: string,
@@ -11,7 +12,7 @@ export type TPagePayload = TPartialHeroPayload & TPartialSeoPayload & {
 }
 
 
-const pageQuery = groq`
+export const pageQuery = groq`
 *[  _type == 'page' && slug.current == $slug &&
   (!defined(parent._ref) || parent->slug.current == $parentSlug) &&
   (!defined(parent->parent._ref) || parent->parent->slug.current == $grandParentSlug)][0] {
@@ -21,17 +22,13 @@ const pageQuery = groq`
   ${sectionsQuery},
 }
 `
-export function loadPage(params: pageParams) {
+
+export function paramsToParentSlugs (params: TPageParams) {
   const {slugs} = params
-  
-  const parentParams = {
+  return {
     slug: slugs[slugs.length-1] || '/',
     parentSlug: slugs[slugs.length-2] || '',
     grandParentSlug: slugs[slugs.length-3] || '',
   }
-  return loadQuery<TPagePayload>(
-    pageQuery,
-    parentParams,
-    { next: { tags: ['page', 'project'] } },
-  )
 }
+

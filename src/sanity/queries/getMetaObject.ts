@@ -4,7 +4,7 @@ import { loadSettings } from './settingsQuery';
 // import { sanityFetch } from './sanity.fetch'
 
 export async function getMetaObject(props: TSeoInput) {
-  const {seo} = props
+  const {seo} = props || {}
   // Specify the meta values for readbility
   const {title, description, image} = seo || {}
   // Get default meta from settings if seo not complete

@@ -10,7 +10,7 @@ import { token } from '@/sanity/lib/token'
 //     tags: ['pages'],
 //   })
 // }
-export type PageParams = {
+export type TPageParams = {
   slugs: string[]
 }
 const paramsQuery = groq`
@@ -32,7 +32,7 @@ export function loadPageParams() {
     useCdn: false,
     stega: false,
   })
-  .fetch<PageParams[]>(
+  .fetch<TPageParams[]>(
     paramsQuery
   )
-} 
+}
