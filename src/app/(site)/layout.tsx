@@ -14,7 +14,6 @@ const VisualEditing = dynamic(() => import('@/sanity/loader/VisualEditing'))
 export default async function BaseLayout(props: { children?: ReactNode }) {
   const { children } = props
   // const preview = getPreview()
-  console.log(draftMode())
   const {data: settings} = await loadSettings()
 
   return (
