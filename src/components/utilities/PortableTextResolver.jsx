@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
 
 export default function PortableTextResolver({ text }) {
-  return <PortableText value={text} components={components} />
+  return <div data-sanity-edit-target><PortableText value={text} components={components}/></div>
 }
 
 // Custom components config

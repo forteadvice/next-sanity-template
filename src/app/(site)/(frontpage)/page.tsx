@@ -18,7 +18,7 @@ export default async function Home() {
     return <FrontpagePreview initial={initial} />
   }
 
-  if (!initial) {
+  if (!initial || initial?.data === null) {
     return notFound()
   }
 

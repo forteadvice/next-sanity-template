@@ -21,11 +21,12 @@ export async function generateMetadata({ params }: {params: TPageParams}) {
 
 export default async function RenderPage({ params }: {params: TPageParams}) {
   const initial = await loadPage(params)
+
   if (draftMode().isEnabled) {
     return <PagePreview params={params} initial={initial} />
   }
 
-  if (!initial) {
+  if (!initial || initial?.data === null) {
     return notFound()
   }
 
