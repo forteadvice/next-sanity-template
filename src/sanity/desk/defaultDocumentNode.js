@@ -1,4 +1,4 @@
-import Iframe from 'sanity-plugin-iframe-pane'
+import { Iframe } from 'sanity-plugin-iframe-pane'
 import { apiVersion } from '../../../env'
 import { groq } from 'next-sanity'
 
