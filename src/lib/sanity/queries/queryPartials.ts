@@ -1,4 +1,9 @@
 import { groq } from 'next-sanity'
+
+/*
+ * docReferencePathQuery should be used as the main and preferebly only path / url-resolver.
+ * If needed, modify this to accept all page types.
+ */
 export const docReferencePathQuery = groq`
   _type == "frontpage" => {
     'path': "/"
@@ -14,6 +19,10 @@ export const docReferencePathQuery = groq`
     }
   }
 `
+
+/*
+ * Porable text
+ */
 export const portableTextQuery = groq`
 text[] {
   ...,
@@ -27,6 +36,10 @@ text[] {
     },
   },
 }`
+
+/*
+ * Hero
+ */
 export const heroQuery = groq`
 hero {
   ...,
@@ -37,10 +50,12 @@ hero {
 }
 `
 
+/*
+ * Sections
+ */
 export const sectionsQuery = groq`
 sections[]{
   ...,
-
   // Text Block
   _type == 'textSection' => {
     ${portableTextQuery},

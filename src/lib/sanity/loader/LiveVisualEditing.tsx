@@ -8,19 +8,19 @@ import { client } from '@/lib/sanity/client'
 
 export default function LiveVisualEditing() {
   const [exitBtn, setExitBtn] = useState(false)
+
   const stegaClient = client.withConfig({
-    stega: false, // TODO: Set true when ready
+    stega: {
+      enabled: true,
+    },
   })
 
   useLiveMode({ client: stegaClient })
 
   useEffect(() => {
-    // If not an iframe or a Vercel Preview deployment, show exit preview
     if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'preview' && window === parent) {
       setExitBtn(true)
     }
-    // Check if iframe parent has perspective published
-    // const parentUrlParams = new URLSearchParams(parent?.location?.search)
   }, [])
 
   return (

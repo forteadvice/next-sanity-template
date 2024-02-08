@@ -2,7 +2,7 @@
 
 // import { type QueryResponseInitial } from '@sanity/react-loader'
 import { useFrontpage } from '@/lib/sanity/loader/useFunctions'
-import Frontpage from './Fontpage'
+import Frontpage from './FontpageView'
 
 export default function FrontpagePreview({ initial }: any) {
   const { data, encodeDataAttribute } = useFrontpage(initial)
