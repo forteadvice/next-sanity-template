@@ -1,4 +1,4 @@
-import { apiVersion } from '../../../env'
+import { apiVersion } from '../../lib/env'
 import { groq } from 'next-sanity'
 
 // Get pages in "tree-structure"

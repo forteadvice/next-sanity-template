@@ -1,5 +1,5 @@
 import { DocumentsIcon, HomeIcon, CogIcon, SchemaIcon } from '@sanity/icons'
-import { apiVersion } from '../../../env'
+import { apiVersion } from '../../lib/env'
 import getPagesInReferenceTree from './getPagesInReferenceTree'
 
 export const deskStructure = (S) =>

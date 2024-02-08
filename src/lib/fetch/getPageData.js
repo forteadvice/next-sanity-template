@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import { sanityFetch } from '../sanity.fetch'
+import { sanityFetch } from '../sanity/fetch'
 import { heroQuery, sectionsQuery } from './queryPartials'
 
 // Assemble params to get specific page

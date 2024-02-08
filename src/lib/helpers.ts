@@ -1,5 +1,5 @@
-export function toUrlSafe(str) {
-  const urlSafe = str
+export function toUrlSafe(string: string): string {
+  const urlSafe = string
     .toLowerCase()
     .replaceAll('æ', 'ae')
     .replaceAll('ø', 'oe')
@@ -9,6 +9,6 @@ export function toUrlSafe(str) {
   return urlSafe
 }
 
-export function upperFirst(string) {
+export function upperFirst(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }

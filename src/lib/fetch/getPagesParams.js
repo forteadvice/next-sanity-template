@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import { sanityFetch } from '../sanity.fetch'
+import { sanityFetch } from '../sanity/fetch'
 
 export default async function getPagesParams() {
   return await sanityFetch({

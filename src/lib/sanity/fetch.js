@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { draftMode } from 'next/headers'
-import { client } from './sanity.client'
+import { client } from './client'
 
 const token = process.env.SANITY_API_READ_TOKEN
 
@@ -20,7 +20,7 @@ export async function sanityFetch({ query, params = {}, tags = [] }) {
   return client.fetch(query, params, {
     ...(isPreview && {
       token,
-      perspective: 'previewDrafts',
+      // perspective: 'previewDrafts',
     }),
     next: {
       revalidate: isPreview ? 0 : false,

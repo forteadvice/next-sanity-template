@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import { sanityFetch } from '../sanity.fetch'
+import { sanityFetch } from '../sanity/fetch'
 import { docReferencePathQuery } from './queryPartials'
 
 export default async function getSettingsData() {

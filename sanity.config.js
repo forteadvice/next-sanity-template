@@ -1,14 +1,16 @@
+import { defineConfig } from 'sanity'
 import { visionTool } from '@sanity/vision'
+import { structureTool } from 'sanity/structure'
+import { media } from 'sanity-plugin-media'
 import { dashboardTool } from '@sanity/dashboard'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
-import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
-import { apiVersion, dataset, projectId } from './env'
+import { presentationTool } from 'sanity/presentation'
+
+import { apiVersion, dataset, projectId } from './src/lib/env'
 import { schemaTypes } from '@/sanity/schemas'
 import { defaultDocumentNode } from '@/sanity/desk/defaultDocumentNode'
 import { deskStructure } from '@/sanity/desk/deskStructure'
-
-import { media } from 'sanity-plugin-media'
+import { locate } from '@/lib/locate'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['frontpage', 'settings'])
@@ -32,9 +34,17 @@ export default defineConfig({
   },
 
   plugins: [
-    deskTool({
+    structureTool({
       defaultDocumentNode,
       structure: deskStructure,
+    }),
+    presentationTool({
+      locate,
+      previewUrl: {
+        draftMode: {
+          enable: '/api/draft',
+        },
+      },
     }),
     dashboardTool({
       widgets: [vercelWidget()],
