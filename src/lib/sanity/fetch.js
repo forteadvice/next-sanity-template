@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { draftMode } from 'next/headers'
-import { client } from './client'
+import { client } from '../../sanity/client'
 
 const token = process.env.SANITY_API_READ_TOKEN
 

@@ -8,9 +8,9 @@ import { presentationTool } from 'sanity/presentation'
 
 import { apiVersion, dataset, projectId } from './src/lib/env'
 import { schemaTypes } from '@/sanity/schemas'
-import { defaultDocumentNode } from '@/sanity/desk/defaultDocumentNode'
-import { deskStructure } from '@/sanity/desk/deskStructure'
-import { locate } from '@/lib/locate'
+import { defaultDocumentNode } from '@/sanity/plugins/structure/defaultDocumentNode'
+import { structure } from '@/sanity/plugins/structure'
+import { locate } from '@/sanity/plugins/locate'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['frontpage', 'settings'])
@@ -36,7 +36,7 @@ export default defineConfig({
   plugins: [
     structureTool({
       defaultDocumentNode,
-      structure: deskStructure,
+      structure,
     }),
     presentationTool({
       locate,

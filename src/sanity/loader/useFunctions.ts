@@ -17,3 +17,8 @@ export function usePage(initial: QueryResponseInitial<any>, slugs: string[]) {
   const params = { slug, parentSlug, grandParentSlug }
   return useQuery<any>(pageQuery, params, { initial })
 }
+
+// Settings
+export function useSettings(initial: QueryResponseInitial<any>) {
+  return useQuery<any>(pageQuery, {}, { initial })
+}

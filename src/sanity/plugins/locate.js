@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { map } from 'rxjs'
-import { docReferencePathQuery } from './fetch/queryPartials'
+import { docReferencePathQuery } from '../../lib/fetch/queryPartials'
 
 export function locate(params, context) {
   if (params.type === 'page' || params.type === 'frontpage') {

@@ -1,9 +1,9 @@
 // Pages
-import Documents from './documents' 
+import Documents from './documents'
 // Singletons
 import Singletons from './singletons'
 // Objects
-import Objects from './objects' 
+import Objects from './objects'
 // Sections
 import Sections from './sections'
 

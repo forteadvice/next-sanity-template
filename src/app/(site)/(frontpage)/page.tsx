@@ -1,11 +1,13 @@
+export const dynamic = 'force-dynamic'
+
 import { draftMode } from 'next/headers'
-import dynamic from 'next/dynamic'
+import dynamicLoad from 'next/dynamic'
 
 import getMetaObject from '@/lib/getMetaObject'
-import { loadFrontpage } from '@/lib/sanity/loader/loadFunctions'
+import { loadFrontpage } from '@/sanity/loader/loadFunctions'
 import FrontpageView from './FontpageView'
 
-const FrontpagePreview = dynamic(() => import('./FrontpagePreview'))
+const FrontpagePreview = dynamicLoad(() => import('./FrontpagePreview'))
 
 export async function generateMetadata() {
   const { data } = await loadFrontpage()

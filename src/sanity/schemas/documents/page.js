@@ -1,7 +1,7 @@
 import { toUrlSafe } from '@/lib/helpers'
 import { PageSections } from '../sections'
 
-const SectionSelection = PageSections.map(section => ({
+const SectionSelection = PageSections.map((section) => ({
   name: section.name,
   type: section.name,
 }))
@@ -67,7 +67,7 @@ export default {
       title: 'Sections',
       type: 'array',
       // import section-elements from /sections/index => {name, type}[]
-      of: SectionSelection
+      of: SectionSelection,
     },
     {
       name: 'seo',

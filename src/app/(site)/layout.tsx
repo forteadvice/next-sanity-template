@@ -5,12 +5,13 @@ import dynamic from 'next/dynamic'
 
 import Menu from '@/components/global/Menu'
 import Footer from '@/components/global/Footer'
-import getSettingsData from '@/lib/fetch/getSettingsData'
+import { loadSettings } from '@/sanity/loader/loadFunctions'
 
-const LiveVisualEditing = dynamic(() => import('@/lib/sanity/loader/LiveVisualEditing'))
+const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditing'))
 
 export default async function BaseLayout({ children }: any) {
-  const settings = await getSettingsData()
+  const initial = await loadSettings()
+  const { data: settings } = initial
 
   return (
     <html lang='en'>

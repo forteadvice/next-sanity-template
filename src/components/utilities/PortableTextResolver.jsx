@@ -47,7 +47,7 @@ function orderedList({ children }) {
 function InternalLink(props) {
   return (
     <Link className='underline' href={`/${props?.value?.path}`} prefetch={false}>
-      {props.text}
+      {props?.text}
     </Link>
   )
 }
@@ -55,14 +55,14 @@ function InternalLink(props) {
 function ExternalLink(props) {
   return (
     <a className='underline' target={'_blank'} href={resolveUrl(props?.value?.href)}>
-      {props.children}
+      {props?.children}
     </a>
   )
 }
 
 // Portable text helpers
 function resolveUrl(url) {
-  if (!url.startsWith('http') && !url.startsWith('tel') && !url.startsWith('mailto')) {
+  if (!url?.startsWith('http') && !url?.startsWith('tel') && !url?.startsWith('mailto')) {
     return `https://${url}`
   }
   return url

@@ -7,6 +7,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Sanity visual editing overlays */
+  #sanity-visual-editing > div > div {
+    @apply -mt-1 -ml-1 p-1 rounded-md box-content;
+  }
 }
 
 /* SAMPLE STYLING - rm when cloned */

@@ -4,7 +4,7 @@ import { useLiveMode } from '@sanity/react-loader'
 import { VisualEditing } from 'next-sanity'
 import { useEffect, useState } from 'react'
 
-import { client } from '@/lib/sanity/client'
+import { client } from '@/sanity/client'
 
 export default function LiveVisualEditing() {
   const [exitBtn, setExitBtn] = useState(false)

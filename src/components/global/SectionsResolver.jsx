@@ -1,5 +1,5 @@
 import * as Sections from '../sections'
-import  { upperFirst } from '@/lib/helpers'
+import { upperFirst } from '@/lib/helpers'
 
 export default function SectionsResolver({ sections }) {
   return (
@@ -21,5 +21,3 @@ function resolveSections(section) {
   console.error('Cant find section', upperFirst(section._type))
   return null
 }
-
-

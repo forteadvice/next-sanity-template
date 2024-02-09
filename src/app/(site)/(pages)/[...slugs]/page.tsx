@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
 import getMetaObject from '@/lib/getMetaObject'
-import { loadPage, loadPagesParams } from '@/lib/sanity/loader/loadFunctions'
+import { loadPage, loadPagesParams } from '@/sanity/loader/loadFunctions'
+
 import PageView from './PageView'
 
 const PagePreview = dynamic(() => import('./PagePreview'))

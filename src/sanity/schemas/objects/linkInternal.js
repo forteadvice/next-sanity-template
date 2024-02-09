@@ -2,7 +2,7 @@ import { LinkIcon } from '@sanity/icons'
 import { PageDocuments } from '../documents'
 import { PageSingletons } from '../singletons'
 
-const LinkablePages = [...PageDocuments, ...PageSingletons].map(page => ({type: page.name}));
+const LinkablePages = [...PageDocuments, ...PageSingletons].map((page) => ({ type: page.name }))
 
 export default {
   name: 'linkInternal',

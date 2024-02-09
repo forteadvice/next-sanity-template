@@ -2,7 +2,7 @@ import { validatePreviewUrl } from '@sanity/preview-url-secret'
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { client } from '@/lib/sanity/client'
+import { client } from '@/sanity/client'
 import { token } from '@/lib/token'
 
 const clientWithToken = client.withConfig({ token })

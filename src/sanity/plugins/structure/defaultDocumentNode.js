@@ -1,5 +1,5 @@
 import { Iframe } from 'sanity-plugin-iframe-pane'
-import { apiVersion } from '../../lib/env'
+import { apiVersion } from '../../../lib/env'
 import { groq } from 'next-sanity'
 
 export const defaultDocumentNode = (S, { schemaType }) => {

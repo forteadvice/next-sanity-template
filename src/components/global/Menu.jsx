@@ -9,7 +9,7 @@ export default function Menu({ data }) {
 
       {data?.links?.map((link) => {
         return (
-          <Link key={link?._key} href={`/${link?.path}`} >
+          <Link key={link?._key} href={`/${link?.path}`}>
             {link?.title}
           </Link>
         )

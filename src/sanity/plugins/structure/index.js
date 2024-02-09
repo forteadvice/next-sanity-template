@@ -1,8 +1,8 @@
 import { DocumentsIcon, HomeIcon, CogIcon, SchemaIcon } from '@sanity/icons'
-import { apiVersion } from '../../lib/env'
+import { apiVersion } from '../../../lib/env'
 import getPagesInReferenceTree from './getPagesInReferenceTree'
 
-export const deskStructure = (S) =>
+export const structure = (S) =>
   S.list()
     .title('Base')
     .items([

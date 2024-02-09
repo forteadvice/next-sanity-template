@@ -3,7 +3,7 @@ import 'server-only'
 import { draftMode } from 'next/headers'
 import * as queryStore from '@sanity/react-loader'
 
-import { client } from '@/lib/sanity/client'
+import { client } from '@/sanity/client'
 import { token } from '@/lib/token'
 
 let isDraftMode = false
