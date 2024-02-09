@@ -1,9 +1,9 @@
 import Menu from '@/components/global/Menu'
 import Footer from '@/components/global/Footer'
-import getSettingsData from '@/lib/fetch/getSettingsData'
+import { loadSettings } from '@/sanity/loader/loadFunctions'
 
 export default async function NotFound() {
-  const settings = await getSettingsData()
+  const { data: settings } = await loadSettings()
 
   return (
     <div className='h-screen flex flex-col'>

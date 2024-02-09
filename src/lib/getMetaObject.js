@@ -1,5 +1,4 @@
-import { query as settingsQuery } from './fetch/getSettingsData'
-import { sanityFetch } from './sanity/fetch'
+import { loadSettings } from '@/sanity/loader/loadFunctions'
 
 export default async function getMetaObject(meta) {
   // Specify the meta values for readbility
@@ -7,7 +6,7 @@ export default async function getMetaObject(meta) {
   // Get default meta from settings if seo not complete
   let defaultMeta = null
   if (!title || !description || !image) {
-    const settings = await sanityFetch({ query: settingsQuery, tags: ['default-meta'] })
+    const { data: settings } = await loadSettings()
     defaultMeta = settings?.defaultSeo
   }
 
