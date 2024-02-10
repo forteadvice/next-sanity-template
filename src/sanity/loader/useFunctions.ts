@@ -3,6 +3,7 @@ import { type QueryResponseInitial } from '@sanity/react-loader'
 import { useQuery } from './useQuery'
 import { frontpageQuery } from '../queries/frontpageQuery'
 import { pageQuery } from '../queries/pageQuery'
+import { settingsQuery } from '../queries/settingsQuery'
 
 // Frontpage
 export function useFrontpage(initial: QueryResponseInitial<any>) {
@@ -20,5 +21,5 @@ export function usePage(initial: QueryResponseInitial<any>, slugs: string[]) {
 
 // Settings
 export function useSettings(initial: QueryResponseInitial<any>) {
-  return useQuery<any>(pageQuery, {}, { initial })
+  return useQuery<any>(settingsQuery, {}, { initial })
 }
