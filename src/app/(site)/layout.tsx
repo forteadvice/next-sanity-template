@@ -22,7 +22,7 @@ export default async function BaseLayout({ children }: any) {
           <>
             <MenuPreview initial={initial} />
             {children}
-            <FooterPreview data={initial} />
+            <FooterPreview initial={initial} />
             <LiveVisualEditing />
           </>
         ) : (
