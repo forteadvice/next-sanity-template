@@ -4,6 +4,5 @@ import linkInternal from './linkInternal'
 import portableText from './portableText'
 import seo from './seo'
 
-const Objects = [hero, linkExternal, linkInternal, portableText, seo]
-
-export default Objects
+const objects = [hero, linkExternal, linkInternal, portableText, seo]
+export default objects

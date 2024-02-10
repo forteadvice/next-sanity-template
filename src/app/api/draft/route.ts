@@ -3,7 +3,7 @@ import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 import { client } from '@/sanity/client'
-import { token } from '@/lib/token'
+import { token } from '@/sanity/token'
 
 const clientWithToken = client.withConfig({ token })
 

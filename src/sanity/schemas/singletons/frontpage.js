@@ -1,6 +1,6 @@
-import { FrontPageSections } from '../sections'
+import { frontPageSections } from '../sections'
 
-const SectionSelection = FrontPageSections.map((section) => ({
+const sections = frontPageSections.map((section) => ({
   name: section.name,
   type: section.name,
 }))
@@ -24,7 +24,7 @@ export default {
       title: 'Sections',
       type: 'array',
       // import section-elements from /sections/index => {name, type}[]
-      of: SectionSelection,
+      of: sections,
     },
     {
       name: 'seo',

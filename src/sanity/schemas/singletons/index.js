@@ -2,9 +2,9 @@ import frontpage from './frontpage'
 import settings from './settings'
 
 // Internally linkable singletons
-export const PageSingletons = [frontpage]
+export const pageSingletons = [frontpage]
 
 // All singletons
-const Singletons = [frontpage, settings]
+const singletons = [frontpage, settings]
 
-export default Singletons
+export default singletons

@@ -1,5 +1,10 @@
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
+import { pageDocuments } from '../documents'
+import { pageSingletons } from '../singletons'
+
+const linkablePages = [...pageDocuments, ...pageSingletons].map((page) => ({ type: page.name }))
+
 export default {
   name: 'portableText',
   title: 'Portable Text',
@@ -44,11 +49,7 @@ export default {
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
-                to: [
-                  { type: 'frontpage' },
-                  { type: 'page' },
-                  // other types you may want to link to
-                ],
+                to: linkablePages,
               },
             ],
           },

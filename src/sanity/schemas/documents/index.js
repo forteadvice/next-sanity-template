@@ -1,9 +1,9 @@
 import page from './page'
 
 // Internally linkable Documents
-export const PageDocuments = [page]
+export const pageDocuments = [page]
 
 // All Documents
-const Documents = [page]
+const documents = [page]
 
-export default Documents
+export default documents

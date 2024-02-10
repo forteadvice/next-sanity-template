@@ -4,7 +4,7 @@ import { draftMode } from 'next/headers'
 import * as queryStore from '@sanity/react-loader'
 
 import { client } from '@/sanity/client'
-import { token } from '@/lib/token'
+import { token } from '@/sanity/token'
 
 let isDraftMode = false
 try {

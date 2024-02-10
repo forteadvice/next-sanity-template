@@ -3,12 +3,12 @@ import TextImage from './textImage'
 import mainImage from './mainImage'
 
 // Example of differentiated sections according to page type
-export const FrontPageSections = [textSection, TextImage]
+export const frontPageSections = [textSection, TextImage]
 
 // Example of differentiated sections according to page type
-export const PageSections = [textSection, TextImage, mainImage]
+export const pageSections = [textSection, TextImage, mainImage]
 
 // All sections
-const Sections = [textSection, TextImage, mainImage]
+const sections = [textSection, TextImage, mainImage]
 
-export default Sections
+export default sections
