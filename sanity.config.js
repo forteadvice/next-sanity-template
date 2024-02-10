@@ -8,7 +8,6 @@ import { presentationTool } from 'sanity/presentation'
 
 import { apiVersion, dataset, projectId } from './src/lib/env'
 import { schemaTypes } from '@/sanity/schemas'
-import { defaultDocumentNode } from '@/sanity/plugins/structure/defaultDocumentNode'
 import { structure } from '@/sanity/plugins/structure'
 import { locate } from '@/sanity/plugins/locate'
 
@@ -35,7 +34,6 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      defaultDocumentNode,
       structure,
     }),
     presentationTool({

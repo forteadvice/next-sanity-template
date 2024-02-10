@@ -1,3 +1,4 @@
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
 import { pageDocuments } from '../documents'
@@ -5,12 +6,12 @@ import { pageSingletons } from '../singletons'
 
 const linkablePages = [...pageDocuments, ...pageSingletons].map((page) => ({ type: page.name }))
 
-export default {
+export default defineType({
   name: 'portableText',
   title: 'Portable Text',
   type: 'array',
   of: [
-    {
+    defineArrayMember({
       type: 'block',
       styles: [
         { title: 'Normal', value: 'normal' },
@@ -26,7 +27,7 @@ export default {
           { title: 'Strike', value: 'strike-through' },
         ],
         annotations: [
-          {
+          defineField({
             name: 'externalLink',
             type: 'object',
             title: 'External link',
@@ -38,8 +39,9 @@ export default {
                 title: 'URL',
               },
             ],
-          },
-          {
+          }),
+
+          defineField({
             name: 'internalLink',
             type: 'object',
             title: 'Internal link',
@@ -52,9 +54,9 @@ export default {
                 to: linkablePages,
               },
             ],
-          },
+          }),
         ],
       },
-    },
+    }),
   ],
-}
+})

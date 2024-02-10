@@ -1,17 +1,19 @@
+import { defineField, defineType } from 'sanity'
 import { BlockContentIcon } from '@sanity/icons'
 
-export default {
+export default defineType({
   name: 'textSection',
   title: 'Text Section',
   type: 'object',
   icon: BlockContentIcon,
   fields: [
-    {
+    defineField({
       name: 'text',
       title: 'Text',
       type: 'portableText',
-    },
+    }),
   ],
+
   preview: {
     select: {
       title: 'text',
@@ -24,4 +26,4 @@ export default {
       }
     },
   },
-}
+})

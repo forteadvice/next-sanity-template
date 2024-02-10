@@ -1,23 +1,28 @@
+import { defineArrayMember, defineField, defineType } from 'sanity'
+
 import { toUrlSafe } from '@/lib/helpers'
 import { pageSections } from '../sections'
 
-const sections = pageSections.map((section) => ({
-  name: section.name,
-  type: section.name,
-}))
+const sections = pageSections.map((section) =>
+  defineArrayMember({
+    name: section.name,
+    type: section.name,
+  }),
+)
 
-export default {
+export default defineType({
   name: 'page',
   type: 'document',
   title: 'Page',
   fields: [
-    {
+    defineField({
       name: 'title',
       type: 'string',
       title: 'Title',
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -27,8 +32,9 @@ export default {
         slugify: toUrlSafe,
       },
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+
+    defineField({
       name: 'parent',
       title: 'Parent page',
       type: 'reference',
@@ -56,24 +62,27 @@ export default {
           }
         },
       },
-    },
-    {
+    }),
+
+    defineField({
       name: 'hero',
       title: 'Hero',
       type: 'hero',
-    },
-    {
+    }),
+
+    defineField({
       name: 'sections',
       title: 'Sections',
       type: 'array',
       of: sections,
-    },
-    {
+    }),
+
+    defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seo',
       options: { collapsible: true, collapsed: true },
-    },
+    }),
   ],
 
   preview: {
@@ -92,4 +101,4 @@ export default {
       }
     },
   },
-}
+})

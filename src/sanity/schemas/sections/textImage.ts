@@ -1,13 +1,14 @@
+import { defineField, defineType } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
 
-export default {
+export default defineType({
   name: 'textImage',
   title: 'Text Image',
   type: 'object',
   icon: ImageIcon,
   validation: (Rule) => Rule.required(),
   fields: [
-    {
+    defineField({
       name: 'image',
       type: 'image',
       options: { hotspot: true },
@@ -20,16 +21,16 @@ export default {
         },
       ],
       validation: (Rule) => Rule.required(),
-    },
+    }),
 
-    {
+    defineField({
       name: 'textSection',
       title: 'Text section',
       type: 'textSection',
       validation: (Rule) => Rule.required(),
-    },
+    }),
 
-    {
+    defineField({
       name: 'layout',
       title: 'Layout',
       type: 'string',
@@ -43,7 +44,7 @@ export default {
         direction: 'horizontal',
       },
       validation: (Rule) => Rule.required(),
-    },
+    }),
   ],
 
   preview: {
@@ -62,4 +63,4 @@ export default {
       }
     },
   },
-}
+})
