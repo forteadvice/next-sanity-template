@@ -1,14 +1,7 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 import { toUrlSafe } from '@/lib/helpers'
 import { pageSections } from '../sections'
-
-const sections = pageSections.map((section) =>
-  defineArrayMember({
-    name: section.name,
-    type: section.name,
-  }),
-)
 
 export default defineType({
   name: 'page',
@@ -74,7 +67,7 @@ export default defineType({
       name: 'sections',
       title: 'Sections',
       type: 'array',
-      of: sections,
+      of: pageSections,
     }),
 
     defineField({

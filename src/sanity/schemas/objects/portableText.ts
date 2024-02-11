@@ -1,10 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { pageDocuments } from '../documents'
-import { pageSingletons } from '../singletons'
-
-const linkablePages = [...pageDocuments, ...pageSingletons].map((page) => ({ type: page.name }))
+import { linkableDocTypes } from '../helpers'
 
 export default defineType({
   name: 'portableText',
@@ -51,7 +48,7 @@ export default defineType({
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
-                to: linkablePages,
+                to: linkableDocTypes,
               },
             ],
           }),

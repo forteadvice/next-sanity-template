@@ -1,12 +1,5 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 import { frontPageSections } from '../sections'
-
-const sections = frontPageSections.map((section) =>
-  defineArrayMember({
-    name: section.name,
-    type: section.name,
-  }),
-)
 
 export default defineType({
   name: 'frontpage',
@@ -31,8 +24,7 @@ export default defineType({
       name: 'sections',
       title: 'Sections',
       type: 'array',
-      // import section-elements from /sections/index => {name, type}[]
-      of: sections,
+      of: frontPageSections,
     }),
 
     defineField({

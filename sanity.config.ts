@@ -6,7 +6,7 @@ import { dashboardTool } from '@sanity/dashboard'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { presentationTool } from 'sanity/presentation'
 
-import { apiVersion, dataset, projectId } from './src/lib/env'
+import { apiVersion, dataset, projectId, studioUrl } from './src/lib/env'
 import { schemaTypes } from '@/sanity/schemas'
 import { structure } from '@/sanity/plugins/structure'
 import { locate } from '@/sanity/plugins/locate'
@@ -15,9 +15,9 @@ const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
 const singletonTypes = new Set(['frontpage', 'settings'])
 
 export default defineConfig({
-  basePath: '/studio',
-  projectId,
-  dataset,
+  basePath: studioUrl,
+  projectId: projectId || '',
+  dataset: dataset || '',
   schema: {
     types: schemaTypes,
     // Filter out singleton types from the global “New document” menu options

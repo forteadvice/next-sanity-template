@@ -1,10 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { LinkIcon } from '@sanity/icons'
 
-import { pageDocuments } from '../documents'
-import { pageSingletons } from '../singletons'
-
-const linkablePages = [...pageDocuments, ...pageSingletons].map((page) => ({ type: page.name }))
+import { linkableDocTypes } from '../helpers'
 
 export default defineType({
   name: 'linkInternal',
@@ -21,7 +18,7 @@ export default defineType({
     defineField({
       name: 'reference',
       type: 'reference',
-      to: linkablePages,
+      to: linkableDocTypes,
     }),
   ],
 
