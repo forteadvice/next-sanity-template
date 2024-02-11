@@ -1,3 +1,4 @@
+import type { ListItemBuilder, StructureBuilder } from 'sanity/structure'
 import { apiVersion } from '../../../lib/env'
 import { groq } from 'next-sanity'
 
@@ -5,7 +6,9 @@ import { groq } from 'next-sanity'
 // Init get pages that are root / don't reference a parent page
 // Parse root pages to the getPagesWithChildren()
 // Not showing drafts - as they then might appear several places
-export default async function getPagesInReferenceTree(S) {
+export default async function getPagesInReferenceTree(
+  S: StructureBuilder,
+): Promise<ListItemBuilder[]> {
   const client = S.context.getClient({ apiVersion })
   const rootQuery = groq`*[_type == "page" && !(_id in path("drafts.**")) && !defined(parent)][]{_id,title}`
   const pages = await client.fetch(rootQuery)
@@ -14,7 +17,7 @@ export default async function getPagesInReferenceTree(S) {
 }
 
 // This function loops througt pages, and render
-async function getPagesWithChildren(S, pages) {
+async function getPagesWithChildren(S: StructureBuilder, pages: any): Promise<ListItemBuilder[]> {
   const client = S.context.getClient({ apiVersion })
   const structure = []
 

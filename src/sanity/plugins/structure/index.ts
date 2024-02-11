@@ -1,8 +1,10 @@
+import type { StructureResolver } from 'sanity/structure'
 import { DocumentsIcon, HomeIcon, CogIcon, SchemaIcon } from '@sanity/icons'
+
 import { apiVersion } from '../../../lib/env'
 import getPagesInReferenceTree from './getPagesInReferenceTree'
 
-export const structure = (S) =>
+export const structure: StructureResolver = (S) =>
   S.list()
     .title('Base')
     .items([
