@@ -28,8 +28,9 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "sanity.config.js",
-    ".next/types/**/*.ts"
+    "sanity.config.ts",
+    ".next/types/**/*.ts",
+    "src/sanity/plugins/structure/index.tw"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { LinkIcon } from '@sanity/icons'
 
-import { linkableDocTypes } from '../helpers'
+import { linkableDocTypes } from '../linkableDocTypes'
 
 export default defineType({
   name: 'linkInternal',

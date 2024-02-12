@@ -1,5 +1,0 @@
-/*
- * Payloads
- */
-
-export interface IFrontPagePayload {}
