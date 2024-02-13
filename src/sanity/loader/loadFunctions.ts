@@ -1,23 +1,34 @@
 /*
- * This file contains all loadFunctions - aka ssr sanityClient requests
+ * This file contains all loadFunctions / sever-side fetchers for Sanity
  */
 
 import 'server-only'
 
+import { groq } from 'next-sanity'
 import { loadQuery } from './loadQuery'
-import { frontpageQuery } from '../queries/frontpageQuery'
-import { pagesParamsQuery } from '../queries/pagesParamsQuery'
-import { pageQuery } from '../queries/pageQuery'
+import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
+import { pageQuery, TPage } from '../schemas/documents/page'
 import { settingsQuery } from '../queries/settingsQuery'
 
 // Frontpage
 export async function loadFrontpage() {
-  return await loadQuery<any | null>(frontpageQuery, {}, { next: { tags: ['frontpage'] } })
+  return await loadQuery<TFrontPage>(frontpageQuery, {}, { next: { tags: ['frontpage'] } })
 }
 
 // Pages params for generateStaticParams
 export async function loadPagesParams() {
-  return await loadQuery<any | null>(pagesParamsQuery, {}, { next: { tags: ['pages'] } })
+  const paramsQuery = groq`
+    *[_type == 'page' && defined(slug.current)][] {
+      'slugs': [slug.current],
+      defined(parent->slug.current) => {
+        'slugs': [parent->slug.current, slug.current]
+      },
+      defined(parent->parent->slug.current) => {
+        'slugs': [parent->parent->slug.current, parent->slug.current, slug.current]
+      },
+    }
+  `
+  return await loadQuery<string[]>(paramsQuery, {}, { next: { tags: ['pages'] } })
 }
 
 // Single page from slug tree
@@ -26,10 +37,10 @@ export async function loadPage(slugs: string[]) {
   const parentSlug = slugs[slugs.length - 2] ?? null
   const grandParentSlug = slugs[slugs.length - 3] ?? null
   const params = { slug, parentSlug, grandParentSlug }
-  return await loadQuery<any | null>(pageQuery, params, { next: { tags: [`page:${slug}`] } })
+  return await loadQuery<TPage>(pageQuery, params, { next: { tags: [`page:${slug}`] } })
 }
 
 // Settings
 export async function loadSettings() {
-  return await loadQuery<any | null>(settingsQuery, {}, { next: { tags: ['settings'] } })
+  return await loadQuery<any>(settingsQuery, {}, { next: { tags: ['settings'] } })
 }

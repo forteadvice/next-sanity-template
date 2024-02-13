@@ -1,4 +1,8 @@
+import { groq } from 'next-sanity'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { seoQuery } from '../objects/seo'
+import { docReferencePathQuery } from '../queryPartials'
+import { linkInternalQuery } from '../objects/linkInternal'
 
 export default defineType({
   name: 'settings',
@@ -7,17 +11,15 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
       type: 'string',
       initialValue: 'Settings',
-      readOnly: () => true,
-      hidden: () => true,
+      readOnly: true,
+      hidden: true,
     }),
 
     // MENU
     defineField({
       name: 'menu',
-      title: 'Menu',
       type: 'object',
       options: {
         collapsed: false,
@@ -36,33 +38,15 @@ export default defineType({
     // FOOTER
     defineField({
       name: 'footer',
-      title: 'Footer',
       type: 'object',
       options: {
         collapsed: false,
         collapsible: true,
       },
       fields: [
-        defineField({
-          name: 'address',
-          title: 'Address',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
-
-        defineField({
-          name: 'phone',
-          title: 'Phone',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
-
-        defineField({
-          name: 'email',
-          title: 'Email',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
+        defineField({ name: 'address', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'phone', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'email', type: 'string', validation: (Rule) => Rule.required() }),
       ],
     }),
 
@@ -75,7 +59,6 @@ export default defineType({
         collapsed: false,
         collapsible: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
 
     // 404 PAGE
@@ -88,21 +71,23 @@ export default defineType({
         collapsible: true,
       },
       fields: [
-        defineField({
-          name: 'title',
-          title: 'Title',
-          type: 'string',
-          validation: (Rule) => Rule.required(),
-        }),
-
-        defineField({
-          name: 'body',
-          title: 'Body',
-          type: 'text',
-          rows: 2,
-          validation: (Rule) => Rule.required(),
-        }),
+        defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'body', type: 'text', rows: 2, validation: (Rule) => Rule.required() }),
       ],
     }),
   ],
 })
+
+export const settingsQuery = groq`
+  *[_type == 'settings'][0] {
+    
+    menu {
+      links[] {
+        _key,
+        ${linkInternalQuery},
+      }
+    }
+
+    defaultSeo { ${seoQuery} },
+  }
+`

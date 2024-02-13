@@ -1,33 +1,15 @@
 import { defineField, defineType } from 'sanity'
+import { baseImageQuery, type TBaseImage } from './baseImage'
+import { groq } from 'next-sanity'
 
 export default defineType({
   name: 'hero',
   title: 'Hero',
   type: 'object',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-
-    defineField({
-      name: 'tagline',
-      type: 'string',
-    }),
-
-    defineField({
-      name: 'image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        defineField({
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-        }),
-      ],
-    }),
+    defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'tagline', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'image', type: 'baseImage' }),
   ],
 
   preview: {
@@ -45,3 +27,15 @@ export default defineType({
     },
   },
 })
+
+export const heroQuery = groq`
+  title,
+  tagline,
+  image { ${baseImageQuery} }
+`
+
+export type THero = {
+  title?: string
+  tagline?: string
+  image?: TBaseImage
+}

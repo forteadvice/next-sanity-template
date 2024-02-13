@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { BlockContentIcon } from '@sanity/icons'
+import { groq } from 'next-sanity'
+import { portableTextQuery, type TPortableText } from '../queryPartials'
 
 export default defineType({
   name: 'textSection',
@@ -7,23 +9,33 @@ export default defineType({
   type: 'object',
   icon: BlockContentIcon,
   fields: [
-    defineField({
-      name: 'text',
-      title: 'Text',
-      type: 'portableText',
-    }),
+    defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'text', type: 'portableText', validation: (Rule) => Rule.required() }),
   ],
 
   preview: {
     select: {
-      title: 'text',
+      title: 'title',
     },
+
     prepare({ title }) {
       return {
-        title: title[0].children[0].text,
+        title,
         subtitle: 'Text Section',
-        media: BlockContentIcon,
       }
     },
   },
 })
+
+export const textSectionQuery = groq`
+  _type,
+  _key,
+  title,
+  text[] { ${portableTextQuery} },
+`
+export type TTextSection = {
+  _type: string
+  _key: string
+  title?: string
+  text?: TPortableText
+}

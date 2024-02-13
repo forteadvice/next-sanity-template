@@ -11,7 +11,11 @@ const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditin
 const MenuPreview = dynamic(() => import('@/components/global/MenuPreview'))
 const FooterPreview = dynamic(() => import('@/components/global/FooterPreview'))
 
-export default async function BaseLayout({ children }: any) {
+type Props = {
+  children: React.ReactNode
+}
+
+export default async function BaseLayout({ children }: Props) {
   const initial = await loadSettings()
   const { data: settings } = initial
 

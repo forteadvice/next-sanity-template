@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { linkableDocTypes } from '../linkableDocTypes'
+import { linkableDocTypes } from '../helpers'
 
 export default defineType({
   name: 'portableText',
@@ -25,7 +25,7 @@ export default defineType({
         ],
         annotations: [
           defineField({
-            name: 'externalLink',
+            name: 'linkExternal',
             type: 'object',
             title: 'External link',
             icon: EarthGlobeIcon,
@@ -34,12 +34,13 @@ export default defineType({
                 name: 'href',
                 type: 'url',
                 title: 'URL',
+                validation: (Rule) => Rule.required(),
               },
             ],
           }),
 
           defineField({
-            name: 'internalLink',
+            name: 'linkInternal',
             type: 'object',
             title: 'Internal link',
             icon: LinkIcon,
@@ -49,6 +50,7 @@ export default defineType({
                 type: 'reference',
                 title: 'Reference',
                 to: linkableDocTypes,
+                validation: (Rule) => Rule.required(),
               },
             ],
           }),

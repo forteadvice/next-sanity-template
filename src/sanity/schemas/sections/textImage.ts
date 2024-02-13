@@ -1,5 +1,9 @@
 import { defineField, defineType } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
+import { groq } from 'next-sanity'
+
+import { textSectionQuery, type TTextSection } from './textSection'
+import { baseImageQuery, type TBaseImage } from '../objects/baseImage'
 
 export default defineType({
   name: 'textImage',
@@ -9,21 +13,6 @@ export default defineType({
   validation: (Rule) => Rule.required(),
   fields: [
     defineField({
-      name: 'image',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
-          validation: (Rule) => Rule.required(),
-        },
-      ],
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
       name: 'textSection',
       title: 'Text section',
       type: 'textSection',
@@ -31,8 +20,12 @@ export default defineType({
     }),
 
     defineField({
+      name: 'image',
+      type: 'baseImage',
+    }),
+
+    defineField({
       name: 'layout',
-      title: 'Layout',
       type: 'string',
       initialValue: 'textImage',
       options: {
@@ -55,7 +48,6 @@ export default defineType({
 
     prepare({ titleObj, image }) {
       const title = titleObj?.text[0]?.children[0]?.text || 'Text image'
-
       return {
         title: title,
         subtitle: 'Text Image',
@@ -64,3 +56,19 @@ export default defineType({
     },
   },
 })
+
+export const textImageQuery = groq`
+  _type,
+  _key,
+  textSection { ${textSectionQuery} },
+  image { ${baseImageQuery} },
+  layout,
+`
+
+export type TTextImage = {
+  _type: string
+  _key: string
+  textSection?: TTextSection
+  image?: TBaseImage
+  layout?: 'textImage' | 'imageText'
+}

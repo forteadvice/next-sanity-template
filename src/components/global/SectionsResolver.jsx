@@ -2,6 +2,7 @@ import * as Sections from '../sections'
 import { upperFirst } from '@/lib/helpers'
 
 export default function SectionsResolver({ sections }) {
+  console.log(sections)
   return (
     <>
       {sections.map((section, idx) => {

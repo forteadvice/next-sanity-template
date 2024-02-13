@@ -9,6 +9,7 @@ export function toUrlSafe(string: string): string {
   return urlSafe
 }
 
-export function upperFirst(string: string): string {
+export function upperFirst(string: string): string | void {
+  if (!string) return
   return string.charAt(0).toUpperCase() + string.slice(1)
 }

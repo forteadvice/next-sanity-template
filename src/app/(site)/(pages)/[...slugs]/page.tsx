@@ -9,17 +9,22 @@ import PageView from './PageView'
 
 const PagePreview = dynamic(() => import('./PagePreview'))
 
+type Props = {
+  params: { slugs: string[] }
+}
+
 export async function generateStaticParams() {
   const { data: pages } = await loadPagesParams()
   return pages
 }
-export async function generateMetadata({ params }: any) {
+
+export async function generateMetadata({ params }: Props) {
   const { slugs } = params
   const { data } = await loadPage(slugs)
   return getMetaObject(data?.seo)
 }
 
-export default async function Page({ params }: any) {
+export default async function Page({ params }: Props) {
   const { slugs } = params
   const initial = await loadPage(slugs)
   if (!initial?.data) return notFound()

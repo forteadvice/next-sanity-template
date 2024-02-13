@@ -1,4 +1,6 @@
+import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
+import type { Image } from 'sanity'
 
 export default defineType({
   name: 'seo',
@@ -21,6 +23,21 @@ export default defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      options: { hotspot: true },
     }),
   ],
 })
+
+export const seoQuery = groq`
+  title,
+  description,
+  image {
+    asset->
+  },
+`
+
+export type TSeo = {
+  title?: string
+  description?: string
+  image?: Image
+}

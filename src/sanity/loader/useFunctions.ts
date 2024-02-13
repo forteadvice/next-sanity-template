@@ -1,22 +1,25 @@
-import { type QueryResponseInitial } from '@sanity/react-loader'
+/*
+ * This file contains all useFunctions / preview-fetchers for Sanity
+ */
 
 import { useQuery } from './useQuery'
-import { frontpageQuery } from '../queries/frontpageQuery'
-import { pageQuery } from '../queries/pageQuery'
+import { type QueryResponseInitial } from '@sanity/react-loader'
+import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
+import { pageQuery, type TPage } from '../schemas/documents/page'
 import { settingsQuery } from '../queries/settingsQuery'
 
 // Frontpage
-export function useFrontpage(initial: QueryResponseInitial<any>) {
-  return useQuery<any>(frontpageQuery, {}, { initial })
+export function useFrontpage(initial: QueryResponseInitial<TFrontPage>) {
+  return useQuery<TFrontPage>(frontpageQuery, {}, { initial })
 }
 
 // Pages
-export function usePage(initial: QueryResponseInitial<any>, slugs: string[]) {
+export function usePage(initial: QueryResponseInitial<TPage>, slugs: string[]) {
   const slug = slugs[slugs.length - 1]
   const parentSlug = slugs[slugs.length - 2] ?? null
   const grandParentSlug = slugs[slugs.length - 3] ?? null
   const params = { slug, parentSlug, grandParentSlug }
-  return useQuery<any>(pageQuery, params, { initial })
+  return useQuery<TPage>(pageQuery, params, { initial })
 }
 
 // Settings

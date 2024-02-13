@@ -2,6 +2,8 @@ import type { DocumentLocationResolver, DocumentLocationsState } from 'sanity/pr
 import { Observable, map } from 'rxjs'
 
 import { docReferencePathQuery } from '../queries/queryPartials'
+import { pageDocTypes } from '../schemas/helpers'
+console.log(pageDocTypes)
 
 export const locate: DocumentLocationResolver = (params, context) => {
   /*
@@ -23,7 +25,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
   /*
    * Page documents
    */
-  if (params.type === 'page' || params.type === 'frontpage') {
+  if (pageDocTypes.some((type) => type == params.type)) {
     const docStream = context.documentStore.listenQuery(
       `*[_id == $id][0]{ _type, title, ${docReferencePathQuery} }`,
       params,

@@ -1,7 +1,10 @@
 import { defineField, defineType } from 'sanity'
+import { groq } from 'next-sanity'
 
 import { toUrlSafe } from '@/lib/helpers'
-import { pageSections } from '../sections'
+import { pageSections, sectionsQuery, TSections } from '../sections'
+import { heroQuery, type THero } from '../objects/hero'
+import { seoQuery, TSeo } from '../objects/seo'
 
 export default defineType({
   name: 'page',
@@ -11,13 +14,11 @@ export default defineType({
     defineField({
       name: 'title',
       type: 'string',
-      title: 'Title',
       validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: 'slug',
-      title: 'Slug',
       type: 'slug',
       description: 'Unique page identifier. Should preferably be generated.',
       options: {
@@ -59,13 +60,11 @@ export default defineType({
 
     defineField({
       name: 'hero',
-      title: 'Hero',
       type: 'hero',
     }),
 
     defineField({
       name: 'sections',
-      title: 'Sections',
       type: 'array',
       of: pageSections,
     }),
@@ -95,3 +94,25 @@ export default defineType({
     },
   },
 })
+
+export const pageQuery = groq`
+*[
+  _type == 'page' && slug.current == $slug &&
+  (!defined(parent._ref) || parent->slug.current == $parentSlug) &&
+  (!defined(parent->parent._ref) || parent->parent->slug.current == $grandParentSlug)
+  ][0] {
+    title,
+    "slug": slug.current,
+    hero { ${heroQuery} },
+    sections { ${sectionsQuery} },
+    seo { ${seoQuery} },
+  }
+`
+
+export type TPage = {
+  title?: string
+  slug?: string
+  hero?: THero
+  sections?: TSections
+  seo?: TSeo
+}

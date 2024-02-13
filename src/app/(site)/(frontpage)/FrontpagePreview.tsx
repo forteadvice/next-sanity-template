@@ -1,10 +1,15 @@
 'use client'
 
-// import { type QueryResponseInitial } from '@sanity/react-loader'
+import type { QueryResponseInitial } from '@sanity/react-loader'
+import type { TFrontPage } from '@/sanity/schemas/singletons/frontpage'
 import { useFrontpage } from '@/sanity/loader/useFunctions'
-import Frontpage from './FontpageView'
+import Frontpage from './FrontpageView'
 
-export default function FrontpagePreview({ initial }: any) {
+type Props = {
+  initial: QueryResponseInitial<TFrontPage>
+}
+
+export default function FrontpagePreview({ initial }: Props) {
   const { data, encodeDataAttribute } = useFrontpage(initial)
   return <Frontpage data={data} />
 }

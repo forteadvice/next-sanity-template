@@ -1,18 +1,20 @@
+import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
-import { frontPageSections } from '../sections'
+import { frontPageSections, sectionsQuery, type TSections } from '../sections'
+
+import { seoQuery, type TSeo } from '../objects/seo'
+import { heroQuery, type THero } from '../objects/hero'
 
 export default defineType({
   name: 'frontpage',
   type: 'document',
-  title: 'Frontpage',
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
       type: 'string',
       initialValue: 'Frontpage',
-      readOnly: () => true,
-      hidden: () => true,
+      readOnly: true,
+      hidden: true,
     }),
 
     defineField({
@@ -22,7 +24,6 @@ export default defineType({
 
     defineField({
       name: 'sections',
-      title: 'Sections',
       type: 'array',
       of: frontPageSections,
     }),
@@ -35,3 +36,19 @@ export default defineType({
     }),
   ],
 })
+
+export const frontpageQuery = groq`
+*[_type == 'frontpage'][0] {
+  title,
+  hero { ${heroQuery} },
+  sections[] { ${sectionsQuery} },
+  seo { ${seoQuery} },
+}
+`
+
+export type TFrontPage = {
+  title?: string
+  hero?: THero
+  sections?: TSections
+  seo?: TSeo
+}
