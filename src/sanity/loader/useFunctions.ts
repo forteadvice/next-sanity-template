@@ -6,7 +6,7 @@ import { useQuery } from './useQuery'
 import { type QueryResponseInitial } from '@sanity/react-loader'
 import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
 import { pageQuery, type TPage } from '../schemas/documents/page'
-import { settingsQuery } from '../queries/settingsQuery'
+import { settingsQuery, type TSettings } from '../schemas/singletons/settings'
 
 // Frontpage
 export function useFrontpage(initial: QueryResponseInitial<TFrontPage>) {
@@ -23,6 +23,6 @@ export function usePage(initial: QueryResponseInitial<TPage>, slugs: string[]) {
 }
 
 // Settings
-export function useSettings(initial: QueryResponseInitial<any>) {
-  return useQuery<any>(settingsQuery, {}, { initial })
+export function useSettings(initial: QueryResponseInitial<TSettings>) {
+  return useQuery<TSettings>(settingsQuery, {}, { initial })
 }

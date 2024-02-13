@@ -18,6 +18,7 @@ type Props = {
 export default async function BaseLayout({ children }: Props) {
   const initial = await loadSettings()
   const { data: settings } = initial
+  const { menu, footer } = settings
 
   return (
     <html lang='en'>
@@ -31,9 +32,9 @@ export default async function BaseLayout({ children }: Props) {
           </>
         ) : (
           <>
-            <Menu data={settings?.menu} />
+            {menu && <Menu data={menu} />}
             {children}
-            <Footer data={settings?.footer} />
+            {footer && <Footer data={footer} />}
           </>
         )}
       </body>

@@ -7,8 +7,8 @@ import 'server-only'
 import { groq } from 'next-sanity'
 import { loadQuery } from './loadQuery'
 import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
-import { pageQuery, TPage } from '../schemas/documents/page'
-import { settingsQuery } from '../queries/settingsQuery'
+import { pageQuery, type TPage } from '../schemas/documents/page'
+import { settingsQuery, type TSettings } from '../schemas/singletons/settings'
 
 // Frontpage
 export async function loadFrontpage() {
@@ -34,13 +34,13 @@ export async function loadPagesParams() {
 // Single page from slug tree
 export async function loadPage(slugs: string[]) {
   const slug = slugs[slugs.length - 1]
-  const parentSlug = slugs[slugs.length - 2] ?? null
-  const grandParentSlug = slugs[slugs.length - 3] ?? null
+  const parentSlug = slugs[slugs.length - 2] || null
+  const grandParentSlug = slugs[slugs.length - 3] || null
   const params = { slug, parentSlug, grandParentSlug }
   return await loadQuery<TPage>(pageQuery, params, { next: { tags: [`page:${slug}`] } })
 }
 
 // Settings
 export async function loadSettings() {
-  return await loadQuery<any>(settingsQuery, {}, { next: { tags: ['settings'] } })
+  return await loadQuery<TSettings>(settingsQuery, {}, { next: { tags: ['settings'] } })
 }

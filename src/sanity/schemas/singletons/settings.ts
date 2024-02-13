@@ -1,12 +1,10 @@
 import { groq } from 'next-sanity'
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { seoQuery } from '../objects/seo'
-import { docReferencePathQuery } from '../queryPartials'
-import { linkInternalQuery } from '../objects/linkInternal'
+import { seoQuery, type TSeo } from '../objects/seo'
+import { linkInternalQuery, type TLinkInternal } from '../objects/linkInternal'
 
 export default defineType({
   name: 'settings',
-  title: 'Settings',
   type: 'document',
   fields: [
     defineField({
@@ -28,7 +26,6 @@ export default defineType({
       fields: [
         defineField({
           name: 'links',
-          title: 'Links',
           type: 'array',
           of: [defineArrayMember({ type: 'linkInternal' })],
         }),
@@ -80,14 +77,51 @@ export default defineType({
 
 export const settingsQuery = groq`
   *[_type == 'settings'][0] {
-    
+
     menu {
       links[] {
         _key,
         ${linkInternalQuery},
       }
-    }
+    },
+
+    footer {
+      address,
+      phone,
+      email,
+    },
 
     defaultSeo { ${seoQuery} },
+
+    pageNotFound {
+      title,
+      body,
+    },
   }
 `
+
+type TMenuItem = {
+  _key?: string
+} & TLinkInternal
+
+export type TMenu = {
+  links: TMenuItem[]
+}
+
+export type TFooter = {
+  address?: string
+  phone?: string
+  email?: string
+}
+
+export type TPageNotFound = {
+  title?: string
+  body?: string
+}
+
+export type TSettings = {
+  menu?: TMenu
+  footer?: TFooter
+  defaultSeo?: TSeo
+  pageNotFound?: TPageNotFound
+}

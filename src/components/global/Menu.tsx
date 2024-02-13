@@ -1,6 +1,11 @@
 import Link from 'next/link'
+import { TMenu } from '@/sanity/schemas/singletons/settings'
 
-export default function Menu({ data }) {
+type Props = {
+  data: TMenu
+}
+
+export default function Menu({ data }: Props) {
   return (
     <nav className='flex gap-4'>
       <Link href={'/'} prefetch={false}>

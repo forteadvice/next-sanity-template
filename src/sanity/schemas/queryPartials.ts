@@ -5,6 +5,7 @@ import type { PortableTextBlock } from '@portabletext/types'
  * docReferencePathQuery should be used as the main and preferebly only path / url-resolver.
  * If needed, modify this to accept all page types.
  */
+
 export const docReferencePathQuery = groq`
   _type == "frontpage" => {
     'path': "/"
