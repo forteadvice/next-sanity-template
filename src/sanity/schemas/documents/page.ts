@@ -1,8 +1,9 @@
-import { defineField, defineType } from 'sanity'
 import { groq } from 'next-sanity'
+import { defineField, defineType } from 'sanity'
+import { SearchIcon, CogIcon, DashboardIcon } from '@sanity/icons'
 
 import { toUrlSafe } from '@/lib/helpers'
-import { pageSections, sectionsQuery, TSections } from '../sections'
+import { pageSections, sectionsQuery, TSection } from '../sections'
 import { heroQuery, type THero } from '../objects/hero'
 import { seoQuery, TSeo } from '../objects/seo'
 
@@ -10,11 +11,17 @@ export default defineType({
   name: 'page',
   type: 'document',
   title: 'Page',
+  groups: [
+    { name: 'settings', icon: CogIcon },
+    { name: 'content', icon: DashboardIcon },
+    { name: 'seo', title: 'SEO', icon: SearchIcon },
+  ],
   fields: [
     defineField({
       name: 'title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      group: 'settings',
     }),
 
     defineField({
@@ -26,6 +33,7 @@ export default defineType({
         slugify: toUrlSafe,
       },
       validation: (Rule) => Rule.required(),
+      group: 'settings',
     }),
 
     defineField({
@@ -56,24 +64,27 @@ export default defineType({
           }
         },
       },
+      group: 'settings',
     }),
 
     defineField({
       name: 'hero',
       type: 'hero',
+      group: 'content',
     }),
 
     defineField({
       name: 'sections',
       type: 'array',
       of: pageSections,
+      group: 'content',
     }),
 
     defineField({
       name: 'seo',
       title: 'SEO',
       type: 'seo',
-      options: { collapsible: true, collapsed: true },
+      group: 'seo',
     }),
   ],
 
@@ -113,6 +124,6 @@ export type TPage = {
   title?: string
   slug?: string
   hero?: THero
-  sections?: TSections
+  sections?: TSection[]
   seo?: TSeo
 }

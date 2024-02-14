@@ -1,6 +1,11 @@
-import SanityImage from '../utilities/SanityImage'
+import SanityImage from '../utilities/BaseImage'
+import type { THero } from '@/sanity/schemas/objects/hero'
 
-export default function Hero({ data }) {
+type Props = {
+  data: THero
+}
+
+export default function Hero({ data }: Props) {
   return (
     <section className='hero'>
       <h1 className='text-6xl lg:text-7xl font-bold'>{data?.title}</h1>

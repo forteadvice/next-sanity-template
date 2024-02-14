@@ -1,9 +1,8 @@
 import type { DocumentLocationResolver, DocumentLocationsState } from 'sanity/presentation'
 import { Observable, map } from 'rxjs'
 
-import { docReferencePathQuery } from '../queries/queryPartials'
-import { pageDocTypes } from '../schemas/helpers'
-console.log(pageDocTypes)
+import { docReferencePathQuery } from '../schemas/queryPartials'
+import { pageDocTypes } from '@/lib/helpers'
 
 export const locate: DocumentLocationResolver = (params, context) => {
   /*
@@ -42,6 +41,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
     return docStream.pipe(
       map((doc) => {
         if (!doc || !doc?.path) return null
+        console.log(doc)
         return {
           locations: [
             {

@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { linkableDocTypes } from '../helpers'
+import { linkableDocTypes } from '@/lib/helpers'
 
 export default defineType({
   name: 'portableText',

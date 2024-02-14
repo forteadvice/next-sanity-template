@@ -1,4 +1,4 @@
-import type { Image } from 'sanity'
+import type { ImageAsset, Image } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
 import { groq } from 'next-sanity'
 
@@ -44,10 +44,12 @@ export default defineType({
 })
 
 export const baseImageQuery = groq`
+  ...,
+  asset->,
   alt,
-  asset->
 `
 
 export type TBaseImage = {
   alt?: string
+  asset: ImageAsset
 } & Image

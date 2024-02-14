@@ -1,11 +1,22 @@
 import { groq } from 'next-sanity'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { MenuIcon, SearchIcon, InsertBelowIcon, UnknownIcon } from '@sanity/icons'
+
+import { defineType, defineField } from 'sanity'
 import { seoQuery, type TSeo } from '../objects/seo'
-import { linkInternalQuery, type TLinkInternal } from '../objects/linkInternal'
+import { menuQuery, type TMenu } from '../objects/menu'
+import { footerQuery, type TFooter } from '../objects/footer'
+import { pageNotFoundQuery, TPageNotFound } from '../objects/pageNotFound'
 
 export default defineType({
   name: 'settings',
   type: 'document',
+  groups: [
+    { name: 'menu', icon: MenuIcon },
+    { name: 'footer', icon: InsertBelowIcon },
+    { name: 'seo', title: 'Default SEO', icon: SearchIcon },
+    { name: 'pageNotFound', title: '404 page', icon: UnknownIcon },
+  ],
+
   fields: [
     defineField({
       name: 'title',
@@ -15,109 +26,42 @@ export default defineType({
       hidden: true,
     }),
 
-    // MENU
     defineField({
       name: 'menu',
-      type: 'object',
-      options: {
-        collapsed: false,
-        collapsible: true,
-      },
-      fields: [
-        defineField({
-          name: 'links',
-          type: 'array',
-          of: [defineArrayMember({ type: 'linkInternal' })],
-        }),
-      ],
+      type: 'menu',
+      group: 'menu',
     }),
 
-    // FOOTER
     defineField({
       name: 'footer',
-      type: 'object',
-      options: {
-        collapsed: false,
-        collapsible: true,
-      },
-      fields: [
-        defineField({ name: 'address', type: 'string', validation: (Rule) => Rule.required() }),
-        defineField({ name: 'phone', type: 'string', validation: (Rule) => Rule.required() }),
-        defineField({ name: 'email', type: 'string', validation: (Rule) => Rule.required() }),
-      ],
+      type: 'footer',
+      group: 'footer',
     }),
 
-    // DEFAULT SEO
     defineField({
       name: 'defaultSeo',
       title: 'Default SEO',
       type: 'seo',
-      options: {
-        collapsed: false,
-        collapsible: true,
-      },
+      group: 'seo',
     }),
 
-    // 404 PAGE
     defineField({
       name: 'pageNotFound',
       title: '404 page',
-      type: 'object',
-      options: {
-        collapsed: false,
-        collapsible: true,
-      },
-      fields: [
-        defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
-        defineField({ name: 'body', type: 'text', rows: 2, validation: (Rule) => Rule.required() }),
-      ],
+      type: 'pageNotFound',
+      group: 'pageNotFound',
     }),
   ],
 })
 
 export const settingsQuery = groq`
   *[_type == 'settings'][0] {
-
-    menu {
-      links[] {
-        _key,
-        ${linkInternalQuery},
-      }
-    },
-
-    footer {
-      address,
-      phone,
-      email,
-    },
-
+    menu { ${menuQuery} },
+    footer { ${footerQuery} },
     defaultSeo { ${seoQuery} },
-
-    pageNotFound {
-      title,
-      body,
-    },
+    pageNotFound { ${pageNotFoundQuery} },
   }
 `
-
-type TMenuItem = {
-  _key?: string
-} & TLinkInternal
-
-export type TMenu = {
-  links: TMenuItem[]
-}
-
-export type TFooter = {
-  address?: string
-  phone?: string
-  email?: string
-}
-
-export type TPageNotFound = {
-  title?: string
-  body?: string
-}
 
 export type TSettings = {
   menu?: TMenu

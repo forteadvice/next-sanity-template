@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { TMenu } from '@/sanity/schemas/singletons/settings'
+
+import type { TMenu } from '@/sanity/schemas/objects/menu'
 
 type Props = {
   data: TMenu

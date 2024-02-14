@@ -4,16 +4,17 @@ import { loadSettings } from '@/sanity/loader/loadFunctions'
 
 export default async function NotFound() {
   const { data: settings } = await loadSettings()
+  const { menu, footer } = settings
 
   return (
     <div className='h-screen flex flex-col'>
-      <Menu data={settings?.menu} />
+      {menu && <Menu data={menu} />}
       <main className='flex-1 flex justify-center items-center'>
         <h1 className='text-2xl mb-2'>
           {settings?.pageNotFound?.title} | {settings?.pageNotFound?.body}
         </h1>
       </main>
-      <Footer data={settings?.footer} />
+      {footer && <Footer data={footer} />}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-export function toUrlSafe(string: string): string {
+export function toUrlSafe(string: string) {
   const urlSafe = string
     .toLowerCase()
     .replaceAll('æ', 'ae')
@@ -9,7 +9,6 @@ export function toUrlSafe(string: string): string {
   return urlSafe
 }
 
-export function upperFirst(string: string): string | void {
-  if (!string) return
+export function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }

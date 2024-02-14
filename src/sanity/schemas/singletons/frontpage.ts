@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
-import { frontPageSections, sectionsQuery, type TSections } from '../sections'
+import { frontPageSections, sectionsQuery, type TSection } from '../sections'
 
 import { seoQuery, type TSeo } from '../objects/seo'
 import { heroQuery, type THero } from '../objects/hero'
@@ -15,6 +15,11 @@ export default defineType({
       initialValue: 'Frontpage',
       readOnly: true,
       hidden: true,
+    }),
+
+    defineField({
+      name: 'linkInternal',
+      type: 'linkInternal',
     }),
 
     defineField({
@@ -48,6 +53,6 @@ export const frontpageQuery = groq`
 export type TFrontPage = {
   title?: string
   hero?: THero
-  sections?: TSections
+  sections?: TSection[]
   seo?: TSeo
 }
