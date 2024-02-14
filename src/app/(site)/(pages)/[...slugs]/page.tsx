@@ -4,9 +4,7 @@ import dynamic from 'next/dynamic'
 
 import getMetaObject from '@/lib/getMetaObject'
 import { loadPage, loadPagesParams } from '@/sanity/loader/loadFunctions'
-
 import PageView from './PageView'
-
 const PagePreview = dynamic(() => import('./PagePreview'))
 
 type Props = {
@@ -21,6 +19,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slugs } = params
   const { data } = await loadPage(slugs)
+  if (!data?.seo) return
   return getMetaObject(data?.seo)
 }
 
