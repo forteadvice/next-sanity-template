@@ -1,6 +1,6 @@
 import { draftMode } from 'next/headers'
 
-export default function isDraftMode() {
+export default function isDraftMode(): boolean {
   let isDraftMode = false
   try {
     isDraftMode = draftMode()?.isEnabled

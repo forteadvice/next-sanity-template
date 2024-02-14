@@ -1,7 +1,7 @@
-import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
 
+import isDraftMode from '@/lib/isDraftMode'
 import getMetaObject from '@/lib/getMetaObject'
 import { loadPage, loadPagesParams } from '@/sanity/loader/loadFunctions'
 import PageView from './PageView'
@@ -27,6 +27,6 @@ export default async function Page({ params }: Props) {
   const { slugs } = params
   const initial = await loadPage(slugs)
   if (!initial?.data) return notFound()
-  if (draftMode()?.isEnabled) return <PagePreview initial={initial} slugs={slugs} />
+  if (isDraftMode()) return <PagePreview initial={initial} slugs={slugs} />
   return <PageView data={initial?.data} />
 }

@@ -1,17 +1,12 @@
 import 'server-only'
 
-import { draftMode } from 'next/headers'
 import * as queryStore from '@sanity/react-loader'
 
+import isDraftModeFunction from '@/lib/isDraftMode'
 import { client } from '@/sanity/client'
 import { token } from '@/sanity/token'
 
-let isDraftMode = false
-try {
-  isDraftMode = draftMode()?.isEnabled
-} catch {
-  isDraftMode = false
-}
+const isDraftMode = isDraftModeFunction()
 
 // Extend client as serverClient with token and stega
 const serverClient = client.withConfig({
