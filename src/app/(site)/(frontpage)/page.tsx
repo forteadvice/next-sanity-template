@@ -12,6 +12,7 @@ const FrontpagePreview = dynamicLoad(() => import('./FrontpagePreview'))
 
 export async function generateMetadata() {
   const { data } = await loadFrontpage()
+  if (!data?.seo) return
   return getMetaObject(data?.seo)
 }
 
