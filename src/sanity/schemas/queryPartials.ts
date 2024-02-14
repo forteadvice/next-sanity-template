@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import type { PortableTextBlock } from '@portabletext/types'
+import type { PortableTextMarkDefinition } from '@portabletext/types'
 
 /*
  * docReferencePathQuery should be used as the main and preferebly only path / url-resolver.
@@ -39,4 +39,4 @@ export const portableTextQuery = groq`
     },
   },
 `
-export type TPortableText = PortableTextBlock[]
+export type TPortableText = PortableTextMarkDefinition

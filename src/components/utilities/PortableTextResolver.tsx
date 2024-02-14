@@ -1,13 +1,14 @@
 import Link from 'next/link'
-import { PortableText, PortableTextComponents, PortableTextProps } from '@portabletext/react'
+import { PortableText, PortableTextReactComponents } from '@portabletext/react'
+import type { PortableTextMarkDefinition } from '@portabletext/types'
 
-export default function PortableTextResolver({ text }: { text: PortableTextProps['value'] }) {
+export default function PortableTextResolver({ text }: { text: PortableTextMarkDefinition }) {
   return <PortableText value={text} components={components} />
 }
 
 // Custom components config
 const baseStyle = 'mb-2 last:mb-0'
-const components: PortableTextComponents = {
+const components: Partial<PortableTextReactComponents> = {
   block: {
     h2: ({ children }) => <h2 className={`${baseStyle} text-4xl font-bold`}>{children}</h2>,
     h3: ({ children }) => <h3 className={`${baseStyle} text-3xl font-semibold`}>{children}</h3>,

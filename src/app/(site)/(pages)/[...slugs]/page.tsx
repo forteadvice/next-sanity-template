@@ -19,6 +19,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slugs } = params
   const { data } = await loadPage(slugs)
+  if (!data?.seo) return
   return getMetaObject(data?.seo)
 }
 
