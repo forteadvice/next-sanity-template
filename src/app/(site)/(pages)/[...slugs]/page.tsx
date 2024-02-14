@@ -1,34 +1,32 @@
 import { notFound } from 'next/navigation'
-import {type TPageParams, loadPageParams} from '@/sanity/queries/getPagesParams'
-import { loadPage } from '@/sanity/queries'
-import { getMetaObject } from '@/sanity/queries/getMetaObject'
-import Page from '@/components/views/page/Page'
-import { draftMode } from 'next/headers'
 import dynamic from 'next/dynamic'
 
+import isDraftMode from '@/lib/isDraftMode'
+import getMetaObject from '@/lib/getMetaObject'
+import { loadPage, loadPagesParams } from '@/sanity/loader/loadFunctions'
+import PageView from './PageView'
+const PagePreview = dynamic(() => import('./PagePreview'))
 
-const PagePreview = dynamic(() => import('@/components/views/page/PagePreview'))
+type Props = {
+  params: { slugs: string[] }
+}
 
 export async function generateStaticParams() {
-  const pages = await loadPageParams()
+  const { data: pages } = await loadPagesParams()
   return pages
 }
 
-export async function generateMetadata({ params }: {params: TPageParams}) {
-  const {data} = await loadPage(params)
-  return getMetaObject(data)
+export async function generateMetadata({ params }: Props) {
+  const { slugs } = params
+  const { data } = await loadPage(slugs)
+  if (!data?.seo) return
+  return getMetaObject(data?.seo)
 }
 
-export default async function RenderPage({ params }: {params: TPageParams}) {
-  const initial = await loadPage(params)
-
-  if (draftMode().isEnabled) {
-    return <PagePreview params={params} initial={initial} />
-  }
-
-  if (!initial || initial?.data === null) {
-    return notFound()
-  }
-
-  return <Page data={initial?.data} />
+export default async function Page({ params }: Props) {
+  const { slugs } = params
+  const initial = await loadPage(slugs)
+  if (!initial?.data) return notFound()
+  if (isDraftMode()) return <PagePreview initial={initial} slugs={slugs} />
+  return <PageView data={initial?.data} />
 }

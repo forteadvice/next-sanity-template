@@ -1,26 +1,29 @@
+import { groq } from 'next-sanity'
 
-import textSection from './textSection';
-import TextImage from './textImage';
-import mainImage from './mainImage';
+import textSection, { textSectionQuery, type TTextSection } from './textSection'
+import TextImage, { textImageQuery, type TTextImage } from './textImage'
 
-// Example of differentiated sections according to page type
-export const FrontPageSections = [
-    textSection, 
-    TextImage,
-]
+// Sections schema import
+const sections = [textSection, TextImage]
+export default sections
 
-// Example of differentiated sections according to page type
-export const PageSections = [
-    textSection, 
-    TextImage,
-    mainImage
-]
+// Prepped section-maps ready to use in docs
+export const allSections = mapSections(sections)
+export const frontPageSections = mapSections([textSection, TextImage])
+export const pageSections = mapSections([textSection, TextImage])
 
-// All sections
-const Sections = [
-    textSection, 
-    TextImage,
-    mainImage
-]
+// Helper function to map out doc-specific sections
+function mapSections(sectionArray: Array<{ name: string; type: string }>) {
+  return sectionArray.map((section) => ({
+    name: section.name,
+    type: section.name,
+  }))
+}
 
-export default Sections
+// Section type and query - can be used by all section-maps
+export type TSection = TTextSection | TTextImage
+
+export const sectionsQuery = groq`
+  _type == 'textSection' => { ${textSectionQuery} },
+  _type == 'textImage' => { ${textImageQuery} },
+`

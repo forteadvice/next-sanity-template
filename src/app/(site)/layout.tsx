@@ -1,34 +1,43 @@
 import '../../styles/globals.css'
 
+import dynamic from 'next/dynamic'
+
+import isDraftMode from '@/lib/isDraftMode'
 import Menu from '@/components/global/Menu'
 import Footer from '@/components/global/Footer'
-// import getPreview from '@/lib/getPreview'
-import dynamic from 'next/dynamic'
-import { draftMode } from 'next/headers'
-// import ExitPreview from '@/components/global/preview/ExitPreview'
-// import getSettingsData from '@/lib/fetch/getSettingsData'
-import { loadSettings } from '@/sanity/queries/settingsQuery'
-import { ReactNode, Suspense } from 'react'
+import { loadSettings } from '@/sanity/loader/loadFunctions'
 
-const VisualEditing = dynamic(() => import('@/sanity/loader/VisualEditing'))
-export default async function BaseLayout(props: { children?: ReactNode }) {
-  const { children } = props
-  // const preview = getPreview()
-  const {data: settings} = await loadSettings()
+const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditing'))
+const MenuPreview = dynamic(() => import('@/components/global/MenuPreview'))
+const FooterPreview = dynamic(() => import('@/components/global/FooterPreview'))
+
+type Props = {
+  children: React.ReactNode
+}
+
+export default async function BaseLayout({ children }: Props) {
+  const initial = await loadSettings()
+  const { data: settings } = initial
+  const { menu, footer } = settings
 
   return (
-      <>
-      <Suspense>
-        <Menu data={settings?.menu} />
-        </Suspense>
-        <Suspense>
-        {children}
-        </Suspense>
-        {/* {preview && <ExitPreview />} */}
-        <Suspense>
-        <Footer data={settings?.footer} />
-        </Suspense>
-        {draftMode().isEnabled && <VisualEditing />}
-      </>
+    <html lang='en'>
+      <body>
+        {isDraftMode() ? (
+          <>
+            <MenuPreview initial={initial} />
+            {children}
+            <FooterPreview initial={initial} />
+            <LiveVisualEditing />
+          </>
+        ) : (
+          <>
+            {menu && <Menu data={menu} />}
+            {children}
+            {footer && <Footer data={footer} />}
+          </>
+        )}
+      </body>
+    </html>
   )
 }
