@@ -12,3 +12,6 @@ export function toUrlSafe(string: string) {
 export function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
+
+export const pageDocTypes = ['frontpage', 'page']
+export const linkableDocTypes = pageDocTypes.map((type) => ({ type }))
