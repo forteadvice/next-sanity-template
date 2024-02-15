@@ -8,16 +8,17 @@ import { presentationTool } from 'sanity/presentation'
 
 import { apiVersion, dataset, projectId, studioUrl } from './src/lib/env'
 import { schemaTypes } from '@/sanity/schemas'
+import singletons from '@/sanity/schemas/singletons'
 import { structure } from '@/sanity/plugins/structure'
 import { locate } from '@/sanity/plugins/locate'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
-const singletonTypes = new Set(['frontpage', 'settings'])
+const singletonTypes: Set<string> = new Set(singletons.map((doc) => doc.name))
 
 export default defineConfig({
   basePath: studioUrl,
-  projectId: projectId || '',
-  dataset: dataset || '',
+  projectId: projectId,
+  dataset: dataset,
   schema: {
     types: schemaTypes,
     // Filter out singleton types from the global “New document” menu options
