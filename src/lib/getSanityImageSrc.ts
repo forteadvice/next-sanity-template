@@ -24,9 +24,9 @@ function generateRect(imageObj: ImageObj) {
   const { left, right, top, bottom } = imageObj.crop
   const { width, height } = imageObj.asset.metadata.dimensions
 
-  const l = left * width
-  const t = top * height
-  const w = width - l - right * width
-  const h = height - t - bottom * height
+  const l = Math.round(left * width)
+  const t = Math.round(top * height)
+  const w = Math.round(width - l - right * width)
+  const h = Math.round(height - t - bottom * height)
   return `&rect=${l},${t},${w},${h}`
 }

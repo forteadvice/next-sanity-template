@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
 
 export default function LiveVisualEditing() {
-  const [exitBtn, setExitBtn] = useState(false)
+  const [exitBtn, setExitBtn] = useState(true)
 
   const stegaClient = client.withConfig({
     stega: {
@@ -18,7 +18,7 @@ export default function LiveVisualEditing() {
   useLiveMode({ client: stegaClient })
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'preview' && window === parent) {
+    if (window === parent) {
       setExitBtn(true)
     }
   }, [])
@@ -28,13 +28,13 @@ export default function LiveVisualEditing() {
       {exitBtn && (
         <a
           href='/api/draft/disable'
-          className='bg-[#2c65c1] text-white rounded px-4 py-2 text-sm fixed bottom-2 right-2 opacity-90 hover:opacity-100 transition-opacity'
+          className='bg-[#2c65c1] !text-white rounded px-4 py-2 text-sm fixed bottom-2 right-2 opacity-90 hover:opacity-100 transition-opacity block z-50'
         >
           Exit preview
         </a>
       )}
 
-      <VisualEditing zIndex={9999} />
+      <VisualEditing />
     </>
   )
 }

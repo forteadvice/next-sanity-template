@@ -1,12 +1,12 @@
-// import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 
 import getMetaObject from '@/lib/getMetaObject'
 import { loadFrontpage } from '@/sanity/loader/loadFunctions'
 import FrontpageView from './FrontpageView'
-// import isDraftMode from '@/lib/isDraftMode'
+import isDraftMode from '@/lib/isDraftMode'
 
-// const FrontpagePreview = dynamic(() => import('./FrontpagePreview'))
+const FrontpagePreview = dynamic(() => import('./FrontpagePreview'))
 
 export async function generateMetadata() {
   const { data } = await loadFrontpage()
@@ -17,6 +17,6 @@ export async function generateMetadata() {
 export default async function Home() {
   const initial = await loadFrontpage()
   if (!initial?.data) return notFound()
-  // if (isDraftMode()) return <FrontpagePreview initial={initial} />
+  if (isDraftMode()) return <FrontpagePreview initial={initial} />
   return <FrontpageView data={initial.data} />
 }
