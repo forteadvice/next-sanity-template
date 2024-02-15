@@ -18,11 +18,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'linkInternal',
-      type: 'linkInternal',
-    }),
-
-    defineField({
       name: 'hero',
       type: 'hero',
     }),
