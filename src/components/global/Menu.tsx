@@ -15,7 +15,7 @@ export default function Menu({ data }: Props) {
 
       {data?.links?.map((link) => {
         return (
-          <Link key={link?._key} href={`/${link?.path}`}>
+          <Link key={link?._key} href={`/${link?.path}`} prefetch={false}>
             {link?.title}
           </Link>
         )
