@@ -1,4 +1,4 @@
-import dynamicLoad from 'next/dynamic'
+import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 
 import getMetaObject from '@/lib/getMetaObject'
@@ -6,7 +6,7 @@ import { loadFrontpage } from '@/sanity/loader/loadFunctions'
 import FrontpageView from './FrontpageView'
 import isDraftMode from '@/lib/isDraftMode'
 
-const FrontpagePreview = dynamicLoad(() => import('./FrontpagePreview'))
+const FrontpagePreview = dynamic(() => import('./FrontpagePreview'))
 
 export async function generateMetadata() {
   const { data } = await loadFrontpage()
