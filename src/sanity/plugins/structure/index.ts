@@ -1,10 +1,10 @@
 import type { StructureResolver } from 'sanity/structure'
-import { DocumentsIcon, HomeIcon, CogIcon, SchemaIcon } from '@sanity/icons'
+import { DocumentsIcon, HomeIcon, CogIcon } from '@sanity/icons'
 
 import { apiVersion } from '../../../lib/env'
-import getPagesInReferenceTree from './getPagesInReferenceTree'
+import pageReferenceTree from './pageReferenceTree'
 
-export const structure: StructureResolver = (S) =>
+export const structure: StructureResolver = (S, context) =>
   S.list()
     .title('Base')
     .items([
@@ -16,14 +16,7 @@ export const structure: StructureResolver = (S) =>
         .id('773862bb-7df1-43c4-9b0f-1a4d125acee6'),
 
       // Pages - reference tree
-      S.listItem()
-        .title('Pages')
-        .icon(SchemaIcon)
-        .child(async () =>
-          S.list()
-            .title('Pages')
-            .items(await getPagesInReferenceTree(S)),
-        ),
+      pageReferenceTree(S, context.documentStore),
 
       // Unsorted pages
       S.listItem()
