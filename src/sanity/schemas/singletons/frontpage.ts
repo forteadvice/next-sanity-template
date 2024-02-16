@@ -26,6 +26,7 @@ export default defineType({
       name: 'hero',
       type: 'hero',
       group: 'content',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({

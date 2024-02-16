@@ -20,8 +20,8 @@ export default defineType({
     defineField({
       name: 'title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
       group: 'settings',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -32,8 +32,8 @@ export default defineType({
         source: 'title',
         slugify: toUrlSafe,
       },
-      validation: (Rule) => Rule.required(),
       group: 'settings',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -71,6 +71,7 @@ export default defineType({
       name: 'hero',
       type: 'hero',
       group: 'content',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
