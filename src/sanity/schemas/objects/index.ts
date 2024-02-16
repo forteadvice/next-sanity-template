@@ -7,6 +7,7 @@ import menu from './menu'
 import footer from './footer'
 import pageNotFound from './pageNotFound'
 import flexibleUrl from './flexibleUrl'
+import ctaLink from './ctaLink'
 import seo from './seo'
 
 const objects = [
@@ -19,6 +20,7 @@ const objects = [
   footer,
   pageNotFound,
   flexibleUrl,
+  ctaLink,
   seo,
 ]
 export default objects
