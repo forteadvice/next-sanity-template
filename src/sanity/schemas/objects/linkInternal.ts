@@ -15,12 +15,14 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: 'reference',
       type: 'reference',
       to: linkableDocTypes,
+      validation: (Rule) => Rule.required(),
     }),
   ],
 })

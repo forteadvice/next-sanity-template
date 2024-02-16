@@ -1,6 +1,7 @@
 import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
 import { frontPageSections, sectionsQuery, type TSection } from '../sections'
+import { SearchIcon, CogIcon, DashboardIcon } from '@sanity/icons'
 
 import { seoQuery, type TSeo } from '../objects/seo'
 import { heroQuery, type THero } from '../objects/hero'
@@ -8,6 +9,10 @@ import { heroQuery, type THero } from '../objects/hero'
 export default defineType({
   name: 'frontpage',
   type: 'document',
+  groups: [
+    { name: 'content', icon: DashboardIcon },
+    { name: 'seo', title: 'SEO', icon: SearchIcon },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -20,18 +25,20 @@ export default defineType({
     defineField({
       name: 'hero',
       type: 'hero',
+      group: 'content',
     }),
 
     defineField({
       name: 'sections',
       type: 'array',
       of: frontPageSections,
+      group: 'content',
     }),
 
     defineField({
       name: 'seo',
       type: 'seo',
-      options: { collapsible: true, collapsed: true },
+      group: 'seo',
     }),
   ],
 })
