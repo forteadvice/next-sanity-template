@@ -42,16 +42,8 @@ function LinkInternal(props: any) {
 
 function LinkExternal(props: any) {
   return (
-    <a className='underline' target={'_blank'} href={resolveUrl(props?.value?.href)}>
+    <a className='underline' target={'_blank'} href={props?.value?.href}>
       {props?.children}
     </a>
   )
-}
-
-// Portable text helpers
-function resolveUrl(url: string) {
-  if (!url?.startsWith('http') && !url?.startsWith('tel') && !url?.startsWith('mailto')) {
-    return `https://${url}`
-  }
-  return url
 }
