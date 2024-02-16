@@ -41,7 +41,6 @@ export const locate: DocumentLocationResolver = (params, context) => {
     return docStream.pipe(
       map((doc) => {
         if (!doc || !doc?.path) return null
-        console.log(doc)
         return {
           locations: [
             {

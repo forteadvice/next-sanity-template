@@ -33,7 +33,13 @@ export default defineType({
         slugify: toUrlSafe,
       },
       group: 'settings',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((self) => {
+          if (!self || !self?.current) return 'Slug is required'
+          const slug = self.current
+          if (toUrlSafe(slug) != slug) return 'Slug is not URL-safe'
+          return true
+        }),
     }),
 
     defineField({
