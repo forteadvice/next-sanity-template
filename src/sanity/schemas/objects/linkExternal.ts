@@ -13,12 +13,13 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
-      name: 'url',
-      title: 'Url',
-      type: 'url',
+      name: 'href',
+      title: 'URL',
+      type: 'flexibleUrl',
     }),
   ],
 })
@@ -30,5 +31,5 @@ export const linkExternalQuery = groq`
 
 export type TLinkExternal = {
   title?: string
-  url?: string
+  href?: string
 }

@@ -6,6 +6,7 @@ import baseImage from './baseImage'
 import menu from './menu'
 import footer from './footer'
 import pageNotFound from './pageNotFound'
+import flexibleUrl from './flexibleUrl'
 import seo from './seo'
 
 const objects = [
@@ -17,6 +18,7 @@ const objects = [
   menu,
   footer,
   pageNotFound,
+  flexibleUrl,
   seo,
 ]
 export default objects

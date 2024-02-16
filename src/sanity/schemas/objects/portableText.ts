@@ -30,12 +30,11 @@ export default defineType({
             title: 'External link',
             icon: EarthGlobeIcon,
             fields: [
-              {
+              defineField({
                 name: 'href',
-                type: 'url',
                 title: 'URL',
-                validation: (Rule) => Rule.required(),
-              },
+                type: 'flexibleUrl',
+              }),
             ],
           }),
 
