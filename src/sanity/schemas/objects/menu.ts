@@ -1,7 +1,5 @@
-import { groq } from 'next-sanity'
-
 import { defineType, defineField, defineArrayMember } from 'sanity'
-import { linkInternalQuery, type TLinkInternal } from './linkInternal'
+import { type TLinkInternal } from './linkInternal'
 
 export default defineType({
   name: 'menu',
@@ -14,13 +12,6 @@ export default defineType({
     }),
   ],
 })
-
-export const menuQuery = groq`
-  links[] {
-    _key,
-    ${linkInternalQuery},
-  }
-`
 
 type TMenuItem = {
   _key?: string

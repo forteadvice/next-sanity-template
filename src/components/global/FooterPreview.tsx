@@ -1,10 +1,12 @@
 'use client'
 
+import dynamic from 'next/dynamic'
+
 import type { QueryResponseInitial } from '@sanity/react-loader'
 import type { TSettings } from '@/sanity/schemas/singletons/settings'
 
 import { useSettings } from '@/sanity/loader/useFunctions'
-import Footer from './Footer'
+const Footer = dynamic(() => import('./Footer/FooterLayout'))
 
 type Props = {
   initial: QueryResponseInitial<TSettings>

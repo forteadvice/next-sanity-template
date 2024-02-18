@@ -1,9 +1,10 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import type { QueryResponseInitial } from '@sanity/react-loader'
 import type { TPage } from '@/sanity/schemas/documents/page'
 import { usePage } from '@/sanity/loader/useFunctions'
-import PageView from './PageView'
+const PageView = dynamic(() => import('./PageView'))
 
 type Props = {
   initial: QueryResponseInitial<TPage>

@@ -1,11 +1,10 @@
-import { groq } from 'next-sanity'
 import { MenuIcon, SearchIcon, InsertBelowIcon, UnknownIcon } from '@sanity/icons'
 
 import { defineType, defineField } from 'sanity'
-import { seoQuery, type TSeo } from '../objects/seo'
-import { menuQuery, type TMenu } from '../objects/menu'
-import { footerQuery, type TFooter } from '../objects/footer'
-import { pageNotFoundQuery, TPageNotFound } from '../objects/pageNotFound'
+import { type TSeo } from '../objects/seo'
+import { type TMenu } from '../objects/menu'
+import { type TFooter } from '../objects/footer'
+import { type TPageNotFound } from '../objects/pageNotFound'
 
 export default defineType({
   name: 'settings',
@@ -53,15 +52,6 @@ export default defineType({
     }),
   ],
 })
-
-export const settingsQuery = groq`
-  *[_type == 'settings'][0] {
-    menu { ${menuQuery} },
-    footer { ${footerQuery} },
-    defaultSeo { ${seoQuery} },
-    pageNotFound { ${pageNotFoundQuery} },
-  }
-`
 
 export type TSettings = {
   menu?: TMenu

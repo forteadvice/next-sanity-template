@@ -1,11 +1,10 @@
-import { groq } from 'next-sanity'
 import { defineField, defineType } from 'sanity'
 import { SearchIcon, CogIcon, DashboardIcon } from '@sanity/icons'
 
 import { toUrlSafe } from '@/lib/helpers'
-import { pageSections, sectionsQuery, TSection } from '../sections'
-import { heroQuery, type THero } from '../objects/hero'
-import { seoQuery, TSeo } from '../objects/seo'
+import { pageSections, TSection } from '../sections'
+import { type THero } from '../objects/hero'
+import { TSeo } from '../objects/seo'
 
 export default defineType({
   name: 'page',
@@ -112,20 +111,6 @@ export default defineType({
     },
   },
 })
-
-export const pageQuery = groq`
-*[
-  _type == 'page' && slug.current == $slug &&
-  (!defined(parent._ref) || parent->slug.current == $parentSlug) &&
-  (!defined(parent->parent._ref) || parent->parent->slug.current == $grandParentSlug)
-  ][0] {
-    title,
-    "slug": slug.current,
-    hero { ${heroQuery} },
-    sections { ${sectionsQuery} },
-    seo { ${seoQuery} },
-  }
-`
 
 export type TPage = {
   title?: string

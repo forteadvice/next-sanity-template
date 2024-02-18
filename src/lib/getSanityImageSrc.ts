@@ -4,13 +4,16 @@ type ImageObj = {
   asset: ImageAsset
 } & Image
 
-type Props = {
-  imageObj: ImageObj
-  width: number | `${number}`
-  height: number | `${number}`
-}
-
-export default function getSanityImageSrc({ imageObj, width, height }: Props) {
+/** Sanity image URL-resolver
+ * @param imageObj Sanity image object: Assets are required, crop and hotspot are optional
+ * @param width Image render width
+ * @param height Image render height
+ */
+export default function getSanityImageSrc(
+  imageObj: ImageObj,
+  width: number | `${number}`,
+  height: number | `${number}`,
+) {
   const { hotspot, asset } = imageObj
   const cropParams = generateRect(imageObj)
   const hotspotParams = hotspot ? `&fp-x=${hotspot.x}&fp-y=${hotspot.y}` : ''
@@ -18,6 +21,9 @@ export default function getSanityImageSrc({ imageObj, width, height }: Props) {
   return src
 }
 
+/** Sanity Image CDN rect param resolver
+ * @returns empty string if !crop, or resolved &rect param
+ */
 function generateRect(imageObj: ImageObj) {
   if (!imageObj.crop) return ''
 

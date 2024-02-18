@@ -1,5 +1,3 @@
-import { groq } from 'next-sanity'
-
 import { defineField, defineType } from 'sanity'
 import { EarthGlobeIcon } from '@sanity/icons'
 
@@ -23,11 +21,6 @@ export default defineType({
     }),
   ],
 })
-
-export const linkExternalQuery = groq`
-  title,
-  url,
-`
 
 export type TLinkExternal = {
   title?: string

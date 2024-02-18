@@ -1,5 +1,5 @@
 import TextSection from './TextSection'
-import SanityImage from '../utilities/BaseImage'
+import BaseImage from '../utilities/BaseImage'
 
 import type { TTextImage } from '@/sanity/schemas/sections/textImage'
 
@@ -14,7 +14,7 @@ export default function TextImage({ data }: Props) {
   return (
     <article className={`text-image md:flex flex ${flexDirection}`}>
       <div>
-        <SanityImage
+        <BaseImage
           imageObj={image}
           width={500}
           height={500}

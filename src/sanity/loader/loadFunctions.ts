@@ -4,11 +4,11 @@
 
 import 'server-only'
 
-import { groq } from 'next-sanity'
 import { loadQuery } from './loadQuery'
-import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
-import { pageQuery, type TPage } from '../schemas/documents/page'
-import { settingsQuery, type TSettings } from '../schemas/singletons/settings'
+import { type TFrontPage } from '../schemas/singletons/frontpage'
+import { type TPage } from '../schemas/documents/page'
+import { type TSettings } from '../schemas/singletons/settings'
+import { frontpageQuery, pageQuery, settingsQuery, pagesParamsQuery } from '../queries'
 
 // Frontpage
 export async function loadFrontpage() {
@@ -17,18 +17,7 @@ export async function loadFrontpage() {
 
 // Pages params for generateStaticParams
 export async function loadPagesParams() {
-  const paramsQuery = groq`
-    *[_type == 'page' && defined(slug.current)][] {
-      'slugs': [slug.current],
-      defined(parent->slug.current) => {
-        'slugs': [parent->slug.current, slug.current]
-      },
-      defined(parent->parent->slug.current) => {
-        'slugs': [parent->parent->slug.current, parent->slug.current, slug.current]
-      },
-    }
-  `
-  return await loadQuery<string[]>(paramsQuery, {}, { next: { tags: ['pages'] } })
+  return await loadQuery<string[]>(pagesParamsQuery, {}, { next: { tags: ['pages'] } })
 }
 
 // Single page from slug tree

@@ -4,9 +4,11 @@
 
 import { useQuery } from './useQuery'
 import { type QueryResponseInitial } from '@sanity/react-loader'
-import { frontpageQuery, type TFrontPage } from '../schemas/singletons/frontpage'
-import { pageQuery, type TPage } from '../schemas/documents/page'
-import { settingsQuery, type TSettings } from '../schemas/singletons/settings'
+import { type TFrontPage } from '../schemas/singletons/frontpage'
+import { type TPage } from '../schemas/documents/page'
+import { type TSettings } from '../schemas/singletons/settings'
+
+import { frontpageQuery, pageQuery, settingsQuery } from '../queries'
 
 // Frontpage
 export function useFrontpage(initial: QueryResponseInitial<TFrontPage>) {

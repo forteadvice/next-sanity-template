@@ -4,7 +4,7 @@ import type { QueryResponseInitial } from '@sanity/react-loader'
 import type { TSettings } from '@/sanity/schemas/singletons/settings'
 
 import { useSettings } from '@/sanity/loader/useFunctions'
-import Menu from './Menu'
+import Menu from './Menu/MenuLayout'
 
 type Props = {
   initial: QueryResponseInitial<TSettings>

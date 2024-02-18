@@ -46,5 +46,3 @@ export default defineType({
     }),
   ],
 })
-
-// TODO: make query and type :)

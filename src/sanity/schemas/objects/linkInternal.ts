@@ -2,8 +2,7 @@ import { defineField, defineType } from 'sanity'
 import { LinkIcon } from '@sanity/icons'
 
 import { linkableDocTypes } from '@/lib/helpers'
-import { docReferencePathQuery, type TDocReferencePath } from '../queryPartials'
-import { groq } from 'next-sanity'
+import type { TDocReferencePath } from '@/sanity/queries'
 
 export default defineType({
   name: 'linkInternal',
@@ -27,12 +26,6 @@ export default defineType({
   ],
 })
 
-export const linkInternalQuery = groq`
-  title,
-  ...reference->{
-    ${docReferencePathQuery}
-  }
-`
 export type TLinkInternal = {
   title?: string
 } & TDocReferencePath

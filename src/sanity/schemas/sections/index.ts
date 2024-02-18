@@ -1,7 +1,5 @@
-import { groq } from 'next-sanity'
-
-import textSection, { textSectionQuery, type TTextSection } from './textSection'
-import TextImage, { textImageQuery, type TTextImage } from './textImage'
+import textSection, { type TTextSection } from './textSection'
+import TextImage, { type TTextImage } from './textImage'
 
 // Sections schema import
 const sections = [textSection, TextImage]
@@ -22,8 +20,3 @@ function mapSections(sectionArray: Array<{ name: string; type: string }>) {
 
 // Section type and query - can be used by all section-maps
 export type TSection = TTextSection | TTextImage
-
-export const sectionsQuery = groq`
-  _type == 'textSection' => { ${textSectionQuery} },
-  _type == 'textImage' => { ${textImageQuery} },
-`

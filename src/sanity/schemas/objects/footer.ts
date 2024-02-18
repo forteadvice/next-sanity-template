@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity'
 import { defineType, defineField } from 'sanity'
 
 export default defineType({
@@ -10,12 +9,6 @@ export default defineType({
     defineField({ name: 'email', type: 'string', validation: (Rule) => Rule.required() }),
   ],
 })
-
-export const footerQuery = groq`
-  address,
-  phone,
-  email,
-`
 
 export type TFooter = {
   address?: string

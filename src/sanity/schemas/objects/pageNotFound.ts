@@ -1,4 +1,3 @@
-import { groq } from 'next-sanity'
 import { defineType, defineField } from 'sanity'
 
 export default defineType({
@@ -9,11 +8,6 @@ export default defineType({
     defineField({ name: 'body', type: 'text', rows: 2, validation: (Rule) => Rule.required() }),
   ],
 })
-
-export const pageNotFoundQuery = groq`
-  title,
-  body,
-`
 
 export type TPageNotFound = {
   title?: string

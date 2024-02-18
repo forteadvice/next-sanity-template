@@ -1,7 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { BlockContentIcon } from '@sanity/icons'
-import { groq } from 'next-sanity'
-import { portableTextQuery, type TPortableText } from '../queryPartials'
+import type { TPortableText } from '@/sanity/queries'
 
 export default defineType({
   name: 'textSection',
@@ -27,12 +26,6 @@ export default defineType({
   },
 })
 
-export const textSectionQuery = groq`
-  _type,
-  _key,
-  title,
-  text[] { ${portableTextQuery} },
-`
 export type TTextSection = {
   _type: string
   _key: string

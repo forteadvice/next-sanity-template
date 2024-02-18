@@ -11,7 +11,7 @@ type Props = {
 
 export default function BaseImage({ imageObj, height, width, ...rest }: Props) {
   if (!imageObj?.alt) return
-  const src = getSanityImageSrc({ imageObj, width, height })
+  const src = getSanityImageSrc(imageObj, width, height)
   return (
     <Image
       src={src}

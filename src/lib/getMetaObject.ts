@@ -8,9 +8,7 @@ export default function getMetaObject(meta: TSeo): Metadata {
   const ogWidth = 1200
   const ogHeight = 630
 
-  const imageSrc = image
-    ? getSanityImageSrc({ imageObj: image, width: ogWidth, height: ogHeight })
-    : undefined
+  const imageSrc = image ? getSanityImageSrc(image, ogWidth, ogHeight) : undefined
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_PRODUCTION_URL || 'http://localhost:3000'),

@@ -1,10 +1,8 @@
 import type { TFooter } from '@/sanity/schemas/objects/footer'
 
-type Props = {
-  data: TFooter
-}
+type Props = { data: TFooter }
 
-export default function Footer({ data }: Props) {
+export default function FooterLayout({ data }: Props) {
   return (
     <footer>
       <address>{data?.address}</address>

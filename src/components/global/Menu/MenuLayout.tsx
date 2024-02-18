@@ -6,7 +6,7 @@ type Props = {
   data: TMenu
 }
 
-export default function Menu({ data }: Props) {
+export default function MenuLayout({ data }: Props) {
   return (
     <nav className='flex gap-4'>
       <Link href={'/'} prefetch={false}>
