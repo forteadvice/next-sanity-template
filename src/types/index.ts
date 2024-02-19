@@ -1,9 +1,9 @@
 // import type { Image, ImageAsset } from 'sanity'
 // import type { PortableTextMarkDefinition } from '@portabletext/types'
 
-/*
- * Objects / partials
- */
+// /*
+//  * Objects / partials
+//  */
 
 // export type TBaseImage = {
 //   alt?: string
