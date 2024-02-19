@@ -4,7 +4,8 @@ type ImageObj = {
   asset: ImageAsset
 } & Image
 
-/** Sanity image URL-resolver
+/**
+ * Sanity image URL-resolver
  * @param imageObj Sanity image object: Assets are required, crop and hotspot are optional
  * @param width Image render width
  * @param height Image render height
@@ -21,8 +22,9 @@ export default function getSanityImageSrc(
   return src
 }
 
-/** Sanity Image CDN rect param resolver
- * @returns empty string if !crop, or resolved &rect param
+/**
+ * Sanity Image CDN rect param resolver
+ * @returns empty string if !crop, or the resolved &rect param
  */
 function generateRect(imageObj: ImageObj) {
   if (!imageObj.crop) return ''

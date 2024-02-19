@@ -1,13 +1,18 @@
 import { groq } from 'next-sanity'
 import type { PortableTextMarkDefinition } from '@portabletext/types'
+import type { Image, ImageAsset } from 'sanity'
 
 /*
- * Helper-queries should not be wrapped in a prenamed object
+ ! Helper-queries should not be wrapped in a prenamed object
  *
  * PARTIALS
  * Groqs for minor reusable fields, such as resolving image-assets and page-paths on internal links
  */
 
+/**
+ * docReferencePathQuery
+ * @description Resolves path for every possible doc-types
+ */
 export const docReferencePathQuery = groq`
   _type == "frontpage" => {
     'path': "/"
@@ -27,6 +32,10 @@ export type TDocReferencePath = {
   path: string
 }
 
+/**
+ * portableTextQuery
+ * @description Resolves all types of portable texts. Use type TDocReferencePath
+ */
 const portableTextQuery = groq`
   ...,
   markDefs[] {
@@ -41,6 +50,10 @@ const portableTextQuery = groq`
 `
 export type TPortableText = PortableTextMarkDefinition
 
+/**
+ * linkInternalQuery
+ * @description Resolves * internal links using the docReferencePath
+ */
 const linkInternalQuery = groq`
   title,
   ...reference->{
@@ -48,6 +61,10 @@ const linkInternalQuery = groq`
   }
 `
 
+/**
+ * baseImageQuery
+ * @description Basic sanity image with hotspot options, cropping and alt-text
+ */
 const baseImageQuery = groq`
   hotspot,
   crop,
@@ -63,7 +80,11 @@ const baseImageQuery = groq`
 const seoQuery = groq`
   title,
   description,
-  image { ${baseImageQuery} }
+  image {
+    hotspot,
+    crop,
+    asset->,
+  }
 `
 
 const heroQuery = groq`
@@ -89,9 +110,13 @@ const sectionsQuery = groq`
 
 /*
  * QUERIES
- * The actual queries
+ * Finalized groqs to query data
  */
 
+/**
+ * Frontpage Query
+ * @description Queries Frontpage data - no params needed
+ */
 export const frontpageQuery = groq`
   *[_type == "frontpage"][0] {
     hero { ${heroQuery} },
@@ -100,6 +125,10 @@ export const frontpageQuery = groq`
   }
 `
 
+/**
+ * Page Query
+ * @description params {slug: string, parentSlug: string, grandParentSlug: string}.
+ */
 export const pageQuery = groq`
   *[
     _type == 'page' && slug.current == $slug &&(!defined(parent._ref) || 
@@ -115,6 +144,10 @@ export const pageQuery = groq`
   }
 `
 
+/**
+ * Pages Params Query
+ * @description Queries array of slugs in page-tree [page, parent? and grandParent?]. - no params needed
+ */
 export const pagesParamsQuery = groq`
   *[_type == 'page' && defined(slug.current)][] {
     'slugs': [slug.current],
@@ -127,6 +160,10 @@ export const pagesParamsQuery = groq`
   }
 `
 
+/**
+ * Settings Query
+ * @description Queries settings data - no params needed
+ */
 export const settingsQuery = groq`
   *[_type == "settings"][0]{
     menu {
