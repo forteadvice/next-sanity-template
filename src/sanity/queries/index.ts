@@ -1,6 +1,5 @@
 import { groq } from 'next-sanity'
 import type { PortableTextMarkDefinition } from '@portabletext/types'
-import type { Image, ImageAsset } from 'sanity'
 
 /*
  ! Helper-queries should not be wrapped in a prenamed object

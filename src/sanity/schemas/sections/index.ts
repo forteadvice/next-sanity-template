@@ -1,6 +1,9 @@
 import textSection, { type TTextSection } from './textSection'
 import TextImage, { type TTextImage } from './textImage'
 
+// Section type and query - can be used by all section-maps
+export type TSection = TTextSection | TTextImage
+
 // Sections schema import
 const sections = [textSection, TextImage]
 export default sections
@@ -17,6 +20,3 @@ function mapSections(sectionArray: Array<{ name: string; type: string }>) {
     type: section.name,
   }))
 }
-
-// Section type and query - can be used by all section-maps
-export type TSection = TTextSection | TTextImage
