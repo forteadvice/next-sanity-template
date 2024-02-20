@@ -11,7 +11,7 @@
   "dependencies": {
     "@portabletext/react": "^3.0.11",
     "@portabletext/types": "^2.0.8",
-    "@sanity/client": "^6.13.3",
+    "@sanity/client": "^6.14.0",
     "@sanity/dashboard": "^3.1.6",
     "@sanity/icons": "^2.10.2",
     "@sanity/preview-url-secret": "^1.6.3",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
-    "@types/react": "^18.2.56",
+    "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "10.4.17",
     "eslint": "8.56.0",
