@@ -11,12 +11,13 @@ export const projectId = assertValue(
 )
 
 export const studioUrl = '/studio'
-export const useCdn = false // Must be false to get fresh data to revalidate
+export const useCdn = false // Must be false to get fresh data to api/revalidate
 
-/*
+/**
  * assertValue helper function
+ * @param v The env var refrerence.
+ * @param errorMessage The trown error string.
  */
-
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)
