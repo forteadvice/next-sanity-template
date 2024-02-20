@@ -8,9 +8,9 @@ import { token } from '@/sanity/token'
 
 const isDraftMode = isDraftModeFunction()
 
-// Extend client as serverClient with token and stega
+// Extend client as serverClient with token and stega if draftmode
 const serverClient = client.withConfig({
-  token, // TODO, try only set token if draftMode().isEnabled
+  token: isDraftMode ? token : undefined,
   stega: {
     enabled: isDraftMode,
   },

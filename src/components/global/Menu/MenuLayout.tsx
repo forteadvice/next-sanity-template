@@ -15,8 +15,8 @@ export default function MenuLayout({ data }: Props) {
 
       {data?.links?.map((link) => {
         return (
-          <Link key={link?._key} href={`/${link?.path}`} prefetch={false}>
-            {link?.title}
+          <Link key={link._key} href={link.path} prefetch={false}>
+            {link.title}
           </Link>
         )
       })}
