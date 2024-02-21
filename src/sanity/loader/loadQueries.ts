@@ -1,7 +1,3 @@
-/*
- * This file contains all loadFunctions / sever-side fetchers for Sanity
- */
-
 import 'server-only'
 
 import { loadQuery } from './loadQuery'

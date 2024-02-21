@@ -9,19 +9,20 @@ type Props = {
 
 export default function TextImage({ data }: Props) {
   const { textSection, image, layout } = data
-  const flexDirection = layout == 'imageText' ? 'md:flex' : 'md:flex-row-reverse'
 
   return (
-    <article className={`text-image md:flex flex ${flexDirection}`}>
-      <div>
+    <article className={`text-image md:grid grid-cols-2`}>
+      <div className={`${layout == 'textImage' ? 'order-2' : ''}`}>
         <BaseImage
           imageObj={image}
           width={500}
-          height={500}
+          aspectRatio={1}
           sizes={'(max-width: 500x) 100vw, 500px'}
         />
       </div>
-      <div>{textSection && <TextSection data={textSection} mt={false} mb={false} />}</div>
+      <div className='flex-1 w-full'>
+        {textSection && <TextSection data={textSection} mt={false} mb={false} />}
+      </div>
     </article>
   )
 }

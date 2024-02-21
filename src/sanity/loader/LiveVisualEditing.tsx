@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { client } from '@/sanity/client'
 
 export default function LiveVisualEditing() {
-  const [exitBtn, setExitBtn] = useState(true)
+  const [exitBtn, setExitBtn] = useState(false)
 
   const stegaClient = client.withConfig({
     stega: {

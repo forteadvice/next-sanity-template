@@ -2,7 +2,7 @@
  * This file contains all useFunctions / preview-fetchers for Sanity
  */
 
-import { useQuery } from './useQuery'
+import { useQuery } from '@sanity/react-loader'
 import { type QueryResponseInitial } from '@sanity/react-loader'
 import { type TFrontPage } from '../schemas/singletons/frontpage'
 import { type TPage } from '../schemas/documents/page'

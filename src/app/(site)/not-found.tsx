@@ -1,4 +1,4 @@
-import { loadSettings } from '@/sanity/loader/loadFunctions'
+import { loadSettings } from '@/sanity/loader/loadQueries'
 
 export default async function NotFound() {
   const { data: settings } = await loadSettings()

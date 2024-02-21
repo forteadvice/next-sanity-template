@@ -11,9 +11,10 @@ export default function Hero({ data }: Props) {
       {data?.image && (
         <BaseImage
           imageObj={data?.image}
-          height={700}
           width={1400}
-          sizes={'(max-width: 1400x) 100vw, 1400px'}
+          aspectRatio={3 / 4}
+          aspectRatioDesktop={16 / 9}
+          sizes={'(max-width: 1400px) 100vw, 1400px'}
         />
       )}
     </section>

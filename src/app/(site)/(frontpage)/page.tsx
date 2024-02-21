@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
 
-import { loadFrontpage } from '@/sanity/loader/loadFunctions'
+import { loadFrontpage } from '@/sanity/loader/loadQueries'
 import getMetaObject from '@/lib/getMetaObject'
 import FrontpageView from './FrontpageView'
 import isDraftMode from '@/lib/isDraftMode'

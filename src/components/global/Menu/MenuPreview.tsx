@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useSettings } from '@/sanity/loader/useFunctions'
+import { useSettings } from '@/sanity/loader/useQueries'
 const MenuLayout = dynamic(() => import('./MenuLayout'))
 
 type Props = {

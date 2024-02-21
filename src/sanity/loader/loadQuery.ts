@@ -1,30 +1,34 @@
 import 'server-only'
 
-import * as queryStore from '@sanity/react-loader'
+import { setServerClient, loadQuery as LOAD_QUERY } from '@sanity/react-loader'
 
-import isDraftModeFunction from '@/lib/isDraftMode'
 import { client } from '@/sanity/client'
 import { token } from '@/sanity/token'
+import isDraftModeFn from '@/lib/isDraftMode'
+const isDraftMode = isDraftModeFn()
 
-const isDraftMode = isDraftModeFunction()
-
-// Extend client as serverClient with token and stega if draftmode
+/**
+ * serverClient
+ * @description Extends client with token and stega - if draft mode
+ */
 const serverClient = client.withConfig({
   token: isDraftMode ? token : undefined,
   stega: {
     enabled: isDraftMode,
   },
 })
+setServerClient(serverClient)
 
-queryStore.setServerClient(serverClient)
-
+/**
+ * Customized loadQuery
+ * @description Overwrites the react-loader loadQuery,
+ * in order to enable draft links and NextJS revalidation
+ */
 export const loadQuery = ((query, params = {}, options = {}) => {
-  // Set perspective depending on draftMode
   const { perspective = isDraftMode ? 'previewDrafts' : 'published' } = options
-  // Set perspective depending on draftMode
   const revalidate: NextFetchRequestConfig['revalidate'] = isDraftMode ? 0 : false
 
-  return queryStore.loadQuery(query, params, {
+  return LOAD_QUERY(query, params, {
     ...options,
     perspective,
     next: {
@@ -32,4 +36,4 @@ export const loadQuery = ((query, params = {}, options = {}) => {
       ...(options.next || {}),
     },
   })
-}) satisfies typeof queryStore.loadQuery
+}) satisfies typeof LOAD_QUERY

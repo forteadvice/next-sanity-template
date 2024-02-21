@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import type { QueryResponseInitial } from '@sanity/react-loader'
 import type { TFrontPage } from '@/sanity/schemas/singletons/frontpage'
 
-import { useFrontpage } from '@/sanity/loader/useFunctions'
+import { useFrontpage } from '@/sanity/loader/useQueries'
 
 const FrontpageView = dynamic(() => import('./FrontpageView'))
 

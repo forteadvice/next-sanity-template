@@ -10,11 +10,7 @@ type ImageObj = {
  * @param width Image render width
  * @param height Image render height
  */
-export default function getSanityImageSrc(
-  imageObj: ImageObj,
-  width: number | `${number}`,
-  height: number | `${number}`,
-) {
+export default function getSanityImageSrc(imageObj: ImageObj, width: number, height: number) {
   const { hotspot, asset } = imageObj
   const cropParams = generateRect(imageObj)
   const hotspotParams = hotspot ? `&fp-x=${hotspot.x}&fp-y=${hotspot.y}` : ''

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import isDraftMode from '@/lib/isDraftMode'
 
-import { loadSettings } from '@/sanity/loader/loadFunctions'
+import { loadSettings } from '@/sanity/loader/loadQueries'
 import MenuLayout from './MenuLayout'
 const MenuPreview = dynamic(() => import('./MenuPreview'))
 

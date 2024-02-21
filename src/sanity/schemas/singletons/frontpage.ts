@@ -44,7 +44,6 @@ export default defineType({
 })
 
 export type TFrontPage = {
-  title?: string
   hero?: THero
   sections?: TSection[]
   seo?: TSeo

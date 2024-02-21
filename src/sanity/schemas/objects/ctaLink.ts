@@ -1,4 +1,6 @@
 import { defineType, defineField } from 'sanity'
+import type { TLinkInternal } from './linkInternal'
+import type { TLinkExternal } from './linkExternal'
 
 export default defineType({
   name: 'ctaLink',
@@ -46,3 +48,9 @@ export default defineType({
     }),
   ],
 })
+
+export type TCtaLink = {
+  type?: 'internal' | 'external'
+  linkInternal?: TLinkInternal
+  linkExternal?: TLinkExternal
+}

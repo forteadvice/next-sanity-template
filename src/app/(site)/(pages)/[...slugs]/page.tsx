@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 import isDraftMode from '@/lib/isDraftMode'
 import getMetaObject from '@/lib/getMetaObject'
-import { loadPage, loadPagesParams } from '@/sanity/loader/loadFunctions'
+import { loadPage, loadPagesParams } from '@/sanity/loader/loadQueries'
 import PageView from './PageView'
 const PagePreview = dynamic(() => import('./PagePreview'))
 

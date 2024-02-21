@@ -15,11 +15,11 @@
 }
 
 /* SAMPLE STYLING - rm when cloned */
-*:not([data-ui='NextStudioLayout'] *) {
-  @apply text-[#202020];
+* {
+  @apply text-[#252525];
 }
 body {
-  @apply bg-[#fcfcfc];
+  @apply bg-[#efeee8];
 }
 main {
   @apply p-4 max-w-[1400px] m-auto;
