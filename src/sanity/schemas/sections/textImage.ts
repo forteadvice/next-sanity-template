@@ -21,6 +21,7 @@ export default defineType({
     defineField({
       name: 'image',
       type: 'baseImage',
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -41,12 +42,12 @@ export default defineType({
 
   preview: {
     select: {
-      titleObj: 'textSection',
+      textSection: 'textSection',
       image: 'image',
     },
 
-    prepare({ titleObj, image }) {
-      const title = titleObj?.text[0]?.children[0]?.text || 'Text image'
+    prepare({ textSection, image }) {
+      const title = textSection?.title
       return {
         title: title,
         subtitle: 'Text Image',

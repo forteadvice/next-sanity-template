@@ -34,6 +34,7 @@ export default defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'flexibleUrl',
+                validation: (Rule) => Rule.required(),
               }),
             ],
           }),
@@ -47,7 +48,6 @@ export default defineType({
               {
                 name: 'reference',
                 type: 'reference',
-                title: 'Reference',
                 to: linkableDocTypes,
                 validation: (Rule) => Rule.required(),
               },

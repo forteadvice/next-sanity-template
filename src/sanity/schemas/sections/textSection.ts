@@ -10,6 +10,7 @@ export default defineType({
   fields: [
     defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'text', type: 'portableText', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'ctaLink', type: 'flexibleLink', title: 'CTA Link' }),
   ],
 
   preview: {

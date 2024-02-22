@@ -41,22 +41,20 @@ const portableTextQuery = groq`
     ...,
     _type == 'linkInternal' => {
       ...,
-      ...reference->{
-        ${docReferencePathQuery}
-      }
+      ...reference->{ ${docReferencePathQuery} }
     },
   },
 `
 export type TPortableText = PortableTextMarkDefinition
 
 /**
- * linkInternalQuery
- * @description Resolves * internal links using the docReferencePath
+ * Flexible link
  */
-const linkInternalQuery = groq`
+const flexibleLinkQuery = groq`
   title,
-  ...reference->{
-    ${docReferencePathQuery}
+  link {
+    internal { ${docReferencePathQuery} },
+    external,
   }
 `
 
@@ -97,12 +95,14 @@ const sectionsQuery = groq`
 
   _type == "textSection" => {
     text[] { ${portableTextQuery} },
+    ctaLink { ${flexibleLinkQuery} },
   },
 
   _type == "textImage" => {
     image { ${baseImageQuery} },
     textSection {
-      text[] { ${portableTextQuery} }
+      text[] { ${portableTextQuery} },
+      ctaLink { ${flexibleLinkQuery} },
     }
   },
 `
@@ -168,7 +168,7 @@ export const settingsQuery = groq`
     menu {
       links[] {
         _key,
-        ${linkInternalQuery}
+        ${flexibleLinkQuery}
       }
     },
     footer,

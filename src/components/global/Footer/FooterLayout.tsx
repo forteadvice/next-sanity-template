@@ -1,4 +1,4 @@
-import type { TFooter } from '@/sanity/schemas/objects/footer'
+import type { TFooter } from '@/sanity/schemas/singletons/settings'
 
 type Props = { data: TFooter }
 

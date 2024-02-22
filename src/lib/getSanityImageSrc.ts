@@ -1,7 +1,7 @@
 import type { Image, ImageAsset } from 'sanity'
 
 type ImageObj = {
-  asset: ImageAsset
+  asset?: ImageAsset
 } & Image
 
 /**
@@ -14,7 +14,7 @@ export default function getSanityImageSrc(imageObj: ImageObj, width: number, hei
   const { hotspot, asset } = imageObj
   const cropParams = generateRect(imageObj)
   const hotspotParams = hotspot ? `&fp-x=${hotspot.x}&fp-y=${hotspot.y}` : ''
-  const src = `${asset.url}?w=${width}&h=${height}&fit=crop&dpr=2&q=100${cropParams}${hotspotParams}`
+  const src = `${asset?.url}?w=${width}&h=${height}&fit=crop&dpr=2&q=100${cropParams}${hotspotParams}`
   return src
 }
 
@@ -23,7 +23,7 @@ export default function getSanityImageSrc(imageObj: ImageObj, width: number, hei
  * @returns empty string if !crop, or the resolved &rect param
  */
 function generateRect(imageObj: ImageObj) {
-  if (!imageObj.crop) return ''
+  if (!imageObj.crop || !imageObj.asset) return ''
 
   const { left, right, top, bottom } = imageObj.crop
   const { width, height } = imageObj.asset.metadata.dimensions

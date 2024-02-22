@@ -9,12 +9,6 @@ export default defineType({
   type: 'image',
   icon: ImageIcon,
   options: { hotspot: true },
-  validation: (Rule) =>
-    Rule.custom((self) => {
-      if (!self?.asset) return 'Please insert an image'
-      return true
-    }),
-
   fields: [
     defineField({
       name: 'alt',
@@ -23,14 +17,16 @@ export default defineType({
       title: 'Alternative text',
 
       validation: (Rule) =>
-        Rule.custom((self) => {
+        Rule.custom((self, context) => {
+          const { parent }: any = context
+          if (self && !parent?.asset) return 'Please select an image or delete the alt-text'
           if (!self) return 'Please enter Alternative text'
           return true
-        }).warning(),
+        }),
 
       hidden: ({ parent }) => {
-        if (!parent?.asset) return true
-        return false
+        if (parent?.alt || parent?.asset) return false
+        return true
       },
     }),
   ],
@@ -38,5 +34,5 @@ export default defineType({
 
 export type TBaseImage = {
   alt?: string
-  asset: ImageAsset
+  asset?: ImageAsset
 } & Image

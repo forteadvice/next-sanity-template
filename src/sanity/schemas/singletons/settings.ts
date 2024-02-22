@@ -1,10 +1,8 @@
 import { MenuIcon, SearchIcon, InsertBelowIcon, UnknownIcon } from '@sanity/icons'
 
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 import { type TSeo } from '../objects/seo'
-import { type TMenu } from '../objects/menu'
-import { type TFooter } from '../objects/footer'
-import { type TPageNotFound } from '../objects/pageNotFound'
+import type { TFlexibleLink } from '../objects/flexibleLink'
 
 export default defineType({
   name: 'settings',
@@ -25,18 +23,33 @@ export default defineType({
       hidden: true,
     }),
 
+    // Menu
     defineField({
       name: 'menu',
-      type: 'menu',
+      type: 'object',
       group: 'menu',
+      fields: [
+        defineField({
+          name: 'menuItems',
+          type: 'array',
+          of: [defineArrayMember({ title: 'Item', type: 'flexibleLink' })],
+        }),
+      ],
     }),
 
+    // Footer
     defineField({
       name: 'footer',
-      type: 'footer',
+      type: 'object',
       group: 'footer',
+      fields: [
+        defineField({ name: 'address', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'phone', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'email', type: 'string', validation: (Rule) => Rule.required() }),
+      ],
     }),
 
+    // Default SEO
     defineField({
       name: 'defaultSeo',
       title: 'Default SEO',
@@ -44,14 +57,38 @@ export default defineType({
       group: 'seo',
     }),
 
+    // 404 Page
     defineField({
       name: 'pageNotFound',
       title: '404 page',
-      type: 'pageNotFound',
+      type: 'object',
       group: 'pageNotFound',
+      fields: [
+        defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
+        defineField({ name: 'body', type: 'text', rows: 2, validation: (Rule) => Rule.required() }),
+      ],
     }),
   ],
 })
+
+export type TMenuItem = {
+  _key?: string
+} & TFlexibleLink
+
+export type TMenu = {
+  menuItems: TMenuItem[]
+}
+
+export type TFooter = {
+  address?: string
+  phone?: string
+  email?: string
+}
+
+export type TPageNotFound = {
+  title?: string
+  body?: string
+}
 
 export type TSettings = {
   menu?: TMenu

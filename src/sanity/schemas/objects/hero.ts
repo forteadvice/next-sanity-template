@@ -6,9 +6,23 @@ export default defineType({
   title: 'Hero',
   type: 'object',
   fields: [
-    defineField({ name: 'title', type: 'string', validation: (Rule) => Rule.required() }),
-    defineField({ name: 'tagline', type: 'string', validation: (Rule) => Rule.required() }),
-    defineField({ name: 'image', type: 'baseImage' }),
+    defineField({
+      name: 'title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'tagline',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'image',
+      type: 'baseImage',
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 
   preview: {
