@@ -55,7 +55,7 @@ const flexibleLinkQuery = groq`
   link {
     internal { ${docReferencePathQuery} },
     external,
-  }
+  } 
 `
 
 /**

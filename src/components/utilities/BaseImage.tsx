@@ -1,6 +1,5 @@
-import { getImageProps } from 'next/image'
+import Image, { getImageProps } from 'next/image'
 import getSanityImageSrc from '@/lib/getSanityImageSrc'
-import type { PlaceholderValue } from 'next/dist/shared/lib/get-img-props'
 import type { TBaseImage } from '@/sanity/schemas/objects/baseImage'
 
 type Props = {
@@ -12,14 +11,16 @@ type Props = {
   priority?: boolean
   className?: string
 }
+
 /**
  * @example
  * <BaseImage
  *   imageObj={data.image}
  *   width={1400}
- *   aspectRatio={3 / 4}
+ *   aspectRatio={3 / 4} // "as-is" will render original image size
  *   aspectRatioDesktop={16 / 9}
  *   sizes={'(max-width: 1400px) 100vw, 1400px'}
+ *   priority={true}
  * />
  */
 export default function BaseImage({
@@ -31,31 +32,25 @@ export default function BaseImage({
   priority = false,
   className,
 }: Props) {
-  // No alt or image
   if (!imageObj?.asset || !imageObj?.alt) return
-
-  // Get common props, used by all sizes
-  const common = { width, sizes, quality: 70, alt: imageObj.alt }
-
-  // Get init image props (default image)
+  // Get common props, used by all Image and
+  const common = { width, sizes, alt: imageObj.alt }
+  // Get init image height (default image)
   const r = aspectRatio === 'as-is' ? imageObj.asset.metadata.dimensions.aspectRatio : aspectRatio
   const height = Math.round(width / r)
-  const {
-    props: { ...initProps },
-  } = getImageProps({
-    ...common,
-    height: height,
-    src: getSanityImageSrc(imageObj, width, height),
-    placeholder: 'blur' as PlaceholderValue,
-    blurDataURL: imageObj.asset.metadata.lqip,
-    priority,
-  })
 
-  // Return picture with desktop source if set
   return (
     <picture>
-      {aspectRatioDesktop && <Source media='(min-width: 768px)' ratio={aspectRatioDesktop} />}
-      <img {...initProps} className={`w-full h-auto ${className ?? ''}`} />
+      {aspectRatioDesktop && <Source media='(min-width: 640px)' ratio={aspectRatioDesktop} />}
+      <Image
+        className={className + 'sm:bg-black'}
+        src={getSanityImageSrc(imageObj, width, height)}
+        height={height}
+        placeholder='blur'
+        blurDataURL={imageObj.asset.metadata.lqip}
+        priority={priority}
+        {...common}
+      />
     </picture>
   )
 
@@ -67,7 +62,6 @@ export default function BaseImage({
     const height = Math.round(width / ratio)
     const src = getSanityImageSrc(imageObj, width, height)
     const props = getImageProps({ ...common, height, src }).props
-
     return <source media={media} width={props.width} height={props.height} srcSet={props.srcSet} />
   }
 }

@@ -1,12 +1,5 @@
 # Next-Sanity Base Template
 
-This template preconfigures:
-
-- An embedded Sanity Studio with basic documents and objects
-- A desk-strucure enabling for singletons and a preview-pane
-- A React-component for LivePreviews
-- An API for handling path revalidation based on document types
-
 ## Contents
 
 - [Setup Guide](#setup-guide)
@@ -23,7 +16,7 @@ This template preconfigures:
 
 ### 1. Deploy Next-Sanity template to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION,NEXT_PUBLIC_PREVIEW_TOKEN,SANITY_REVALIDATE_SECRET&envDescription=Read%20about%20the%20variable%20requirments%20here%3A&envLink=https%3A%2F%2Fgithub.com%2Fmjthias%2Fnext-sanity-template%232-configure-missing-environment-variables-vercel&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fforteadvice%2Fnext-sanity-template&env=SANITY_REVALIDATE_SECRET&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
 
 <br>
 
@@ -102,7 +95,7 @@ pnpm run dev
 
 <br>
 
-## Configure Vercel deploy-hook
+## Configure Vercel deploy-hook in Dashboard
 
 Go to /studio, click dashboard and create a new connection.
 
@@ -124,38 +117,6 @@ Read docs [here](https://www.sanity.io/plugins/vercel-dashboard-widget)
 
 <br>
 
-## Configure Vercel deploy-hook
-
-If needed, Vercel deploy-hook can be set up as following:
-
-| Key         | Value                      |
-| ----------- | -------------------------- |
-| Name        | _Some name_                |
-| URL         | _Deploy-hook URL_          |
-| Dataset     | production                 |
-| Trigger on  | Create, Update, Delete     |
-| Filter      | _\_type == 'affectedType'_ |
-| HTTP method | POST                       |
-| API version | Newest                     |
-
-<br>
-
----
-
-<br>
-
-## Built in components & functionality
-
-### Preview
-
-TODO...
-
-### Revalidate
-
-TODO...
-
-<br>
-
 ---
 
 <br>
@@ -170,11 +131,3 @@ TODO...
 <br>
 
 ---
-
-<br>
-
-## TODOS
-
-- [Dynamic image heights - unstable_getImgProps()](https://github.com/vercel/next.js/discussions/19880)
-
-- Revalidate is currently not working - for anyone. 14.0.4 might fix the issue
