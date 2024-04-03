@@ -21,7 +21,7 @@ export default function MenuLayout({ data }: Props) {
 
 // Single menu item
 function MenuItem({ title, link }: TMenuItem) {
-  if (link?.internal) {
+  if (link?.internal?.path) {
     return (
       <Link href={link.internal.path} prefetch={false}>
         {title}
