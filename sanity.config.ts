@@ -2,18 +2,16 @@ import { defineConfig } from 'sanity'
 import { visionTool } from '@sanity/vision'
 import { structureTool } from 'sanity/structure'
 import { media } from 'sanity-plugin-media'
-import { dashboardTool } from '@sanity/dashboard'
-import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { presentationTool } from 'sanity/presentation'
 
-import { apiVersion, dataset, projectId, studioUrl } from './src/lib/env'
+import { apiVersion, dataset, projectId, studioUrl } from './src/sanity/lib/sanity.env'
 import { schemaTypes } from '@/sanity/schemas'
-import singletons from '@/sanity/schemas/singletons'
+import { singletons } from '@/sanity/schemas/documents'
 import { structure } from '@/sanity/plugins/structure'
 import { locate } from '@/sanity/plugins/locate'
 
 const singletonActions = new Set(['publish', 'discardChanges', 'restore'])
-const singletonTypes: Set<string> = new Set(singletons.map((doc) => doc.name))
+const singletonTypes: Set<string> = new Set(singletons)
 
 export default defineConfig({
   basePath: studioUrl,
@@ -44,9 +42,6 @@ export default defineConfig({
           enable: '/api/draft',
         },
       },
-    }),
-    dashboardTool({
-      widgets: [vercelWidget()],
     }),
     media(),
     visionTool({ defaultApiVersion: apiVersion }),

@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { linkableDocTypes } from '@/lib/helpers'
+import { linkableDocumentTypes } from '../documents'
 
 export default defineType({
   name: 'portableTextSimple',
@@ -14,12 +14,14 @@ export default defineType({
         { title: 'Normal', value: 'normal' },
         { title: 'Quote', value: 'blockquote' },
       ],
+
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Strike', value: 'strike-through' },
         ],
+
         annotations: [
           defineField({
             name: 'linkExternal',
@@ -45,7 +47,7 @@ export default defineType({
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
-                to: linkableDocTypes,
+                to: linkableDocumentTypes,
                 validation: (Rule) => Rule.required(),
               },
             ],

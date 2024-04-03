@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import type { Image, ImageAsset } from 'sanity'
 
 export default defineType({
   name: 'seo',
@@ -26,11 +25,3 @@ export default defineType({
     }),
   ],
 })
-
-export type TSeo = {
-  title?: string
-  description?: string
-  image?: {
-    asset: ImageAsset
-  } & Image
-}

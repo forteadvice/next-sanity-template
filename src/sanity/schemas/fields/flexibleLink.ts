@@ -1,6 +1,5 @@
 import { defineType, defineField } from 'sanity'
-import { linkableDocTypes } from '@/lib/helpers'
-import type { TDocReferencePath } from '@/sanity/queries'
+import { linkableDocumentTypes } from '../documents'
 
 export default defineType({
   name: 'flexibleLink',
@@ -25,8 +24,7 @@ export default defineType({
         defineField({
           name: 'internal',
           type: 'reference',
-          description: 'Reference an internal Sanity documement',
-          to: linkableDocTypes,
+          to: linkableDocumentTypes,
           options: { disableNew: true },
           hidden: ({ parent }) => {
             return parent?.external ? true : false
@@ -44,11 +42,3 @@ export default defineType({
     }),
   ],
 })
-
-export type TFlexibleLink = {
-  title?: string
-  link?: {
-    internal?: TDocReferencePath
-    external?: string
-  }
-}

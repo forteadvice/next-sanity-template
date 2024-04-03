@@ -1,8 +1,14 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
   "overrides": [
     {
-      "files": ["src/sanity/**/*.js"],
+      "files": [
+        "src/sanity/**/*.js"
+      ],
       "rules": {
         "import/no-anonymous-default-export": "off"
       }

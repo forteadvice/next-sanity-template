@@ -1,6 +1,4 @@
-import type { ImageAsset, Image } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
-
 import { defineType, defineField } from 'sanity'
 
 export default defineType({
@@ -19,7 +17,7 @@ export default defineType({
       validation: (Rule) =>
         Rule.custom((self, context) => {
           const { parent }: any = context
-          if (self && !parent?.asset) return 'Please select an image or delete the alt-text'
+          if (self && !parent.asset) return 'Please select an image or delete the alt-text'
           if (!self) return 'Please enter Alternative text'
           return true
         }),
@@ -31,8 +29,3 @@ export default defineType({
     }),
   ],
 })
-
-export type TBaseImage = {
-  alt?: string
-  asset?: ImageAsset
-} & Image

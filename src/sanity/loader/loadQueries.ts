@@ -1,10 +1,14 @@
 import 'server-only'
 
 import { loadQuery } from './loadQuery'
-import { type TFrontPage } from '../schemas/singletons/frontpage'
-import { type TPage } from '../schemas/documents/page'
-import { type TSettings } from '../schemas/singletons/settings'
-import { frontpageQuery, pageQuery, settingsQuery, pagesParamsQuery } from '../queries'
+import { frontpageQuery, type TFrontPage } from '../queries/documentQueries/frontpage'
+import {
+  pageQuery,
+  pagesParamsQuery,
+  type TPage,
+  type TPageParams,
+} from '../queries/documentQueries/page'
+import { settingsQuery, type TSettings } from '../queries/documentQueries/settings'
 
 // Frontpage
 export async function loadFrontpage() {
@@ -13,7 +17,7 @@ export async function loadFrontpage() {
 
 // Pages params for generateStaticParams
 export async function loadPagesParams() {
-  return await loadQuery<string[]>(pagesParamsQuery, {}, { next: { tags: ['pages'] } })
+  return await loadQuery<TPageParams>(pagesParamsQuery, {}, { next: { tags: ['pages'] } })
 }
 
 // Single page from slug tree

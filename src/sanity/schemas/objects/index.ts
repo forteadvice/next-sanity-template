@@ -1,10 +1,16 @@
 import hero from './hero'
-import portableText from './portableText'
-import baseImage from './baseImage'
-
-import flexibleUrl from './flexibleUrl'
-import flexibleLink from './flexibleLink'
 import seo from './seo'
+import textImage from './textImage'
+import textSection from './textSection'
 
-const objects = [hero, portableText, baseImage, flexibleUrl, flexibleLink, seo]
-export default objects
+export const objects = [hero, seo, textImage, textSection]
+
+// Prepped section-maps ready to use in docs
+export const defaultSections = mapSections([textImage, textSection])
+
+function mapSections(sectionArray: Array<{ name: string; type: string }>) {
+  return sectionArray.map((section) => ({
+    name: section.name,
+    type: section.name,
+  }))
+}

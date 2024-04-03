@@ -1,9 +1,6 @@
-import { defineField, defineType } from 'sanity'
-import { frontPageSections, type TSection } from '../sections'
+import { defineField, defineType, defineArrayMember } from 'sanity'
+import { defaultSections } from '../objects'
 import { SearchIcon, DashboardIcon } from '@sanity/icons'
-
-import { type TSeo } from '../objects/seo'
-import { type THero } from '../objects/hero'
 
 export default defineType({
   name: 'frontpage',
@@ -30,9 +27,9 @@ export default defineType({
 
     defineField({
       name: 'sections',
-      type: 'array',
-      of: frontPageSections,
       group: 'content',
+      type: 'array',
+      of: defaultSections,
     }),
 
     defineField({
@@ -42,9 +39,3 @@ export default defineType({
     }),
   ],
 })
-
-export type TFrontPage = {
-  hero?: THero
-  sections?: TSection[]
-  seo?: TSeo
-}

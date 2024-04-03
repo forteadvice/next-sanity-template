@@ -2,8 +2,8 @@ import 'server-only'
 
 import { setServerClient, loadQuery as LOAD_QUERY } from '@sanity/react-loader'
 
-import { client } from '@/sanity/client'
-import { token } from '@/sanity/token'
+import { client } from '@/sanity/lib/sanity.client'
+import { token } from '@/sanity/lib/sanity.token'
 import isDraftModeFn from '@/lib/isDraftMode'
 const isDraftMode = isDraftModeFn()
 

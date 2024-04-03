@@ -1,3 +1,10 @@
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 export function toUrlSafe(string: string) {
   const urlSafe = string
     .toLowerCase()
@@ -12,6 +19,3 @@ export function toUrlSafe(string: string) {
 export function upperFirst(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
-
-export const pageDocTypes = ['frontpage', 'page']
-export const linkableDocTypes = pageDocTypes.map((type) => ({ type }))

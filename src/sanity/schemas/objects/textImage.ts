@@ -1,9 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
 
-import { type TTextSection } from './textSection'
-import { type TBaseImage } from '../objects/baseImage'
-
 export default defineType({
   name: 'textImage',
   title: 'Text Image',
@@ -56,11 +53,3 @@ export default defineType({
     },
   },
 })
-
-export type TTextImage = {
-  _type: string
-  _key: string
-  textSection?: TTextSection
-  image?: TBaseImage
-  layout?: 'textImage' | 'imageText'
-}

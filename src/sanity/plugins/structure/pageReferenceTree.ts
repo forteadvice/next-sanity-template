@@ -2,7 +2,7 @@ import { DocumentStore } from 'sanity'
 import { StructureBuilder, ListItemBuilder, ListItem, Divider } from 'sanity/structure'
 import { groq } from 'next-sanity'
 import { map } from 'rxjs/operators'
-import { apiVersion } from '@/lib/env'
+import { apiVersion } from '@/sanity/lib/sanity.env'
 
 import { DocumentIcon, SchemaIcon } from '@sanity/icons'
 

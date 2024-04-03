@@ -1,10 +1,9 @@
 import * as Sections from '../sections'
-import { upperFirst } from '@/lib/helpers'
-
-import type { TSection } from '@/sanity/schemas/sections'
+import { upperFirst } from '@/lib/utils'
+import type { TSections, TSection } from '@/sanity/queries/objectQueries/sections'
 
 type Props = {
-  sections: TSection[]
+  sections: TSections
 }
 
 export default function SectionsResolver({ sections }: Props) {

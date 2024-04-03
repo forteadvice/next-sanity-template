@@ -1,6 +1,5 @@
 import { defineField, defineType } from 'sanity'
 import { BlockContentIcon } from '@sanity/icons'
-import type { TPortableText } from '@/sanity/queries'
 
 export default defineType({
   name: 'textSection',
@@ -26,10 +25,3 @@ export default defineType({
     },
   },
 })
-
-export type TTextSection = {
-  _type: string
-  _key: string
-  title?: string
-  text?: TPortableText
-}

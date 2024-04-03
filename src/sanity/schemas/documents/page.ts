@@ -1,10 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { SearchIcon, CogIcon, DashboardIcon } from '@sanity/icons'
-
-import { toUrlSafe } from '@/lib/helpers'
-import { pageSections, TSection } from '../sections'
-import { type THero } from '../objects/hero'
-import { TSeo } from '../objects/seo'
+import { toUrlSafe } from '@/lib/utils'
+import { defaultSections } from '../objects'
 
 export default defineType({
   name: 'page',
@@ -32,8 +29,8 @@ export default defineType({
         slugify: toUrlSafe,
       },
       group: 'settings',
-      validation: (Rule) =>
-        Rule.custom((self) => {
+      validation: (SlugRule) =>
+        SlugRule.custom((self: any) => {
           if (!self || !self?.current) return 'Slug is required'
           const slug = self.current
           if (toUrlSafe(slug) != slug) return 'Slug is not URL-safe'
@@ -82,7 +79,7 @@ export default defineType({
     defineField({
       name: 'sections',
       type: 'array',
-      of: pageSections,
+      of: defaultSections,
       group: 'content',
     }),
 
@@ -111,11 +108,3 @@ export default defineType({
     },
   },
 })
-
-export type TPage = {
-  title?: string
-  slug?: string
-  hero?: THero
-  sections?: TSection[]
-  seo?: TSeo
-}

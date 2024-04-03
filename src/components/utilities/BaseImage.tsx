@@ -1,6 +1,6 @@
 import Image, { getImageProps } from 'next/image'
 import getSanityImageSrc from '@/lib/getSanityImageSrc'
-import type { TBaseImage } from '@/sanity/schemas/objects/baseImage'
+import type { TBaseImage } from '@/sanity/queries/fieldQueries/baseImage'
 
 type Props = {
   imageObj?: TBaseImage
@@ -32,10 +32,9 @@ export default function BaseImage({
   priority = false,
   className,
 }: Props) {
-  if (!imageObj?.asset || !imageObj?.alt) return
-  // Get common props, used by all Image and
+  if (!imageObj?.asset || !imageObj.alt) return
+
   const common = { width, sizes, alt: imageObj.alt }
-  // Get init image height (default image)
   const r = aspectRatio === 'as-is' ? imageObj.asset.metadata.dimensions.aspectRatio : aspectRatio
   const height = Math.round(width / r)
 
@@ -55,7 +54,7 @@ export default function BaseImage({
   )
 
   /**
-   * Source tag generator
+   * Source tag
    */
   function Source({ media, ratio }: { media: string; ratio: number }) {
     if (!imageObj) return

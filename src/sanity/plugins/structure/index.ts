@@ -1,7 +1,7 @@
 import type { StructureResolver } from 'sanity/structure'
 import { DocumentsIcon, HomeIcon, CogIcon } from '@sanity/icons'
 
-import { apiVersion } from '../../../lib/env'
+import { apiVersion } from '../../lib/sanity.env'
 import pageReferenceTree from './pageReferenceTree'
 
 export const structure: StructureResolver = (S, context) =>

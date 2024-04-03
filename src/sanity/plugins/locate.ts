@@ -1,13 +1,12 @@
 import type { DocumentLocationResolver, DocumentLocationsState } from 'sanity/presentation'
 import { Observable, map } from 'rxjs'
-
-import { docReferencePathQuery } from '../queries'
-import { pageDocTypes } from '@/lib/helpers'
+import { referencePathQuery } from '../queries/helperQueries/referencePath'
+import { pageDocumentTypes } from '../schemas/documents'
 
 export const locate: DocumentLocationResolver = (params, context) => {
   /*
    * Settings
-   * Hardcoded location at Frontpage for ease of use
+   * Hardcoded location at root for ease of use
    */
   if (params.type === 'settings') {
     return {
@@ -24,9 +23,9 @@ export const locate: DocumentLocationResolver = (params, context) => {
   /*
    * Page documents
    */
-  if (pageDocTypes.some((type) => type == params.type)) {
+  if (pageDocumentTypes.some((type) => type == params.type)) {
     const docStream = context.documentStore.listenQuery(
-      `*[_id == $id][0]{ _type, title, ${docReferencePathQuery} }`,
+      `*[_id == $id][0]{ _type, title, 'path': ${referencePathQuery} }`,
       params,
       { perspective: 'previewDrafts' },
     ) as Observable<
@@ -39,7 +38,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
     >
 
     return docStream.pipe(
-      map((doc) => {
+      map((doc: any) => {
         if (!doc || !doc?.path) return null
         return {
           locations: [

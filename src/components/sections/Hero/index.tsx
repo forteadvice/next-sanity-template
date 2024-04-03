@@ -1,7 +1,9 @@
-import BaseImage from '../utilities/BaseImage'
-import type { THero } from '@/sanity/schemas/objects/hero'
+import BaseImage from '../../utilities/BaseImage'
+import type { THero } from '@/sanity/queries/objectQueries/hero'
 
-type Props = { data: THero }
+type Props = {
+  data: THero
+}
 
 export default function Hero({ data }: Props) {
   return (

@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import { type TBaseImage } from './baseImage'
 
 export default defineType({
   name: 'hero',
@@ -40,9 +39,3 @@ export default defineType({
     },
   },
 })
-
-export type THero = {
-  title?: string
-  tagline?: string
-  image?: TBaseImage
-}

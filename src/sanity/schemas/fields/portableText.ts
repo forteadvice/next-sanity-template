@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { linkableDocTypes } from '@/lib/helpers'
+import { linkableDocumentTypes } from '../documents'
 
 export default defineType({
   name: 'portableText',
@@ -48,7 +48,7 @@ export default defineType({
               {
                 name: 'reference',
                 type: 'reference',
-                to: linkableDocTypes,
+                to: linkableDocumentTypes,
                 validation: (Rule) => Rule.required(),
               },
             ],

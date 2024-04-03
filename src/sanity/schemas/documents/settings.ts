@@ -1,8 +1,5 @@
 import { MenuIcon, SearchIcon, InsertBelowIcon, UnknownIcon } from '@sanity/icons'
-
 import { defineType, defineField, defineArrayMember } from 'sanity'
-import { type TSeo } from '../objects/seo'
-import type { TFlexibleLink } from '../objects/flexibleLink'
 
 export default defineType({
   name: 'settings',
@@ -70,29 +67,3 @@ export default defineType({
     }),
   ],
 })
-
-export type TMenuItem = {
-  _key?: string
-} & TFlexibleLink
-
-export type TMenu = {
-  menuItems: TMenuItem[]
-}
-
-export type TFooter = {
-  address?: string
-  phone?: string
-  email?: string
-}
-
-export type TPageNotFound = {
-  title?: string
-  body?: string
-}
-
-export type TSettings = {
-  menu?: TMenu
-  footer?: TFooter
-  defaultSeo?: TSeo
-  pageNotFound?: TPageNotFound
-}

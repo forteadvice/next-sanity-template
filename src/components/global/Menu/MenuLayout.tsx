@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { TMenu, TMenuItem } from '@/sanity/schemas/singletons/settings'
+import type { TMenu, TMenuItem } from '@/sanity/queries/documentQueries/settings'
 
 type Props = { data: TMenu }
 
@@ -12,8 +12,8 @@ export default function MenuLayout({ data }: Props) {
         Home
       </Link>
 
-      {data?.menuItems?.map((item) => {
-        return <MenuItem key={item._key} />
+      {data?.menuItems?.map((item, idx) => {
+        return <MenuItem {...item} key={idx} />
       })}
     </nav>
   )

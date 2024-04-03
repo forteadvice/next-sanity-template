@@ -1,6 +1,5 @@
-import documents from './documents'
-import singletons from './singletons'
-import objects from './objects'
-import sections from './sections'
+import { fields } from './fields'
+import { objects } from './objects'
+import { documents } from './documents'
 
-export const schemaTypes = [...documents, ...singletons, ...objects, ...sections]
+export const schemaTypes = [...fields, ...objects, ...documents]
