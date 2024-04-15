@@ -10,7 +10,7 @@ import { seoQuery, type TSeo } from '../objectQueries/seo'
 export const settingsQuery = groq`
 *[_type == "settings"][0] {
   menu {
-    links[] ${flexibleLinkQuery}
+    menuItems[] ${flexibleLinkQuery}
   },
   footer {
     address,
