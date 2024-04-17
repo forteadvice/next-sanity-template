@@ -1,13 +1,11 @@
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import { cn } from '@/lib/utils'
 
 type ButtonProps = {
   href?: never
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-type AnchorProps = {
-  href: string
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps
 
 /**
  * Primary action button. Can be rendered as button or Link
