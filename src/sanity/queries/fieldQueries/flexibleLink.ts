@@ -1,21 +1,14 @@
 import { groq } from 'next-sanity'
-import { referencePathQuery, type TReferencePath } from '../helperQueries/referencePath'
+import { flexibleRefsQuery, TFlexibleRefs } from './flexibleRefs'
 
 /**
  * Flexible link
  */
 export const flexibleLinkQuery = groq`{
   title,
-  link {
-    internal { 'path': ${referencePathQuery} },
-    external,
-  } 
+  ...href ${flexibleRefsQuery}
 }`
 
 export type TFlexibleLink = {
   title?: string
-  link?: {
-    internal?: { path?: TReferencePath }
-    external?: string
-  }
-}
+} & TFlexibleRefs
