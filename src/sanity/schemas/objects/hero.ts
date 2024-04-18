@@ -6,15 +6,13 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      name: 'headline',
+      type: 'headline',
     }),
 
     defineField({
-      name: 'tagline',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
+      name: 'manchet',
+      type: 'manchet',
     }),
 
     defineField({
@@ -23,19 +21,4 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
-
-  preview: {
-    select: {
-      title: 'title',
-      media: 'image',
-    },
-
-    prepare({ title, media }) {
-      return {
-        title: title || 'Hero',
-        subtitle: 'Hero',
-        media,
-      }
-    },
-  },
 })
