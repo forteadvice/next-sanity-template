@@ -22,9 +22,7 @@ export default function TextImage({ data }: Props) {
         />
       </div>
 
-      <div>
-        <div className='flex-1 w-full'>{textSection && <TextSection data={textSection} />}</div>
-      </div>
+      <div className='flex-1 w-full'>{textSection && <TextSection data={textSection} />}</div>
     </article>
   )
 }

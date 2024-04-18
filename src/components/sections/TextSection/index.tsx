@@ -11,12 +11,16 @@ export default function TextSection({ data }: Props) {
 
   if (!text) return
   return (
-    <div className='text-section'>
+    <article className='text-section my-4'>
       <h2>
         <b>{title}</b>
       </h2>
       <PortableTextResolver text={text} />
-      {ctaLink?.href && <Button href={ctaLink?.href}>{ctaLink?.title}</Button>}
-    </div>
+      {ctaLink?.href && (
+        <Button className='mt-2 inline-block' href={ctaLink?.href}>
+          {ctaLink?.title}
+        </Button>
+      )}
+    </article>
   )
 }
