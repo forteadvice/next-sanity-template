@@ -1,6 +1,7 @@
 import Image, { getImageProps } from 'next/image'
 import getSanityImageSrc from '@/lib/getSanityImageSrc'
 import type { TBaseImage } from '@/sanity/queries/fieldQueries/baseImage'
+import { cn } from '@/lib/utils'
 
 type Props = {
   imageObj?: TBaseImage
@@ -39,10 +40,10 @@ export default function BaseImage({
   const height = Math.round(width / r)
 
   return (
-    <picture className='base-image'>
+    <picture>
       {aspectRatioDesktop && <Source media='(min-width: 640px)' ratio={aspectRatioDesktop} />}
       <Image
-        className={className + 'sm:bg-black'}
+        className={cn('w-full', className)}
         src={getSanityImageSrc(imageObj, width, height)}
         height={height}
         placeholder='blur'

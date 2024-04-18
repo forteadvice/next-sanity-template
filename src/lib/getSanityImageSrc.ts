@@ -1,7 +1,14 @@
-import type { Image, ImageAsset, ImageUrlParams } from 'sanity'
+import type { Image, ImageUrlParams, ImageDimensions } from 'sanity'
 
 type ImageObj = {
-  asset?: ImageAsset
+  alt?: string
+  asset?: {
+    url: string
+    metadata: {
+      dimensions: ImageDimensions
+      lqip: string
+    }
+  }
 } & Image
 
 /**

@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import type { Image, ImageAsset } from 'sanity'
+import type { Image, ImageDimensions } from 'sanity'
 
 /**
  * baseImageQuery
@@ -9,10 +9,22 @@ export const baseImageQuery = groq`{
   hotspot,
   crop,
   alt,
-  asset->
+  asset->{
+    url,
+    metadata {
+      dimensions,
+      lqip,
+    }
+  }
 }`
 
 export type TBaseImage = {
   alt?: string
-  asset?: ImageAsset
+  asset?: {
+    url: string
+    metadata: {
+      dimensions: ImageDimensions
+      lqip: string
+    }
+  }
 } & Image
