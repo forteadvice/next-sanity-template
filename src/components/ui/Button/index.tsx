@@ -12,7 +12,7 @@ type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps
  */
 export default function Button({ children, href, className, ...rest }: AnchorProps | ButtonProps) {
   const buttonStyle = cn(
-    'block py-2 px-4 bg-black text-white rounded-full hover:bg-opacity-80',
+    'button py-2 px-4 bg-black text-white rounded-full hover:bg-opacity-80',
     className,
   )
 

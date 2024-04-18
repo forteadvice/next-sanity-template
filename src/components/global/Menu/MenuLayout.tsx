@@ -7,7 +7,7 @@ type Props = { data: TMenu }
 // The menu bar
 export default function MenuLayout({ data }: Props) {
   return (
-    <nav className='flex gap-4'>
+    <nav className='menu flex gap-4'>
       <Link href={'/'} prefetch={false}>
         Home
       </Link>

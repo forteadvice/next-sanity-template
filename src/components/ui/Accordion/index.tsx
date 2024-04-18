@@ -7,7 +7,7 @@ type Props = {
 
 export default function Accordion({ summary, children }: Props) {
   return (
-    <details className='group'>
+    <details className='accordion group'>
       <summary>{summary}</summary>
       <div>{children}</div>
     </details>

@@ -39,7 +39,7 @@ export default function BaseImage({
   const height = Math.round(width / r)
 
   return (
-    <picture>
+    <picture className='base-image'>
       {aspectRatioDesktop && <Source media='(min-width: 640px)' ratio={aspectRatioDesktop} />}
       <Image
         className={className + 'sm:bg-black'}

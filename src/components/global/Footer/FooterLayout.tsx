@@ -4,7 +4,7 @@ type Props = { data: TFooter }
 
 export default function FooterLayout({ data }: Props) {
   return (
-    <footer>
+    <footer className='footer'>
       <address>{data?.address}</address>
       <p>{data?.phone}</p>
       <p>{data?.email}</p>
