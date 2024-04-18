@@ -1,8 +1,11 @@
-import { defineField, defineType, defineArrayMember } from 'sanity'
-import { defaultSections } from '../objects'
-import { SearchIcon, DashboardIcon } from '@sanity/icons'
+import { DashboardIcon, SearchIcon } from '@sanity/icons'
+import { groq } from 'next-sanity'
+import { defineField, defineType } from 'sanity'
+import { heroQuery, type THero } from '../objects/hero'
+import { sectionsQuery, type TSections, defaultSections } from '../objects/sections'
+import { seoQuery, type TSeo } from '../objects/seo'
 
-export default defineType({
+export const frontpageSchema = defineType({
   name: 'frontpage',
   type: 'document',
   groups: [
@@ -39,3 +42,21 @@ export default defineType({
     }),
   ],
 })
+
+/**
+ * Frontpage Query
+ * @description Queries Frontpage data - no params needed
+ */
+export const frontpageQuery = groq`
+  *[_type == "frontpage"][0] {
+    hero ${heroQuery} ,
+    sections[] ${sectionsQuery},
+    seo ${seoQuery} ,
+  }
+`
+
+export type TFrontPage = {
+  hero?: THero
+  sections?: TSections
+  seo?: TSeo
+}

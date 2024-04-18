@@ -1,5 +1,5 @@
 import BaseImage from '../../utilities/BaseImage'
-import type { THero } from '@/sanity/queries/objectQueries/hero'
+import type { THero } from '@/sanity/schemas/objects/hero'
 
 type Props = {
   data: THero

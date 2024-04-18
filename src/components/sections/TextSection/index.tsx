@@ -1,5 +1,5 @@
 import PortableTextResolver from '@/components/utilities/PortableTextResolver'
-import type { TTextSection } from '@/sanity/queries/objectQueries/textSection'
+import type { TTextSection } from '@/sanity/schemas/objects/textSection'
 
 type Props = {
   data: TTextSection

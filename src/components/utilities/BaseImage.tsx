@@ -1,6 +1,6 @@
-import Image, { getImageProps } from 'next/image'
 import getSanityImageSrc from '@/lib/getSanityImageSrc'
-import type { TBaseImage } from '@/sanity/queries/fieldQueries/baseImage'
+import type { TBaseImage } from '@/sanity/schemas/fields/baseImage'
+import Image, { getImageProps } from 'next/image'
 
 type Props = {
   imageObj?: TBaseImage

@@ -1,9 +1,9 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
 
-import { linkableDocumentTypes } from '../documents'
+import { linkableDocumentTypes } from '../documents/_linkableDocumentTypes'
 
-export default defineType({
+export const portableTextSimpleSchema = defineType({
   name: 'portableTextSimple',
   title: 'Simple Portable Text',
   type: 'array',

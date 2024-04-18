@@ -2,8 +2,8 @@
 
 import dynamic from 'next/dynamic'
 
+import type { TFrontPage } from '@/sanity/schemas/documents/frontpage'
 import type { QueryResponseInitial } from '@sanity/react-loader'
-import type { TFrontPage } from '@/sanity/queries/documentQueries/frontpage'
 
 import { useFrontpage } from '@/sanity/loader/useQueries'
 

@@ -1,7 +1,10 @@
 import { MenuIcon, SearchIcon, InsertBelowIcon, UnknownIcon } from '@sanity/icons'
 import { defineType, defineField, defineArrayMember } from 'sanity'
+import { groq } from 'next-sanity'
+import { flexibleLinkQuery, type TFlexibleLink } from '../fields/flexibleLink'
+import { seoQuery, type TSeo } from '../objects/seo'
 
-export default defineType({
+export const settingsSchema = defineType({
   name: 'settings',
   type: 'document',
   groups: [
@@ -67,3 +70,48 @@ export default defineType({
     }),
   ],
 })
+
+/**
+ * Settings Query
+ * @description Queries settings data - no params needed
+ */
+export const settingsQuery = groq`
+*[_type == "settings"][0] {
+  menu {
+    menuItems[] ${flexibleLinkQuery}
+  },
+  footer {
+    address,
+    phone,
+    email,
+  },
+  pageNotFound {
+    title,
+    body,
+  },
+  defaultSeo ${seoQuery}
+}`
+
+export type TMenuItem = TFlexibleLink
+
+export type TMenu = {
+  menuItems: TMenuItem[]
+}
+
+export type TFooter = {
+  address?: string
+  phone?: string
+  email?: string
+}
+
+export type TPageNotFound = {
+  title?: string
+  body?: string
+}
+
+export type TSettings = {
+  menu?: TMenu
+  footer?: TFooter
+  defaultSeo?: TSeo
+  pageNotFound?: TPageNotFound
+}

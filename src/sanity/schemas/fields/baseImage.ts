@@ -1,7 +1,9 @@
 import { ImageIcon } from '@sanity/icons'
 import { defineType, defineField } from 'sanity'
+import { groq } from 'next-sanity'
+import type { Image, ImageAsset } from 'sanity'
 
-export default defineType({
+export const baseImageSchema = defineType({
   name: 'baseImage',
   title: 'Image',
   type: 'image',
@@ -29,3 +31,19 @@ export default defineType({
     }),
   ],
 })
+
+/**
+ * baseImageQuery
+ * @description Basic sanity image with hotspot options, cropping and alt-text
+ */
+export const baseImageQuery = groq`{
+  hotspot,
+  crop,
+  alt,
+  asset->
+}`
+
+export type TBaseImage = {
+  alt?: string
+  asset?: ImageAsset
+} & Image

@@ -1,6 +1,8 @@
 import { defineField, defineType } from 'sanity'
+import { groq } from 'next-sanity'
+import { baseImageQuery, type TBaseImage } from '../fields/baseImage'
 
-export default defineType({
+export const heroSchema = defineType({
   name: 'hero',
   title: 'Hero',
   type: 'object',
@@ -39,3 +41,15 @@ export default defineType({
     },
   },
 })
+
+export const heroQuery = groq`{
+  title,
+  tagline,
+  image ${baseImageQuery}
+}`
+
+export type THero = {
+  title?: string
+  tagline?: string
+  image?: TBaseImage
+}

@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import type { QueryResponseInitial } from '@sanity/react-loader'
-import type { TPage } from '@/sanity/queries/documentQueries/page'
+import type { TPage } from '@/sanity/schemas/documents/page'
 import { usePage } from '@/sanity/loader/useQueries'
 const PageView = dynamic(() => import('./PageView'))
 

@@ -1,6 +1,6 @@
 import { defineField } from 'sanity'
 
-export default defineField({
+export const flexibleUrlSchema = defineField({
   name: 'flexibleUrl',
   title: 'URL',
   type: 'url',

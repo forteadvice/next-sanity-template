@@ -1,7 +1,13 @@
-import baseImage from './baseImage'
-import flexibleLink from './flexibleLink'
-import flexibleUrl from './flexibleUrl'
-import portableText from './portableText'
-import portableTextSimple from './portableTextSimple'
+import { baseImageSchema } from './baseImage'
+import { flexibleLinkSchema } from './flexibleLink'
+import { flexibleUrlSchema } from './flexibleUrl'
+import { portableTextSchema } from './portableText'
+import { portableTextSimpleSchema } from './portableTextSimple'
 
-export const fields = [baseImage, flexibleUrl, flexibleLink, portableText, portableTextSimple]
+export const fields = [
+  baseImageSchema,
+  flexibleUrlSchema,
+  flexibleLinkSchema,
+  portableTextSchema,
+  portableTextSimpleSchema,
+]

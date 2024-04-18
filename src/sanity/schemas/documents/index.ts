@@ -1,9 +1,6 @@
-import page from './page'
-import frontpage from './frontpage'
-import settings from './settings'
+import { pageSchema } from './page'
+import { frontpageSchema } from './frontpage'
+import { settingsSchema } from './settings'
+import { SchemaTypeDefinition } from 'sanity'
 
-export const documents = [page, frontpage, settings]
-
-export const singletons = ['settings', 'frontpage']
-export const pageDocumentTypes = ['frontpage', 'page']
-export const linkableDocumentTypes = pageDocumentTypes.map((type) => ({ type }))
+export const documents: SchemaTypeDefinition[] = [pageSchema, frontpageSchema, settingsSchema]

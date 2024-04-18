@@ -1,9 +1,11 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
+import { linkableDocumentTypes } from '../documents/_linkableDocumentTypes'
+import { groq } from 'next-sanity'
+import type { PortableTextMarkDefinition } from '@portabletext/types'
+import { referencePathQuery } from '../../queries/helperQueries/referencePath'
 
-import { linkableDocumentTypes } from '../documents'
-
-export default defineType({
+export const portableTextSchema = defineType({
   name: 'portableText',
   title: 'Portable Text',
   type: 'array',
@@ -58,3 +60,20 @@ export default defineType({
     }),
   ],
 })
+
+/**
+ * portableTextQuery
+ * @description Resolves all types of portable texts. Use type TDocReferencePath
+ */
+export const portableTextQuery = groq`{
+  ...,
+  markDefs[] {
+    ...,
+    _type == 'linkInternal' => {
+      ...,
+      ...reference->{ "path": ${referencePathQuery} }
+    },
+  },
+}`
+
+export type TPortableText = PortableTextMarkDefinition

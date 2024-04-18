@@ -1,14 +1,14 @@
 import 'server-only'
 
 import { loadQuery } from './loadQuery'
-import { frontpageQuery, type TFrontPage } from '../queries/documentQueries/frontpage'
+import { frontpageQuery, type TFrontPage } from '../schemas/documents/frontpage'
 import {
   pageQuery,
   pagesParamsQuery,
   type TPage,
   type TPageParams,
-} from '../queries/documentQueries/page'
-import { settingsQuery, type TSettings } from '../queries/documentQueries/settings'
+} from '../schemas/documents/page'
+import { settingsQuery, type TSettings } from '../schemas/documents/settings'
 
 // Frontpage
 export async function loadFrontpage() {

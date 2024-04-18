@@ -1,6 +1,6 @@
 import Hero from '@/components/sections/Hero'
 import SectionsResolver from '@/components/global/SectionsResolver'
-import type { TFrontPage } from '@/sanity/queries/documentQueries/frontpage'
+import type { TFrontPage } from '@/sanity/schemas/documents/frontpage'
 
 export default function FrontpageView({ data }: { data: TFrontPage }) {
   return (
