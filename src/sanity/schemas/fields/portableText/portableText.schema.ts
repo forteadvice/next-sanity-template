@@ -1,27 +1,27 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+import { linkableDocumentTypes } from '../../documents/_linkableDocumentTypes'
 
-import { linkableDocumentTypes } from '../documents/_linkableDocumentTypes'
-
-export const portableTextSimpleSchema = defineType({
-  name: 'portableTextSimple',
-  title: 'Simple Portable Text',
+export const portableTextSchema = defineType({
+  name: 'portableText',
+  title: 'Portable Text',
   type: 'array',
   of: [
     defineArrayMember({
       type: 'block',
       styles: [
         { title: 'Normal', value: 'normal' },
+        { title: 'H2', value: 'h2' },
+        { title: 'H3', value: 'h3' },
+        { title: 'H4', value: 'h4' },
         { title: 'Quote', value: 'blockquote' },
       ],
-
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Strike', value: 'strike-through' },
         ],
-
         annotations: [
           defineField({
             name: 'linkExternal',
@@ -33,6 +33,7 @@ export const portableTextSimpleSchema = defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'flexibleUrl',
+                validation: (Rule) => Rule.required(),
               }),
             ],
           }),
@@ -46,7 +47,6 @@ export const portableTextSimpleSchema = defineType({
               {
                 name: 'reference',
                 type: 'reference',
-                title: 'Reference',
                 to: linkableDocumentTypes,
                 validation: (Rule) => Rule.required(),
               },

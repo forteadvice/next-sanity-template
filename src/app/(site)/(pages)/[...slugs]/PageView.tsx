@@ -1,7 +1,7 @@
 import Hero from '@/components/sections/Hero'
 import SectionsResolver from '@/components/global/SectionsResolver'
 
-import type { TPage } from '@/sanity/schemas/documents/page'
+import type { TPage } from '@/sanity/schemas/documents/page/page.props'
 
 export default function PageView({ data }: { data: TPage }) {
   return (

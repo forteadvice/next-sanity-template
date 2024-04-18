@@ -1,7 +1,5 @@
-import { defineType, defineField } from 'sanity'
-import { linkableDocumentTypes } from '../documents/_linkableDocumentTypes'
-import { groq } from 'next-sanity'
-import { referencePathQuery, type TReferencePath } from '../../queries/helperQueries/referencePath'
+import { defineField, defineType } from 'sanity'
+import { linkableDocumentTypes } from '../../documents/_linkableDocumentTypes'
 
 export const flexibleLinkSchema = defineType({
   name: 'flexibleLink',
@@ -44,19 +42,3 @@ export const flexibleLinkSchema = defineType({
     }),
   ],
 })
-
-export const flexibleLinkQuery = groq`{
-  title,
-  link {
-    internal { 'path': ${referencePathQuery} },
-    external,
-  } 
-}`
-
-export type TFlexibleLink = {
-  title?: string
-  link?: {
-    internal?: { path?: TReferencePath }
-    external?: string
-  }
-}

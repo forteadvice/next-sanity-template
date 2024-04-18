@@ -1,14 +1,12 @@
 import 'server-only'
 
 import { loadQuery } from './loadQuery'
-import { frontpageQuery, type TFrontPage } from '../schemas/documents/frontpage'
-import {
-  pageQuery,
-  pagesParamsQuery,
-  type TPage,
-  type TPageParams,
-} from '../schemas/documents/page'
-import { settingsQuery, type TSettings } from '../schemas/documents/settings'
+import { frontpageQuery } from '../schemas/documents/frontpage/frontpage.query'
+import { type TFrontPage } from '../schemas/documents/frontpage/frontpage.props'
+import { pageQuery, pagesParamsQuery } from '../schemas/documents/page/page.query'
+import { type TPage, type TPageParams } from '../schemas/documents/page/page.props'
+import { settingsQuery } from '../schemas/documents/settings/settings.query'
+import { type TSettings } from '../schemas/documents/settings/settings.props'
 
 // Frontpage
 export async function loadFrontpage() {

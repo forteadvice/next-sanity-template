@@ -1,5 +1,5 @@
 import getSanityImageSrc from './getSanityImageSrc'
-import type { TSeo } from '@/sanity/schemas/objects/seo'
+import type { TSeo } from '@/sanity/schemas/objects/seo/seo.props'
 import type { Metadata } from 'next'
 
 export default function getMetaObject(meta: TSeo): Metadata {

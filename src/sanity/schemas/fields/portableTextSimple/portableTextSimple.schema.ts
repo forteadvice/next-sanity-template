@@ -1,30 +1,26 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { EarthGlobeIcon, LinkIcon } from '@sanity/icons'
-import { linkableDocumentTypes } from '../documents/_linkableDocumentTypes'
-import { groq } from 'next-sanity'
-import type { PortableTextMarkDefinition } from '@portabletext/types'
-import { referencePathQuery } from '../../queries/helperQueries/referencePath'
+import { linkableDocumentTypes } from '../../documents/_linkableDocumentTypes'
 
-export const portableTextSchema = defineType({
-  name: 'portableText',
-  title: 'Portable Text',
+export const portableTextSimpleSchema = defineType({
+  name: 'portableTextSimple',
+  title: 'Simple Portable Text',
   type: 'array',
   of: [
     defineArrayMember({
       type: 'block',
       styles: [
         { title: 'Normal', value: 'normal' },
-        { title: 'H2', value: 'h2' },
-        { title: 'H3', value: 'h3' },
-        { title: 'H4', value: 'h4' },
         { title: 'Quote', value: 'blockquote' },
       ],
+
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
           { title: 'Strike', value: 'strike-through' },
         ],
+
         annotations: [
           defineField({
             name: 'linkExternal',
@@ -36,7 +32,6 @@ export const portableTextSchema = defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'flexibleUrl',
-                validation: (Rule) => Rule.required(),
               }),
             ],
           }),
@@ -50,6 +45,7 @@ export const portableTextSchema = defineType({
               {
                 name: 'reference',
                 type: 'reference',
+                title: 'Reference',
                 to: linkableDocumentTypes,
                 validation: (Rule) => Rule.required(),
               },
@@ -60,20 +56,3 @@ export const portableTextSchema = defineType({
     }),
   ],
 })
-
-/**
- * portableTextQuery
- * @description Resolves all types of portable texts. Use type TDocReferencePath
- */
-export const portableTextQuery = groq`{
-  ...,
-  markDefs[] {
-    ...,
-    _type == 'linkInternal' => {
-      ...,
-      ...reference->{ "path": ${referencePathQuery} }
-    },
-  },
-}`
-
-export type TPortableText = PortableTextMarkDefinition

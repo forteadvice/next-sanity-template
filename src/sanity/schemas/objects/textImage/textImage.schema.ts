@@ -1,8 +1,5 @@
-import { defineField, defineType } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
-import { groq } from 'next-sanity'
-import { baseImageQuery, type TBaseImage } from '../fields/baseImage'
-import { textSectionQuery, type TTextSection } from './textSection'
+import { defineField, defineType } from 'sanity'
 
 export const textImageSchema = defineType({
   name: 'textImage',
@@ -56,15 +53,3 @@ export const textImageSchema = defineType({
     },
   },
 })
-
-export const textImageQuery = groq`{
-  textSection ${textSectionQuery},
-  image ${baseImageQuery},
-  layout,
-}`
-
-export type TTextImage = {
-  textSection?: TTextSection
-  image?: TBaseImage
-  layout?: 'textImage' | 'imageText'
-}

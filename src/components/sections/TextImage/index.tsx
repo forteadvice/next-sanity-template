@@ -1,4 +1,4 @@
-import type { TTextImage } from '@/sanity/schemas/objects/textImage'
+import type { TTextImage } from '@/sanity/schemas/objects/textImage/textImage.props'
 import BaseImage from '../../utilities/BaseImage'
 import TextSection from '../TextSection'
 
