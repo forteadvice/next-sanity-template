@@ -7,7 +7,7 @@ type Props = { data: TMenu }
 // The menu bar
 export default function MenuLayout({ data }: Props) {
   return (
-    <nav className='flex gap-4'>
+    <nav className='menu flex gap-4'>
       <Link href={'/'} prefetch={false}>
         Home
       </Link>
@@ -20,15 +20,12 @@ export default function MenuLayout({ data }: Props) {
 }
 
 // Single menu item
-function MenuItem({ title, link }: TMenuItem) {
-  if (link?.internal?.path) {
+function MenuItem({ title, href }: TMenuItem) {
+  if (href) {
     return (
-      <Link href={link.internal.path} prefetch={false}>
+      <Link href={href} prefetch={false}>
         {title}
       </Link>
     )
-  }
-  if (link?.external) {
-    return <a href={link.external}>{title}</a>
   }
 }

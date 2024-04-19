@@ -8,5 +8,11 @@ export const baseImageQuery = groq`{
   hotspot,
   crop,
   alt,
-  asset->
+  asset->{
+    url,
+    metadata {
+      dimensions,
+      lqip,
+    }
+  }
 }`

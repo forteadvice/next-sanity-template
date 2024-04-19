@@ -40,7 +40,7 @@ img {
   @apply my-16 gap-16;
 }
 main > *:not(.hero):not(figure) {
-  @apply md:mx-16;
+  @apply md:m-16;
 }
 figure {
   @apply max-w-[700px] m-auto my-32;

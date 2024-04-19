@@ -6,7 +6,7 @@ import type { TPage } from '@/sanity/schemas/documents/page/page.props'
 export default function PageView({ data }: { data: TPage }) {
   return (
     <main>
-      {data?.hero && <Hero data={data?.hero} />}
+      {data?.hero && <Hero {...data?.hero} />}
       {data?.sections && <SectionsResolver sections={data?.sections} />}
     </main>
   )

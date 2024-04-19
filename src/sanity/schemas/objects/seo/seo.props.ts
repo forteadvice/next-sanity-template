@@ -1,9 +1,15 @@
-import type { Image, ImageAsset } from 'sanity'
+import type { Image, ImageDimensions } from 'sanity'
 
 export type TSeo = {
   title?: string
   description?: string
   image?: {
-    asset: ImageAsset
+    asset?: {
+      url: string
+      metadata: {
+        dimensions: ImageDimensions
+        lqip: string
+      }
+    }
   } & Image
 }

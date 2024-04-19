@@ -3,10 +3,20 @@ import { defineField } from 'sanity'
 export const flexibleUrlSchema = defineField({
   name: 'flexibleUrl',
   title: 'URL',
-  type: 'url',
-  description: 'Accepts http, https, mailto: & tel:',
-  validation: (Rule) =>
-    Rule.uri({
-      scheme: ['http', 'https', 'mailto', 'tel'],
+  type: 'string',
+  description: 'Accepts www, http://, https://, mailto: & tel:',
+  validation: (Rule) => [
+    Rule.custom((self) => {
+      if (!self) return true
+      if (
+        self.startsWith('www') ||
+        self.startsWith('http://') ||
+        self.startsWith('https://') ||
+        self.startsWith('mailto:') ||
+        self.startsWith('tel:')
+      )
+        return true
+      return 'Not a valid Url'
     }),
+  ],
 })

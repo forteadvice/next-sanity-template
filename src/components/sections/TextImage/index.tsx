@@ -10,7 +10,7 @@ export default function TextImage({ data }: Props) {
   const { textSection, image, layout } = data
 
   return (
-    <article className={`md:grid grid-cols-2`}>
+    <article className={`text-image md:grid grid-cols-2`}>
       <div className={`${layout == 'textImage' ? 'order-2' : ''}`}>
         <BaseImage
           imageObj={image}
@@ -19,6 +19,7 @@ export default function TextImage({ data }: Props) {
           sizes={'(max-width: 500x) 100vw, 500px'}
         />
       </div>
+
       <div className='flex-1 w-full'>{textSection && <TextSection data={textSection} />}</div>
     </article>
   )

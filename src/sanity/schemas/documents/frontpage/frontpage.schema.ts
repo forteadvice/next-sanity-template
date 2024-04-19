@@ -14,8 +14,6 @@ export const frontpageSchema = defineType({
       name: 'title',
       type: 'string',
       initialValue: 'Frontpage',
-      readOnly: true,
-      hidden: true,
     }),
 
     defineField({

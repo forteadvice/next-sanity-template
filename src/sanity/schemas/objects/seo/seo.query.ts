@@ -6,6 +6,12 @@ export const seoQuery = groq`{
   image {
     hotspot,
     crop,
-    asset->,
-  },
+    asset->{
+      url,
+      metadata {
+        dimensions,
+        lqip,
+      }
+    }
+  }
 }`

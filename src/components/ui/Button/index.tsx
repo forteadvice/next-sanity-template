@@ -1,20 +1,18 @@
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 import { cn } from '@/lib/utils'
 
 type ButtonProps = {
   href?: never
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-type AnchorProps = {
-  href: string
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>
+type AnchorProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps
 
 /**
  * Primary action button. Can be rendered as button or Link
  */
 export default function Button({ children, href, className, ...rest }: AnchorProps | ButtonProps) {
   const buttonStyle = cn(
-    'block py-2 px-4 bg-black text-white rounded-full hover:bg-opacity-80',
+    'button py-2 px-4 bg-black text-white rounded-full hover:bg-opacity-80',
     className,
   )
 
