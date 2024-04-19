@@ -5,7 +5,7 @@ import type { TFrontPage } from '@/sanity/queries/documentQueries/frontpage'
 export default function FrontpageView({ data }: { data: TFrontPage }) {
   return (
     <main>
-      {data?.hero && <Hero data={data.hero} />}
+      {data?.hero && <Hero {...data.hero} />}
       {data?.sections && <SectionsResolver sections={data.sections} />}
     </main>
   )

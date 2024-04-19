@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import type { Image, ImageAsset } from 'sanity'
+import type { Image, ImageDimensions } from 'sanity'
 
 export const seoQuery = groq`{
   title,
@@ -7,7 +7,13 @@ export const seoQuery = groq`{
   image {
     hotspot,
     crop,
-    asset->,
+    asset->{
+    url,
+    metadata {
+      dimensions,
+      lqip,
+    }
+  }
   },
 }`
 
@@ -15,6 +21,12 @@ export type TSeo = {
   title?: string
   description?: string
   image?: {
-    asset: ImageAsset
+    asset?: {
+      url: string
+      metadata: {
+        dimensions: ImageDimensions
+        lqip: string
+      }
+    }
   } & Image
 }
