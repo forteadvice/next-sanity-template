@@ -1,4 +1,4 @@
-import type { TFooter } from '@/sanity/queries/documentQueries/settings'
+import type { TFooter } from '@/sanity/schemas/documents/settings/settings.props'
 
 type Props = { data: TFooter }
 

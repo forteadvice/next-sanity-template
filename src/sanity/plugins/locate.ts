@@ -1,7 +1,7 @@
 import type { DocumentLocationResolver, DocumentLocationsState } from 'sanity/presentation'
 import { Observable, map } from 'rxjs'
 import { referencePathQuery } from '../queries/helperQueries/referencePath'
-import { pageDocumentTypes } from '../schemas/documents'
+import { pageDocumentTypes } from '../schemas/documents/_pageDocumentTypes'
 
 export const locate: DocumentLocationResolver = (params, context) => {
   /*

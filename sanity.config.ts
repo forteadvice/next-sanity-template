@@ -6,7 +6,7 @@ import { presentationTool } from 'sanity/presentation'
 
 import { apiVersion, dataset, projectId, studioUrl } from './src/sanity/lib/sanity.env'
 import { schemaTypes } from '@/sanity/schemas'
-import { singletons } from '@/sanity/schemas/documents'
+import { singletons } from '@/sanity/schemas/documents/_singletons'
 import { structure } from '@/sanity/plugins/structure'
 import { locate } from '@/sanity/plugins/locate'
 

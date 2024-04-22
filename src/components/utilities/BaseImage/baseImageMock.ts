@@ -1,4 +1,4 @@
-import { TBaseImage } from '@/sanity/queries/fieldQueries/baseImage'
+import { TBaseImage } from '@/sanity/schemas/fields/baseImage/baseImage.props'
 
 export const baseImageMock = {
   _type: 'baseImage',

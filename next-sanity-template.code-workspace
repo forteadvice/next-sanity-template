@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/*.code-search": true,
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "sanity-io.vscode-sanity",
+      "hdoro.sanity-snippets",
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+    ],
+  },
+}

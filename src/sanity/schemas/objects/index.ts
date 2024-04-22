@@ -1,16 +1,6 @@
-import hero from './hero'
-import seo from './seo'
-import textImage from './textImage'
-import textSection from './textSection'
+import { heroSchema } from './hero/hero.schema'
+import { seoSchema } from './seo/seo.schema'
+import { textImageSchema } from './textImage/textImage.schema'
+import { textSectionSchema } from './textSection/textSection.schema'
 
-export const objects = [hero, seo, textImage, textSection]
-
-// Prepped section-maps ready to use in docs
-export const defaultSections = mapSections([textImage, textSection])
-
-function mapSections(sectionArray: Array<{ name: string; type: string }>) {
-  return sectionArray.map((section) => ({
-    name: section.name,
-    type: section.name,
-  }))
-}
+export const objects = [heroSchema, seoSchema, textImageSchema, textSectionSchema]

@@ -1,19 +1,19 @@
-import baseImage from './baseImage'
-import flexibleLink from './flexibleLink'
-import flexibleRefs from './flexibleRefs'
-import flexibleUrl from './flexibleUrl'
-import headline from './headline'
-import manchet from './manchet'
-import portableText from './portableText'
-import portableTextSimple from './portableTextSimple'
+import { baseImageSchema } from './baseImage/baseImage.schema'
+import { flexibleLinkSchema } from './flexibleLink/flexibleLink.schema'
+import { flexibleRefsSchema } from './flexibleRefs/flexibleRefs.schema'
+import { flexibleUrlSchema } from './flexibleUrl/flexibleUrl.schema'
+import { portableTextSchema } from './portableText/portableText.schema'
+import { portableTextSimpleSchema } from './portableTextSimple/portableTextSimple.schema'
+import { headlineSchema } from './headline/headline.schema'
+import { manchetSchema } from './manchet/manchet.schema'
 
 export const fields = [
-  baseImage,
-  flexibleUrl,
-  flexibleLink,
-  flexibleRefs,
-  headline,
-  manchet,
-  portableText,
-  portableTextSimple,
+  baseImageSchema,
+  flexibleUrlSchema,
+  flexibleLinkSchema,
+  flexibleRefsSchema,
+  portableTextSchema,
+  portableTextSimpleSchema,
+  headlineSchema,
+  manchetSchema,
 ]

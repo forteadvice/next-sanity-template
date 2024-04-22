@@ -1,6 +1,6 @@
 import Button from '@/components/ui/Button'
 import PortableTextResolver from '@/components/utilities/PortableTextResolver'
-import type { TTextSection } from '@/sanity/queries/objectQueries/textSection'
+import type { TTextSection } from '@/sanity/schemas/objects/textSection/textSection.props'
 
 type Props = {
   data: TTextSection

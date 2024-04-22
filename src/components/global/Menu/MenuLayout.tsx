@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { TMenu, TMenuItem } from '@/sanity/queries/documentQueries/settings'
+import type { TMenu, TMenuItem } from '@/sanity/schemas/documents/settings/settings.props'
 
 type Props = { data: TMenu }
 
