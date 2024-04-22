@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { LinkIcon } from '@sanity/icons'
+import { linkableDocumentTypes } from '../../documents/_linkableDocumentTypes'
 
 export const flexibleLinkSchema = defineType({
   name: 'flexibleLink',

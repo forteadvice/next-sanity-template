@@ -1,10 +1,7 @@
 import { groq } from 'next-sanity'
-import { referencePathQuery } from '../../../queries/helperQueries/referencePath'
+import { flexibleRefsQuery } from '../flexibleRefs/flexibleRefs.query'
 
 export const flexibleLinkQuery = groq`{
   title,
-  link {
-    internal { 'path': ${referencePathQuery} },
-    external,
-  } 
+  ...href ${flexibleRefsQuery}
 }`

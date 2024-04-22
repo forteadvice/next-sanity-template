@@ -1,7 +1,7 @@
 import { defineType, defineField } from 'sanity'
-import { linkableDocumentTypes } from '../documents'
+import { linkableDocumentTypes } from '../../documents/_linkableDocumentTypes'
 
-export default defineType({
+export const flexibleRefsSchema = defineType({
   name: 'flexibleRefs',
   type: 'object',
   options: { collapsible: false },

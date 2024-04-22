@@ -1,5 +1,6 @@
 import { baseImageSchema } from './baseImage/baseImage.schema'
 import { flexibleLinkSchema } from './flexibleLink/flexibleLink.schema'
+import { flexibleRefsSchema } from './flexibleRefs/flexibleRefs.schema'
 import { flexibleUrlSchema } from './flexibleUrl/flexibleUrl.schema'
 import { portableTextSchema } from './portableText/portableText.schema'
 import { portableTextSimpleSchema } from './portableTextSimple/portableTextSimple.schema'
@@ -10,6 +11,7 @@ export const fields = [
   baseImageSchema,
   flexibleUrlSchema,
   flexibleLinkSchema,
+  flexibleRefsSchema,
   portableTextSchema,
   portableTextSimpleSchema,
   headlineSchema,
