@@ -19,6 +19,7 @@ const meta: Meta<typeof TabsComponent> = {
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam eaque voluptas itaque velit amet. Quos iusto repellendus eum nisi ad, distinctio possimus eos repudiandae saepe esse quidem voluptatem ratione!',
       },
     ],
+    title: 'Tabs component',
   },
 }
 export default meta

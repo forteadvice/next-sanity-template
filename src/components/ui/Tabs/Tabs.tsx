@@ -13,14 +13,15 @@ type Tab = {
 type Props = {
   tabs?: Tab[]
   headlineTag?: 'h2' | 'h3'
+  title: string
 }
 
 /**
  * Accessible tabs with (almost) no styling
  */
-export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3' }: Props) {
+export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', title }: Props) {
   // Set unique key on each tab
-  tabs?.map((tab) => (tab.key = `tab${useId()}`))
+  tabs?.map((tab) => (tab.key = `tabs${useId()}`))
 
   const [currentKey, setCurrentKey] = useState(tabs ? tabs[0]?.key : undefined)
   const buttonsRef = useRef<HTMLButtonElement[]>([])
@@ -43,19 +44,18 @@ export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3' }: Props) {
 
   return (
     <div>
-      <ol role='tablist' className='flex gap-3'>
+      <ol role='tablist' aria-label={title} className='flex gap-3'>
         {tabs?.map((tab, index) => {
           const { label, key } = tab
-
           return (
-            <li key={`selector-${key}`}>
+            <li key={`tab-${key}`}>
               <button
                 ref={(button) => {
                   if (button) buttonsRef.current[index] = button
                 }}
                 role='tab'
-                id={`selector-${key}`}
-                aria-controls={`content-${key}`}
+                id={`tab-${key}`}
+                aria-controls={`tabpanel-${key}`}
                 aria-selected={key === currentKey}
                 onClick={() => setCurrentKey(key)}
                 onKeyDown={handleBtnKeyDown}
@@ -74,10 +74,10 @@ export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3' }: Props) {
         const { headline, text, key } = tab
         return (
           <div
-            key={`content-${key}`}
             role='tabpanel'
-            id={`content-${key}`}
-            aria-labelledby={`selector-${key}`}
+            key={`tabpanel-${key}`}
+            id={`tabpanel-${key}`}
+            aria-labelledby={`tab-${key}`}
             aria-hidden={currentKey !== key}
             className={cn('transition-opacity duration-500', {
               'opacity-0 h-0 overflow-hidden': currentKey !== key,
