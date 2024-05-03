@@ -11,15 +11,18 @@ type Tab = {
 }
 
 type Props = {
+  /** Array of tabs */
   tabs?: Tab[]
+  /** Sets the tag used for each tabpanel headline */
   headlineTag?: 'h2' | 'h3'
-  title: string
+  /** Provides a label that describes the purpose of the set of tabs. */
+  ariaLabel: string
 }
 
 /**
  * Accessible tabs with (almost) no styling
  */
-export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', title }: Props) {
+export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', ariaLabel }: Props) {
   // Set unique key on each tab
   tabs?.map((tab) => (tab.key = `tabs${useId()}`))
 
@@ -44,7 +47,7 @@ export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', title }: P
 
   return (
     <div>
-      <ol role='tablist' aria-label={title} className='flex gap-3'>
+      <ol role='tablist' aria-label={ariaLabel} className='flex gap-3'>
         {tabs?.map((tab, index) => {
           const { label, key } = tab
           return (
