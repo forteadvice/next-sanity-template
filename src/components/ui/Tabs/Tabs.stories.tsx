@@ -11,12 +11,14 @@ const meta: Meta<typeof TabsComponent> = {
         label: 'Tab 1',
         headline: 'Tab 1 headline',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam eaque voluptas itaque velit amet. Quos iusto repellendus eum nisi ad, distinctio possimus eos repudiandae saepe esse quidem voluptatem ratione!',
+        _key: '192847',
       },
 
       {
         label: 'Tab 2',
         headline: 'Tab 2 headline',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quisquam eaque voluptas itaque velit amet. Quos iusto repellendus eum nisi ad, distinctio possimus eos repudiandae saepe esse quidem voluptatem ratione!',
+        _key: '192393',
       },
     ],
     ariaLabel: 'Tabs component',
