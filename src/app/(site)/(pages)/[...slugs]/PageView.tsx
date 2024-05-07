@@ -3,11 +3,11 @@ import SectionsResolver from '@/components/global/SectionsResolver'
 
 import type { TPage } from '@/sanity/schemas/documents/page/page.props'
 
-export default function PageView({ data }: { data: TPage }) {
+export default function PageView({ hero, sections }: TPage) {
   return (
     <main>
-      {data?.hero && <Hero {...data?.hero} />}
-      {data?.sections && <SectionsResolver sections={data?.sections} />}
+      {hero && <Hero {...hero} />}
+      {sections && <SectionsResolver sections={sections} />}
     </main>
   )
 }

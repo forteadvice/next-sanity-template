@@ -1,13 +1,12 @@
-import dynamic from 'next/dynamic'
-import isDraftMode from '@/lib/isDraftMode'
+import type { TFooter } from '@/sanity/schemas/documents/settings/settings.props'
 
-import { loadSettings } from '@/sanity/loader/loadQueries'
-import FooterLayout from './FooterLayout'
-const FooterPreview = dynamic(() => import('./FooterPreview'))
-
-export default async function Footer() {
-  const initial = await loadSettings()
-  if (!initial.data?.footer) return
-  if (isDraftMode()) return <FooterPreview initial={initial} />
-  return <FooterLayout data={initial.data.footer} />
+export default function FooterLayout(props: TFooter) {
+  const { address, phone, email } = props
+  return (
+    <footer className='footer p-4'>
+      <address>{address}</address>
+      <p>{phone}</p>
+      <p>{email}</p>
+    </footer>
+  )
 }

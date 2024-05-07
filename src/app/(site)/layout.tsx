@@ -1,22 +1,23 @@
 import '../../styles/globals.css'
 
-import dynamic from 'next/dynamic'
-
 import isDraftMode from '@/lib/isDraftMode'
 import Menu from '@/components/global/Menu'
 import Footer from '@/components/global/Footer'
-
-const LiveVisualEditing = dynamic(() => import('@/sanity/loader/LiveVisualEditing'))
+import ExitPreviewButton from '@/components/global/ExitPreviewButton'
+import { loadSettings } from '@/sanity/lib/loaders/load.settings'
 
 type Props = { children: React.ReactNode }
 export default async function BaseLayout({ children }: Props) {
+  const settings = await loadSettings()
+  const { menu, footer } = settings
+
   return (
     <html lang='en'>
       <body>
-        <Menu />
+        {menu && <Menu {...menu} />}
         {children}
-        <Footer />
-        {isDraftMode() && <LiveVisualEditing />}
+        {footer && <Footer {...footer} />}
+        {isDraftMode() && <ExitPreviewButton />}
       </body>
     </html>
   )
