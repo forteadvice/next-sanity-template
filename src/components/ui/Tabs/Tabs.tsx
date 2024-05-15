@@ -1,6 +1,5 @@
 'use client'
-
-import { useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -8,7 +7,7 @@ type Tab = {
   label?: string
   headline?: string
   text?: string
-  _key: string
+  key?: string
 }
 
 type Props = {
@@ -24,7 +23,11 @@ type Props = {
  * Accessible tabs with (almost) no styling
  */
 export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', ariaLabel }: Props) {
-  const [currentKey, setCurrentKey] = useState(tabs ? tabs[0]?._key : undefined)
+  // Set unique key on each tab
+  const id = useId()
+  tabs?.map((tab, idx) => (tab.key = `tabs${idx}${id}`))
+
+  const [currentKey, setCurrentKey] = useState(tabs ? tabs[0]?.key : undefined)
   const buttonsRef = useRef<HTMLButtonElement[]>([])
 
   // Logic for arrow left & right
@@ -47,21 +50,21 @@ export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', ariaLabel 
     <div>
       <ol role='tablist' aria-label={ariaLabel} className='flex gap-3'>
         {tabs?.map((tab, index) => {
-          const { label, _key } = tab
+          const { label, key } = tab
           return (
-            <li key={`tab-${_key}`}>
+            <li key={`tab-${key}`}>
               <button
                 ref={(button) => {
                   if (button) buttonsRef.current[index] = button
                 }}
                 role='tab'
-                id={`tab-${_key}`}
-                aria-controls={`tabpanel-${_key}`}
-                aria-selected={_key === currentKey}
-                onClick={() => setCurrentKey(_key)}
+                id={`tab-${key}`}
+                aria-controls={`tabpanel-${key}`}
+                aria-selected={key === currentKey}
+                onClick={() => setCurrentKey(key)}
                 onKeyDown={handleBtnKeyDown}
                 className={cn({
-                  underline: _key === currentKey,
+                  underline: key === currentKey,
                 })}
               >
                 {label}
@@ -72,16 +75,16 @@ export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', ariaLabel 
       </ol>
 
       {tabs?.map((tab) => {
-        const { headline, text, _key } = tab
+        const { headline, text, key } = tab
         return (
           <div
             role='tabpanel'
-            key={`tabpanel-${_key}`}
-            id={`tabpanel-${_key}`}
-            aria-labelledby={`tab-${_key}`}
-            aria-hidden={currentKey !== _key}
+            key={`tabpanel-${key}`}
+            id={`tabpanel-${key}`}
+            aria-labelledby={`tab-${key}`}
+            aria-hidden={currentKey !== key}
             className={cn('transition-opacity duration-500', {
-              'opacity-0 h-0 overflow-hidden': currentKey !== _key,
+              'opacity-0 h-0 overflow-hidden': currentKey !== key,
             })}
           >
             <HeadlineTag>{headline}</HeadlineTag>
