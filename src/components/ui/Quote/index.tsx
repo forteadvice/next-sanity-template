@@ -39,11 +39,13 @@ function QuoteCredits(props: Omit<Props, 'children'>) {
           />
         </div>
       )}
-      <div className='flex flex-col sm:pl-4 pt-2 sm:pt-0'>
-        {name && <p className='text-sm sm:text-lg font-semibold'>{name}</p>}
-        {heading && <p className='text-xs sm:text-sm font-semibold italic'>{heading}</p>}
-        {subHeading && <p className='text-xs italic'>{subHeading}</p>}
-      </div>
+      {(name || heading || subHeading) && (
+        <div className='flex flex-col sm:pl-4 pt-2 sm:pt-0'>
+          {name && <p className='text-sm sm:text-lg font-semibold'>{name}</p>}
+          {heading && <p className='text-xs sm:text-sm font-semibold italic'>{heading}</p>}
+          {subHeading && <p className='text-xs italic'>{subHeading}</p>}
+        </div>
+      )}
     </div>
   )
 }
