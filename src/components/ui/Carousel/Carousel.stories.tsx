@@ -10,7 +10,7 @@ const meta: Meta<typeof CarouselComponent> = {
     slides: [
       {
         imgSrc:
-          'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=5616&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         link: {
           href: '#',
           title: 'Read more',
@@ -18,7 +18,7 @@ const meta: Meta<typeof CarouselComponent> = {
       },
       {
         imgSrc:
-          'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=5760&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         link: {
           href: '#',
           title: 'Read more',
@@ -26,7 +26,7 @@ const meta: Meta<typeof CarouselComponent> = {
       },
       {
         imgSrc:
-          'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=4159&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         link: {
           href: '#',
           title: 'Read more',
@@ -34,7 +34,7 @@ const meta: Meta<typeof CarouselComponent> = {
       },
       {
         imgSrc:
-          'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=3506&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         link: {
           href: '#',
           title: 'Read more',

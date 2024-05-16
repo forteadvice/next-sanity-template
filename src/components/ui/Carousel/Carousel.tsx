@@ -13,13 +13,22 @@ type Props = {
   slides?: TCarouselSlide[]
 }
 
+type TSlideStore = {
+  transformNr: number
+  currentIdx: number
+  previousIdx: number
+  direction: 'left' | 'right'
+}
+
 export default function Carousel({ ariaLabel, slides }: Props) {
   const [autoPlay, setAutoPlay] = useState(true)
-  const [currentIdx, setCurrentIdx] = useState(0)
-  const [leftIdx, setLeftIdx] = useState(slides ? slides?.length - 1 : undefined)
-  const [rightIdx, setRightIdx] = useState(slides ? 1 : undefined)
-  const [tranformerNr, setTransformerNr] = useState(0)
-  const [counrterTranformerNr, setCounterTransformerNr] = useState(0)
+  const [slideStore, setSlideStore] = useState<TSlideStore>({
+    transformNr: 0,
+    currentIdx: 0,
+    previousIdx: 0,
+    direction: 'right',
+  })
+  const [disableButtons, setDisableButtons] = useState(false)
 
   if (!slides) return
 
@@ -27,23 +36,35 @@ export default function Carousel({ ariaLabel, slides }: Props) {
   const id = useId()
   const carouselItemsId = `carouselItems${id}`
 
-  const lastSlideIndex = slides.length - 1
-  // const firstSlide = { ...slides[0] }
-  // const lastSlide = { ...slides[lastSlideIndex] }
+  const maxSlideIndex = slides.length - 1
 
   function moveLeft() {
-    const newCurrentIdx = currentIdx == 0 ? lastSlideIndex : currentIdx - 1
-    setCurrentIdx(newCurrentIdx)
-    setTransformerNr(tranformerNr + 1)
-    setCounterTransformerNr(counrterTranformerNr - 1)
-    setRightIdx(newCurrentIdx + 1)
+    if (!slides || disableButtons) return
+    setSlideStore({
+      transformNr: slideStore.transformNr + 1,
+      previousIdx: slideStore.currentIdx,
+      currentIdx: slideStore.currentIdx == 0 ? maxSlideIndex : slideStore.currentIdx - 1,
+      direction: 'left',
+    })
+    pauseButtonActions()
   }
+
   function moveRight() {
-    const newCurrentIdx = currentIdx == lastSlideIndex ? 0 : currentIdx + 1
-    setCurrentIdx(newCurrentIdx)
-    setCounterTransformerNr(counrterTranformerNr + 1)
-    setTransformerNr(tranformerNr - 1)
-    setLeftIdx(newCurrentIdx - 1)
+    if (!slides || disableButtons) return
+    setSlideStore({
+      transformNr: slideStore.transformNr - 1,
+      previousIdx: slideStore.currentIdx,
+      currentIdx: slideStore.currentIdx == maxSlideIndex ? 0 : slideStore.currentIdx + 1,
+      direction: 'right',
+    })
+    pauseButtonActions()
+  }
+
+  function pauseButtonActions() {
+    setDisableButtons(true)
+    setTimeout(() => {
+      setDisableButtons(false)
+    }, 700)
   }
 
   return (
@@ -70,13 +91,9 @@ export default function Carousel({ ariaLabel, slides }: Props) {
             aria-live={autoPlay ? 'off' : 'polite'}
             className='relative transition-transform duration-700 transform-gpu h-0 pb-[66.5%]'
             style={{
-              transform: `translateX(${tranformerNr * 100}%`,
+              transform: `translateX(${slideStore.transformNr * 100}%`,
             }}
           >
-            {/* <div className='flex-1'>
-              <CarouselSlide {...lastSlide} active={false} />
-            </div> */}
-
             {slides?.map((slide, idx) => {
               return (
                 <div
@@ -84,16 +101,27 @@ export default function Carousel({ ariaLabel, slides }: Props) {
                   role='group'
                   aria-roledescription='slide'
                   aria-label={`${idx + 1} of ${slides.length}`}
-                  style={{ transform: `` }}
+                  className='absolute top-0 left-0'
+                  style={{
+                    display:
+                      idx !== slideStore.currentIdx && idx !== slideStore.previousIdx
+                        ? 'none'
+                        : undefined,
+
+                    transform:
+                      idx === slideStore.currentIdx
+                        ? `translateX(${slideStore.transformNr * -100}%)`
+                        : idx === slideStore.previousIdx && slideStore.direction === 'right'
+                          ? `translateX(${slideStore.transformNr * -100 - 100}%)`
+                          : idx === slideStore.previousIdx
+                            ? `translateX(${slideStore.transformNr * -100 + 100}%)`
+                            : undefined,
+                  }}
                 >
-                  <CarouselSlide {...slide} active={currentIdx === idx} />
+                  <CarouselSlide {...slide} active={slideStore.currentIdx === idx} />
                 </div>
               )
             })}
-
-            {/* <div aria-hidden tabIndex={-1} className='flex-1'>
-              <CarouselSlide {...firstSlide} active={false} />
-            </div> */}
           </div>
         </div>
 
