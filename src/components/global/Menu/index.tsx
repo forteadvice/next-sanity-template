@@ -1,13 +1,29 @@
-import dynamic from 'next/dynamic'
-import isDraftMode from '@/lib/isDraftMode'
+import Link from 'next/link'
 
-import { loadSettings } from '@/sanity/loader/loadQueries'
-import MenuLayout from './MenuLayout'
-const MenuPreview = dynamic(() => import('./MenuPreview'))
+import type { TMenu, TMenuItem } from '@/sanity/schemas/documents/settings/settings.props'
 
-export default async function Menu() {
-  const initial = await loadSettings()
-  if (!initial.data?.menu) return
-  if (isDraftMode()) return <MenuPreview initial={initial} />
-  return <MenuLayout data={initial.data.menu} />
+// The menu bar
+export default function MenuLayout({ menuItems }: TMenu) {
+  return (
+    <nav className='menu flex gap-4'>
+      <Link href={'/'} prefetch={false}>
+        Home
+      </Link>
+
+      {menuItems?.map((item, idx) => {
+        return <MenuItem {...item} key={idx} />
+      })}
+    </nav>
+  )
+}
+
+// Single menu item
+function MenuItem({ title, href }: TMenuItem) {
+  if (href) {
+    return (
+      <Link href={href} prefetch={false}>
+        {title}
+      </Link>
+    )
+  }
 }

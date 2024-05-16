@@ -2,10 +2,6 @@ import { revalidateTag, revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
-/*
- * TODO: This needs to be typed and tested - this is just an old sketch
- */
-
 export async function POST(req: any) {
   try {
     const { isValidSignature, body } = await parseBody(req, process.env.SANITY_REVALIDATE_SECRET)
@@ -22,11 +18,11 @@ export async function POST(req: any) {
       return new NextResponse(message, { status: 400 })
     }
 
-    if (body.changedSlug) {
+    const tag = resolveTags(body)
+    if (!tag) {
       console.log('revalidate *')
       revalidatePath('/', 'layout')
     } else {
-      const tag = resolveTags(body)
       console.log(`revalidateTag: ${tag}`)
       revalidateTag(tag)
     }
@@ -39,6 +35,16 @@ export async function POST(req: any) {
 }
 
 function resolveTags(body: any) {
-  if (body._type == 'page') return `page:${body.slug}`
-  return body._type
+  const { changedSlug, _type, slug } = body
+
+  // Return null to revalidate *
+  // Slug changed revalidate * to prevent 404 links
+  if (changedSlug) return null
+
+  if (_type == 'page') return `page:${slug}`
+  if (_type == 'frontpage') return 'frontpage'
+  if (_type == 'settings') return 'settings'
+
+  // Unhandled - revalidate *
+  return null
 }

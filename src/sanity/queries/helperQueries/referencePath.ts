@@ -6,6 +6,8 @@ import { groq } from 'next-sanity'
  */
 export const referencePathQuery = groq`
   select(
+    _type == "page" && defined(parent->parent->slug) => "/" + parent->parent->slug.current + "/" + parent->slug.current + "/" + slug.current,
+    _type == "page" && defined(parent->slug) => "/" + parent->slug.current + "/" + slug.current,
     _type == "page" => "/" + slug.current,
     "/"
   )

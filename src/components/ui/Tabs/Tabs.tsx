@@ -24,7 +24,8 @@ type Props = {
  */
 export default function Tabs({ tabs, headlineTag: HeadlineTag = 'h3', ariaLabel }: Props) {
   // Set unique key on each tab
-  tabs?.map((tab) => (tab.key = `tabs${useId()}`))
+  const id = useId()
+  tabs?.map((tab, idx) => (tab.key = `tabs${idx}${id}`))
 
   const [currentKey, setCurrentKey] = useState(tabs ? tabs[0]?.key : undefined)
   const buttonsRef = useRef<HTMLButtonElement[]>([])
