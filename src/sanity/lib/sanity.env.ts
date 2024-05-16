@@ -10,6 +10,11 @@ export const projectId = assertValue(
   'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID',
 )
 
+export const previewToken = assertValue(
+  process.env.NEXT_PUBLIC_PREVIEW_TOKEN,
+  'Missing environment variable: NEXT_PUBLIC_PREVIEW_TOKEN',
+)
+
 export const studioUrl = '/studio'
 export const useCdn = false // Must be false to get fresh data to api/revalidate
 

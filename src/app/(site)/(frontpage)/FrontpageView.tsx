@@ -2,11 +2,11 @@ import Hero from '@/components/sections/Hero'
 import SectionsResolver from '@/components/global/SectionsResolver'
 import type { TFrontPage } from '@/sanity/schemas/documents/frontpage/frontpage.props'
 
-export default function FrontpageView({ data }: { data: TFrontPage }) {
+export default function FrontpageView({ hero, sections }: TFrontPage) {
   return (
     <main>
-      {data?.hero && <Hero {...data.hero} />}
-      {data?.sections && <SectionsResolver sections={data.sections} />}
+      {hero && <Hero {...hero} />}
+      {sections && <SectionsResolver sections={sections} />}
     </main>
   )
 }

@@ -1,12 +1,12 @@
-import { loadSettings } from '@/sanity/loader/loadQueries'
+import { loadSettings } from '@/sanity/lib/loaders/load.settings'
 
 export default async function NotFound() {
-  const { data: settings } = await loadSettings()
+  const { pageNotFound } = await loadSettings()
 
   return (
     <main className='flex-1 flex justify-center items-center'>
       <h1 className='text-2xl mb-2'>
-        {settings?.pageNotFound?.title} | {settings?.pageNotFound?.body}
+        {pageNotFound?.title} | {pageNotFound?.body}
       </h1>
     </main>
   )
