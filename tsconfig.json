@@ -21,7 +21,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "typeRoots": ["./custom.d.ts"]
   },
   "include": [
     "next-env.d.ts",
