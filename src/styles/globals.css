@@ -20,7 +20,10 @@ main {
   @apply p-4 max-w-[1400px] m-auto;
 }
 img {
-  @apply block rounded-3xl;
+  @apply block;
+}
+img:not(a img) {
+  @apply rounded-3xl;
 }
 .hero p {
   @apply md:ml-12 lg:ml-24;
