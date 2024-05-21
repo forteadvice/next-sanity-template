@@ -12,7 +12,7 @@ export default function CallToAction(props: Props) {
 
   return (
     <section
-      className={`relative ${image ? 'bg-center bg-cover' : ''} grid gap-y-8 py-32 text-center bg-emerald-100`}
+      className={`relative ${image ? 'bg-center bg-cover' : ''} grid gap-y-8 py-32 text-center ${!video ? 'bg-emerald-100' : ''}`}
       style={{ backgroundImage: image ? `url(${image})` : 'none' }}
     >
       {heading && <h1 className='text-6xl font-semibold'>{heading}</h1>}

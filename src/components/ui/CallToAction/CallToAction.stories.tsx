@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import CallToAction from '.'
 import imageFile from './image.jpg'
-
+import videoFile from './video.mp4'
+console.log(videoFile)
 import Button from '../Button'
 
 const meta: Meta<typeof CallToAction> = {
@@ -13,7 +14,7 @@ const meta: Meta<typeof CallToAction> = {
   tags: ['autodocs'],
   args: {
     image: imageFile.src,
-    video: 'static/media/src/components/ui/CallToAction/video.mp4',
+    video: videoFile,
     heading: "I'm a bold heading",
     subHeading: 'Sub sub what up',
     button: <Button href='#'>Click here</Button>,
