@@ -18,7 +18,8 @@ type Directions = 'left' | 'right'
 export default function Carousel({ ariaLabel, slides }: Props) {
   const [autoPlay, setAutoPlay] = useState(true)
   const [autoPlayTick, setAutoPlayTick] = useState(0)
-  const [pauseActions, setPauseActions] = useState(false)
+  const [pauseAutoActions, setPauseAutoActions] = useState(false)
+  const [pauseButtonActions, setPauseButtonActions] = useState(false)
   const [transformValue, setTransformValue] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [previousIndex, setPreviousIndex] = useState(0)
@@ -37,20 +38,29 @@ export default function Carousel({ ariaLabel, slides }: Props) {
 
   // On tick update, determine wether to move slide
   useEffect(() => {
-    if (autoPlay && autoPlayTick != 0 && !pauseActions) {
+    if (autoPlay && autoPlayTick != 0 && !pauseButtonActions && !pauseAutoActions) {
       move('right')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoPlayTick])
 
-  // Remove pauseActions after X ms
+  // Remove pauseAutoActions after X ms - should match tick ms
   useEffect(() => {
-    if (pauseActions) {
+    if (pauseAutoActions) {
       setTimeout(() => {
-        setPauseActions(false)
+        setPauseButtonActions(false)
+      }, 5000)
+    }
+  }, [pauseAutoActions])
+
+  // Remove pauseButtonActions after X ms - should match transition duration
+  useEffect(() => {
+    if (pauseButtonActions) {
+      setTimeout(() => {
+        setPauseButtonActions(false)
       }, 700)
     }
-  }, [pauseActions])
+  }, [pauseButtonActions])
 
   if (!slides) return
 
@@ -59,8 +69,8 @@ export default function Carousel({ ariaLabel, slides }: Props) {
 
   // Mover-function
   function move(direction: Directions) {
-    if (!slides || pauseActions) return
-    setPauseActions(true)
+    if (!slides || pauseButtonActions) return
+    setPauseButtonActions(true)
     if (direction === 'left') {
       setCurrentIndex(currentIndex == 0 ? maxSlideIndex : currentIndex - 1)
       setTransformValue(transformValue + 1)
@@ -85,9 +95,9 @@ export default function Carousel({ ariaLabel, slides }: Props) {
           className='absolute top-1/2 left-5 -translate-y-1/2 z-10 bg-white bg-opacity-75 w-10 h-10 rounded-full'
           aria-controls={carouselItemsId}
           aria-label='Previous Slide'
-          onClick={() => move('left')}
-          onFocus={() => {
-            console.log('KASJDKJKS')
+          onClick={() => {
+            move('left')
+            setPauseAutoActions(true)
           }}
         >
           {'<-'}
@@ -134,7 +144,10 @@ export default function Carousel({ ariaLabel, slides }: Props) {
           className='absolute top-1/2 right-5 -translate-y-1/2 z-10 bg-white bg-opacity-75 w-10 h-10 rounded-full'
           aria-controls={carouselItemsId}
           aria-label='Next Slide'
-          onClick={() => move('right')}
+          onClick={() => {
+            move('right')
+            setPauseAutoActions(true)
+          }}
         >
           {'->'}
         </button>
