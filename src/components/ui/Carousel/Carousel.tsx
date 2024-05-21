@@ -17,26 +17,33 @@ type Directions = 'left' | 'right'
 
 export default function Carousel({ ariaLabel, slides }: Props) {
   const [autoPlay, setAutoPlay] = useState(true)
+  const [autoPlayTick, setAutoPlayTick] = useState(0)
   const [pauseActions, setPauseActions] = useState(false)
   const [transformValue, setTransformValue] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [previousIndex, setPreviousIndex] = useState(0)
   const [direction, setDirection] = useState<Directions>('right')
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout | null = null
-    if (autoPlay && !pauseActions) {
-      interval = setInterval(() => {
-        move('right')
-      }, 3000)
-    }
-    return () => {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
-  }, [autoPlay])
+  // Generate unique identifiers
+  const id = useId()
+  const carouselItemsId = `carouselItems${id}`
 
+  // Update tick everey X seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setAutoPlayTick(autoPlayTick + 1)
+    }, 5000)
+  }, [autoPlayTick])
+
+  // On tick update, determine wether to move slide
+  useEffect(() => {
+    if (autoPlay && autoPlayTick != 0 && !pauseActions) {
+      move('right')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoPlayTick])
+
+  // Remove pauseActions after X ms
   useEffect(() => {
     if (pauseActions) {
       setTimeout(() => {
@@ -47,6 +54,10 @@ export default function Carousel({ ariaLabel, slides }: Props) {
 
   if (!slides) return
 
+  // Store maximum index value
+  const maxSlideIndex = slides.length - 1
+
+  // Mover-function
   function move(direction: Directions) {
     if (!slides || pauseActions) return
     setPauseActions(true)
@@ -60,13 +71,6 @@ export default function Carousel({ ariaLabel, slides }: Props) {
     setPreviousIndex(currentIndex)
     setDirection(direction)
   }
-
-  // Generate unique identifiers
-  const id = useId()
-  const carouselItemsId = `carouselItems${id}`
-
-  // Store maximum index value
-  const maxSlideIndex = slides.length - 1
 
   return (
     <div
