@@ -19,8 +19,15 @@ export default function Button({ children, href, className, ...rest }: ButtonPro
   )
 
   if (href) {
+    const targetBlank = !href.startsWith('/')
+
     return (
-      <Link className={buttonStyle} href={href} {...(rest as Omit<NextJSAnchorProps, 'href'>)}>
+      <Link
+        className={buttonStyle}
+        href={href}
+        target={targetBlank ? '_blank' : undefined}
+        {...(rest as Omit<NextJSAnchorProps, 'href'>)}
+      >
         {children}
       </Link>
     )
