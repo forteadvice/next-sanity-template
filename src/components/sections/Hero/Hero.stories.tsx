@@ -3,7 +3,7 @@ import Component from './Hero'
 import { baseImageMock } from '@/components/utilities/BaseImage/baseImage.mock'
 
 const meta: Meta<typeof Component> = {
-  title: 'UI/Hero',
+  title: 'Sections/Hero',
   component: Component,
   tags: ['autodocs'],
 

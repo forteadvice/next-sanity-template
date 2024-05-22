@@ -1,13 +1,18 @@
 import BaseImage from '@/components/utilities/BaseImage/BaseImage'
 import type { THero } from '@/sanity/schemas/objects/hero/hero.props'
+import Heading from '@/components/ui/Heading/Heading'
 
 export default function Hero(props: THero) {
   const { headline, manchet, image } = props
   return (
-    <section className='hero relative'>
-      <div className='absolute m-6'>
-        <h1 className='text-white text-6xl lg:text-7xl font-bold'>{headline}</h1>
-        <p className='text-white text-lg md:text-xl mt-2 font-semibold'>{manchet}</p>
+    <section className='relative'>
+      <div className='absolute m-6 '>
+        <Heading tag='h1' variant='title' className='text-white'>
+          {headline}
+        </Heading>
+        <Heading tag='p' variant='extra-small' className='mt-5 text-white'>
+          {manchet}
+        </Heading>
       </div>
       {image && (
         <BaseImage

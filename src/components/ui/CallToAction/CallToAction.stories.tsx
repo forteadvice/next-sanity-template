@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import CallToAction from './CallToAction'
 import imageFile from './image.jpg'
 import videoFile from './video.mp4'
-console.log(videoFile)
+
 import Button from '../Button/Button'
 
 const meta: Meta<typeof CallToAction> = {

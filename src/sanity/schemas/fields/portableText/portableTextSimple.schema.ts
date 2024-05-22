@@ -9,10 +9,7 @@ export const portableTextSimpleSchema = defineType({
   of: [
     defineArrayMember({
       type: 'block',
-      styles: [
-        { title: 'Normal', value: 'normal' },
-        { title: 'Quote', value: 'blockquote' },
-      ],
+      styles: [{ title: 'Normal', value: 'normal' }],
 
       marks: {
         decorators: [
@@ -23,33 +20,10 @@ export const portableTextSimpleSchema = defineType({
 
         annotations: [
           defineField({
-            name: 'linkExternal',
-            type: 'object',
-            title: 'External link',
-            icon: EarthGlobeIcon,
-            fields: [
-              defineField({
-                name: 'href',
-                title: 'URL',
-                type: 'flexibleUrl',
-              }),
-            ],
-          }),
-
-          defineField({
-            name: 'linkInternal',
-            type: 'object',
-            title: 'Internal link',
+            name: 'link',
+            title: 'Link',
+            type: 'flexibleRefs',
             icon: LinkIcon,
-            fields: [
-              {
-                name: 'reference',
-                type: 'reference',
-                title: 'Reference',
-                to: linkableDocumentTypes,
-                validation: (Rule) => Rule.required(),
-              },
-            ],
           }),
         ],
       },

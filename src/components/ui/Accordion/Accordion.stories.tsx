@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Accordion from './Accordion'
+import AccordionComponent from './Accordion'
 
-const meta: Meta<typeof Accordion> = {
+const meta: Meta<typeof AccordionComponent> = {
   title: 'UI/Accordion',
-  component: Accordion,
+  component: AccordionComponent,
   tags: ['autodocs'],
   args: {
     summary: 'Lorem ipsum dolor',
@@ -13,6 +13,6 @@ const meta: Meta<typeof Accordion> = {
 }
 export default meta
 
-type Story = StoryObj<typeof Accordion>
+type Story = StoryObj<typeof AccordionComponent>
 
 export const Primary: Story = {}
