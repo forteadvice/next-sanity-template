@@ -1,4 +1,4 @@
-import Button from '@/components/ui/Button'
+import Button from '@/components/ui/Button/Button'
 import PortableTextResolver from '@/components/utilities/PortableTextResolver'
 import type { TTextSection } from '@/sanity/schemas/objects/textSection/textSection.props'
 

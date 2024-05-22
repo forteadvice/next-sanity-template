@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Quote from '.'
+import Quote from './Quote'
 
 const meta: Meta<typeof Quote> = {
   title: 'UI/Quote',

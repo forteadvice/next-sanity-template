@@ -1,5 +1,5 @@
 import * as Sections from '../sections'
-import { upperFirst } from '@/lib/utils'
+import { upperFirst } from '@/lib/toUpperFirst'
 import type { TSections, TSection } from '@/sanity/schemas/objects/sections/sections.props'
 
 type Props = {

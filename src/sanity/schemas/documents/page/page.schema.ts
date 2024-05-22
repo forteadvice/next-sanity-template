@@ -1,4 +1,4 @@
-import { toUrlSafe } from '@/lib/utils'
+import { toUrlSafe } from '@/lib/toUrlSafe'
 import { CogIcon, DashboardIcon, SearchIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 import { defaultSections } from '../../objects/sections/sections.schema'

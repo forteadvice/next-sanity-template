@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Component from '.'
-import { baseImageMock } from '@/components/utilities/BaseImage/baseImageMock'
+import Component from './Hero'
+import { baseImageMock } from '@/components/utilities/BaseImage/baseImage.mock'
 
 const meta: Meta<typeof Component> = {
   title: 'UI/Hero',

@@ -1,4 +1,4 @@
-import Hero from '@/components/sections/Hero'
+import Hero from '@/components/sections/Hero/Hero'
 import SectionsResolver from '@/components/global/SectionsResolver'
 import type { TFrontPage } from '@/sanity/schemas/documents/frontpage/frontpage.props'
 

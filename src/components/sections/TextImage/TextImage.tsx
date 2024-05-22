@@ -1,6 +1,6 @@
 import type { TTextImage } from '@/sanity/schemas/objects/textImage/textImage.props'
-import BaseImage from '../../utilities/BaseImage'
-import TextSection from '../TextSection'
+import BaseImage from '../../utilities/BaseImage/BaseImage'
+import TextSection from '../TextSection/TextSection'
 
 type Props = {
   data: TTextImage
