@@ -1,6 +1,6 @@
 import { DashboardIcon, SearchIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
-import { defaultSections } from '../../objects/sections/sections.schema'
+import { defaultBlocks } from '../../objects/contentBlocks/contentBlocks.schema'
 
 export const frontpageSchema = defineType({
   name: 'frontpage',
@@ -24,10 +24,10 @@ export const frontpageSchema = defineType({
     }),
 
     defineField({
-      name: 'sections',
+      name: 'contentBlocks',
       group: 'content',
       type: 'array',
-      of: defaultSections,
+      of: defaultBlocks,
     }),
 
     defineField({

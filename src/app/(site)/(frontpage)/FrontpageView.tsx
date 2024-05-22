@@ -1,12 +1,12 @@
 import Hero from '@/components/sections/Hero/Hero'
-import SectionsResolver from '@/components/global/SectionsResolver'
+import ContentBlocksResolver from '@/components/utilities/ContentBlocks.tsx/ContentBlocksResolver'
 import type { TFrontPage } from '@/sanity/schemas/documents/frontpage/frontpage.props'
 
-export default function FrontpageView({ hero, sections }: TFrontPage) {
+export default function FrontpageView({ hero, contentBlocks }: TFrontPage) {
   return (
     <main>
       {hero && <Hero {...hero} />}
-      {sections && <SectionsResolver sections={sections} />}
+      {contentBlocks && <ContentBlocksResolver contentBlocks={contentBlocks} />}
     </main>
   )
 }

@@ -1,4 +1,4 @@
-import BaseImage from '../../utilities/BaseImage/BaseImage'
+import BaseImage from '@/components/utilities/BaseImage/BaseImage'
 import type { THero } from '@/sanity/schemas/objects/hero/hero.props'
 
 export default function Hero(props: THero) {

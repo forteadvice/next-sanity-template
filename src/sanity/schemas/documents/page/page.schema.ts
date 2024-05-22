@@ -1,7 +1,7 @@
 import { toUrlSafe } from '@/lib/toUrlSafe'
 import { CogIcon, DashboardIcon, SearchIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
-import { defaultSections } from '../../objects/sections/sections.schema'
+import { defaultBlocks } from '../../objects/contentBlocks/contentBlocks.schema'
 
 export const pageSchema = defineType({
   name: 'page',
@@ -76,9 +76,9 @@ export const pageSchema = defineType({
     }),
 
     defineField({
-      name: 'sections',
+      name: 'contentBlocks',
       type: 'array',
-      of: defaultSections,
+      of: defaultBlocks,
       group: 'content',
     }),
 
