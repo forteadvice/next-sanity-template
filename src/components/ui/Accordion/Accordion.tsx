@@ -1,4 +1,5 @@
 import { useId, useState } from 'react'
+import Heading from '../Heading/Heading'
 
 type Props = {
   summary: string
@@ -6,7 +7,7 @@ type Props = {
   summaryTag: 'h2' | 'h3'
 }
 
-export default function Accordion({ summary, summaryTag: SummaryTag = 'h3', children }: Props) {
+export default function Accordion({ summary, summaryTag = 'h3', children }: Props) {
   const [expanded, setExpanded] = useState(false)
 
   // Genarate inuque identifiers
@@ -16,7 +17,7 @@ export default function Accordion({ summary, summaryTag: SummaryTag = 'h3', chil
 
   return (
     <div>
-      <SummaryTag>
+      <Heading tag={summaryTag} variant='medium'>
         <button
           id={buttonId}
           aria-expanded={expanded}
@@ -26,7 +27,7 @@ export default function Accordion({ summary, summaryTag: SummaryTag = 'h3', chil
         >
           <span>{summary}</span>
         </button>
-      </SummaryTag>
+      </Heading>
 
       <div id={regionId} role='region' aria-labelledby={buttonId} hidden={!expanded}>
         {children}

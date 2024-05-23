@@ -6,7 +6,9 @@ const meta: Meta<typeof Component> = {
   title: 'Sections/Hero',
   component: Component,
   tags: ['autodocs'],
-
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     headline: 'Lorem Ipsum',
     manchet:
