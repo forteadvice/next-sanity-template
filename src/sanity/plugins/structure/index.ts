@@ -18,18 +18,6 @@ export const structure: StructureResolver = (S, context) =>
       // Pages - reference tree
       pageReferenceTree(S, context.documentStore),
 
-      // Unsorted pages
-      S.listItem()
-        .title('Pages (unsorted)')
-        .icon(DocumentsIcon)
-        .child(
-          S.documentList()
-            .title(`All Pages`)
-            .schemaType('page')
-            .apiVersion(`v${apiVersion}`)
-            .filter('_type == "page"'),
-        ),
-
       S.divider(),
 
       // Settings
