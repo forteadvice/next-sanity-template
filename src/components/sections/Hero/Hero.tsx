@@ -17,10 +17,10 @@ export default function Hero(props: THero) {
       {image && (
         <BaseImage
           imageObj={image}
-          width={680}
+          width={2800}
           aspectRatio={1 / 1}
           aspectRatioDesktop={16 / 9}
-          sizes={'(max-width: 800px) 90vw, 680px'}
+          sizes={'100vw'}
         />
       )}
     </section>

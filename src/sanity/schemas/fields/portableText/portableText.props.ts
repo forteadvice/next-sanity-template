@@ -1,3 +1,3 @@
-import type { PortableTextMarkDefinition } from '@portabletext/types'
+import type { PortableTextBlock } from '@portabletext/types'
 
-export type TPortableText = PortableTextMarkDefinition
+export type TPortableText = PortableTextBlock[]

@@ -1,11 +1,10 @@
-import { PortableText, PortableTextReactComponents } from '@portabletext/react'
-import type { PortableTextMarkDefinition } from '@portabletext/types'
+import { PortableText, PortableTextReactComponents, PortableTextProps } from '@portabletext/react'
 import InlineLink from '../ui/InlineLink/InlineLink'
 import { cn } from '@/lib/cn'
 import Heading from '../ui/Heading/Heading'
 
-export default function PortableTextResolver({ text }: { text: PortableTextMarkDefinition }) {
-  return <PortableText value={text} components={components} />
+export default function PortableTextResolver({ value }: PortableTextProps) {
+  return <PortableText value={value} components={components} />
 }
 
 // Custom components config

@@ -3,12 +3,8 @@ import PortableTextResolver from '@/components/utilities/PortableTextResolver'
 import type { TTextSection } from '@/sanity/schemas/objects/textSection/textSection.props'
 import Heading from '@/components/ui/Heading/Heading'
 
-type Props = {
-  data: TTextSection
-}
-
-export default function TextSection({ data }: Props) {
-  const { text, ctaLink, title } = data
+export default function TextSection(props: TTextSection) {
+  const { text, ctaLink, title } = props
 
   if (!text) return
   return (
@@ -16,7 +12,7 @@ export default function TextSection({ data }: Props) {
       <Heading tag='h2' variant='large'>
         {title}
       </Heading>
-      <PortableTextResolver text={text} />
+      <PortableTextResolver value={text} />
       {ctaLink?.href && (
         <Button className='mt-2 inline-block' href={ctaLink?.href}>
           {ctaLink?.title}
