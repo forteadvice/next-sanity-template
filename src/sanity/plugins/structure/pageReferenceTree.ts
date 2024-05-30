@@ -8,12 +8,15 @@ import { DocumentIcon, SchemaIcon } from '@sanity/icons'
 
 type TPageReferenceTree = Array<{
   _id: string
+  _type: string
   title: string
   children?: Array<{
     _id: string
+    _type: string
     title: string
     children?: Array<{
       _id: string
+      _type: string
       title: string
     }>
   }>
@@ -23,23 +26,25 @@ export default function pageReferenceTree(S: StructureBuilder, documentStore: Do
   const query = groq`
   *[_type == "page" && !(_id in path("drafts.**")) && !defined(parent)] | order(lower(title) asc) [] {
     _id,
+    _type,
     title,
-    'children': *[_type == "page" && !(_id in path("drafts.**")) && parent._ref == ^._id] | order(lower(title) asc) [] {
+    'children': *[_type == "page" && parent._ref == ^._id] | order(lower(title) asc) [] {
       _id,
+      _type,
       title,
-      'children': *[_type == "page" && !(_id in path("drafts.**")) && parent._ref == ^._id] | order(lower(title) asc) [] {
+      'children': *[_type == "page" && parent._ref == ^._id] | order(lower(title) asc) [] {
         _id,
+        _type,
         title,
       }
     }
   }`
-  const options = { apiVersion }
 
   return S.listItem()
     .title('Pages')
     .icon(SchemaIcon)
     .child(() =>
-      documentStore.listenQuery(query, {}, options).pipe(
+      documentStore.listenQuery(query, {}, { apiVersion, perspective: 'previewDrafts' }).pipe(
         map((parents: TPageReferenceTree) =>
           S.list()
             .title('Pages')
@@ -59,9 +64,10 @@ function buildTree(
   S: StructureBuilder,
 ): (ListItemBuilder | ListItem | Divider)[] {
   return parents.sort().map((parent) => {
-    const { _id, title, children } = parent
+    const { _id, title, children, _type } = parent
+
     if (!children || children.length === 0) {
-      return S.documentListItem().title(title).icon(DocumentIcon).schemaType('page').id(_id)
+      return S.documentListItem().title(title).icon(DocumentIcon).schemaType(_type).id(_id)
     }
 
     return S.listItem()
@@ -72,10 +78,10 @@ function buildTree(
           .menuItems([
             S.menuItem()
               .title('Add')
-              .intent({ type: 'create', params: { type: 'page' } }),
+              .intent({ type: 'create', params: { type: children[0]._type } }),
           ])
           .items([
-            S.documentListItem().schemaType('page').title(title).id(_id),
+            S.documentListItem().schemaType(_type).title(title).id(_id),
             S.divider(),
             ...buildTree(children, S),
           ]),

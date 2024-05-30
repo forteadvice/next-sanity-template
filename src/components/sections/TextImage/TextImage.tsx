@@ -1,13 +1,9 @@
 import type { TTextImage } from '@/sanity/schemas/objects/textImage/textImage.props'
-import BaseImage from '../../utilities/BaseImage'
-import TextSection from '../TextSection'
+import BaseImage from '@/components/utilities/BaseImage/BaseImage'
+import TextSection from '../TextSection/TextSection'
 
-type Props = {
-  data: TTextImage
-}
-
-export default function TextImage({ data }: Props) {
-  const { textSection, image, layout } = data
+export default function TextImage(props: TTextImage) {
+  const { textSection, image, layout } = props
 
   return (
     <article className={`text-image md:grid grid-cols-2`}>
@@ -20,7 +16,7 @@ export default function TextImage({ data }: Props) {
         />
       </div>
 
-      <div className='flex-1 w-full'>{textSection && <TextSection data={textSection} />}</div>
+      <div className='flex-1 w-full'>{textSection && <TextSection {...textSection} />}</div>
     </article>
   )
 }

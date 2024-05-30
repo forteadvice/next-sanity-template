@@ -1,8 +1,8 @@
 import '../../styles/globals.css'
 
 import isDraftMode from '@/lib/isDraftMode'
-import Menu from '@/components/global/Menu'
-import Footer from '@/components/global/Footer'
+import Menu from '@/components/global/Menu/Menu'
+import Footer from '@/components/global/Footer/Footer'
 import ExitPreviewButton from '@/components/global/ExitPreviewButton'
 import { loadSettings } from '@/sanity/lib/loaders/load.settings'
 

@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import { referencePathQuery } from '../../../queries/helperQueries/referencePath'
+import { flexibleRefsQuery } from '../flexibleRefs/flexibleRefs.query'
 
 /**
  * portableTextQuery
@@ -9,9 +9,6 @@ export const portableTextQuery = groq`{
   ...,
   markDefs[] {
     ...,
-    _type == 'linkInternal' => {
-      ...,
-      ...reference->{ "path": ${referencePathQuery} }
-    },
+    _type == "link" => ${flexibleRefsQuery},
   },
 }`

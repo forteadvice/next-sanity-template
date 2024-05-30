@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { heroQuery } from '../../objects/hero/hero.query'
-import { sectionsQuery } from '../../objects/sections/sections.query'
+import { contentBlocksQuery } from '../../objects/contentBlocks/contentBlocks.query'
 import { seoQuery } from '../../objects/seo/seo.query'
 
 /**
@@ -17,7 +17,7 @@ export const pageQuery = groq`
     title,
     "slug": slug.current,
     hero ${heroQuery},
-    sections[] ${sectionsQuery},
+    contentBlocks[] ${contentBlocksQuery},
     seo ${seoQuery} ,
   }
 `

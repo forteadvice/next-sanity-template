@@ -1,49 +1,52 @@
-import Link from 'next/link'
-import { PortableText, PortableTextReactComponents } from '@portabletext/react'
-import type { PortableTextMarkDefinition } from '@portabletext/types'
+import { PortableText, PortableTextReactComponents, PortableTextProps } from '@portabletext/react'
+import InlineLink from '../ui/InlineLink/InlineLink'
+import { cn } from '@/lib/cn'
+import Heading from '../ui/Heading/Heading'
 
-export default function PortableTextResolver({ text }: { text: PortableTextMarkDefinition }) {
-  return <PortableText value={text} components={components} />
+export default function PortableTextResolver({ value }: PortableTextProps) {
+  return <PortableText value={value} components={components} />
 }
 
 // Custom components config
-const baseStyle = 'mb-2 last:mb-0'
+const baseBlockStyle = 'mt-10 first:mt-0'
 const components: Partial<PortableTextReactComponents> = {
   block: {
-    h2: ({ children }) => <h2 className={`${baseStyle} text-4xl font-bold`}>{children}</h2>,
-    h3: ({ children }) => <h3 className={`${baseStyle} text-3xl font-semibold`}>{children}</h3>,
-    h4: ({ children }) => <h4 className={`${baseStyle} text-2xl font-semibold`}>{children}</h4>,
-    normal: ({ children }) => <p className={`${baseStyle}`}>{children}</p>,
-    blockquote: ({ children }) => (
-      <blockquote className={`${baseStyle} italic before:content-['“'] after:content-['”']`}>
+    h2: ({ children }) => (
+      <Heading variant='extra-large' tag='h2' className={cn(baseBlockStyle)}>
         {children}
-      </blockquote>
+      </Heading>
     ),
+    h3: ({ children }) => (
+      <Heading variant='large' tag='h3' className={cn(baseBlockStyle)}>
+        {children}
+      </Heading>
+    ),
+    h4: ({ children }) => (
+      <Heading variant='medium' tag='h4' className={cn(baseBlockStyle)}>
+        {children}
+      </Heading>
+    ),
+    normal: ({ children }) => <p className={cn(baseBlockStyle, 'mt-5')}>{children}</p>,
   },
+
   marks: {
-    linkInternal: LinkInternal,
-    linkExternal: LinkExternal,
+    link: (props) => {
+      if (!props?.value?.href) return
+      return <InlineLink href={`${props?.value?.href}`}>{props?.text}</InlineLink>
+    },
   },
+
   list: {
-    bullet: ({ children }) => <ul className={`${baseStyle} list-disc list-inside`}>{children}</ul>,
+    bullet: ({ children }) => <ul className={cn(baseBlockStyle, 'list-disc')}>{children}</ul>,
+    number: ({ children }) => <ol className={cn(baseBlockStyle, 'list-decimal')}>{children}</ol>,
+  },
+
+  listItem: {
+    bullet: ({ children }) => (
+      <li className={cn(baseBlockStyle, 'mt-2.5 pl-0.5 ml-6')}>{children}</li>
+    ),
     number: ({ children }) => (
-      <ol className={`${baseStyle} list-decimal list-inside`}>{children}</ol>
+      <li className={cn(baseBlockStyle, 'mt-2.5 pl-0.5 ml-6')}>{children}</li>
     ),
   },
-}
-
-function LinkInternal(props: any) {
-  return (
-    <Link className='underline' href={`${props?.value?.path}`} prefetch={false}>
-      {props?.text}
-    </Link>
-  )
-}
-
-function LinkExternal(props: any) {
-  return (
-    <a className='underline' target={'_blank'} href={props?.value?.href}>
-      {props?.children}
-    </a>
-  )
 }
