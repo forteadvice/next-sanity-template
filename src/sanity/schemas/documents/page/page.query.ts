@@ -9,11 +9,10 @@ import { seoQuery } from '../../objects/seo/seo.query'
  */
 export const pageQuery = groq`
   *[
-    _type == 'page' && slug.current == $slug &&(!defined(parent._ref) || 
-    parent->slug.current == $parentSlug) &&(!defined(parent->parent._ref) || 
-    parent->parent->slug.current == $grandParentSlug) 
+    _type == 'page' && slug.current == $slug && ((!defined(parent._ref) && !defined($parentSlug) ) || parent->slug.current == $parentSlug) && 
+    ((!defined(parent->parent._ref) && !defined($grandParentSlug)) || parent->parent->slug.current == $grandParentSlug)
     ][0] {
-    
+
     title,
     "slug": slug.current,
     hero ${heroQuery},
