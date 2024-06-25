@@ -19,7 +19,25 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
     // Filter out singleton types from the global “New document” menu options
-    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+    templates: (templates) => [
+      ...templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+      /** 
+       * Initial Template for assigning parent on create
+       * Each child page type must have its own template.
+      */
+      {
+        id: `page-parent`,
+        title: `Page with parent`,
+        schemaType: 'page',
+        parameters: [{ name: 'parentId', type: 'string' }],
+        value: (params: any) => ({
+          parent: {
+            _type: 'reference',
+            _ref: params.parentId,
+          },
+        }),
+      },
+    ]
   },
 
   document: {

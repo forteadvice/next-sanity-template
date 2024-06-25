@@ -76,9 +76,13 @@ function buildTree(
         S.list()
           .title(title)
           .menuItems([
+            // S.menuItem()
+            //   .title('Add')
+            //   .intent({ type: 'create', params: { type: children[0]._type } }),
+            /** Child pages types */
             S.menuItem()
               .title('Add')
-              .intent({ type: 'create', params: { type: children[0]._type } }),
+              .intent({ type: 'create', params: [{ type: 'page', template: `page-parent` }, { parentId: _id }], }),
           ])
           .items([
             S.documentListItem().schemaType(_type).title(title).id(_id),
