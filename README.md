@@ -78,7 +78,7 @@ NEXT_PUBLIC_PREVIEW_TOKEN=
 Install dependencies ⚙️
 
 ```bash
-pnpm run install
+pnpm install
 ```
 
 <br>
