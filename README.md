@@ -16,7 +16,7 @@
 
 ### 1. Deploy Next-Sanity template to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fforteadvice%2Fnext-sanity-template&env=SANITY_REVALIDATE_SECRET&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
+[![Deploy with Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fforteadvice%2Fnext-sanity-template&env=NEXT_PUBLIC_SANITY_API_VERSION&env=NEXT_PUBLIC_PREVIEW_TOKEN&env=SANITY_REVALIDATE_SECRET&integration-ids=oac_hb2LITYajhRQ0i4QznmKH7gx)
 
 <br>
 
