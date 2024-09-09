@@ -28,7 +28,6 @@ type TBlockModule = typeof Blocks & Record<string, React.ComponentType<TContentB
 function resolveBlocks(block: TContentBlock) {
   const blockName = upperFirst(block._type)
   const Block = (Blocks as TBlockModule)[blockName]
-  
   if (Block) return Block
   console.error('Cant find block', upperFirst(block._type))
   return null

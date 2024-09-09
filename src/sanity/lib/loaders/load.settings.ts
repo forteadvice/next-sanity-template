@@ -3,7 +3,6 @@ import { settingsQuery } from '@/sanity/schemas/documents/settings/settings.quer
 import type { TSettings } from '@/sanity/schemas/documents/settings/settings.props'
 
 export async function loadSettings() {
-  const settings = await sanityLoad<TSettings>({ query: settingsQuery, tags: ['settings'] });
-  
-  return settings || { menu: null, footer: null };
+  const settings = await sanityLoad<TSettings>({ query: settingsQuery, tags: ['settings'] })
+  return settings || { menu: null, footer: null }
 }
