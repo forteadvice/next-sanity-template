@@ -12,19 +12,18 @@ type Props = {
 export default function ContentBlocksResolver({ contentBlocks }: Props) {
   return (
     <>
-      {contentBlocks.map((block, idx) => {
+      {contentBlocks.map((block) => {
         const Block = resolveBlocks(block)
         if (!Block) {
           return <div key={block._key}>Missing block: {upperFirst(block._type)}</div>
         }
-        return <Block data={block} blockIdx={idx} key={block._key} />
+        return <Block {...block} key={block._key} />
       })}
     </>
   )
 }
 
-type TBlockModule = typeof Blocks &
-  Record<string, React.ComponentType<{ data: TContentBlock; blockIdx: number }>>
+type TBlockModule = typeof Blocks & Record<string, React.ComponentType<TContentBlock>>
 
 function resolveBlocks(block: TContentBlock) {
   const blockName = upperFirst(block._type)
